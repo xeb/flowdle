@@ -1,0 +1,31 @@
+application: flootle
+version: 2
+runtime: python
+api_version: 1
+
+handlers:
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /images
+  static_dir: images
+
+- url: /scripts
+  static_dir: scripts
+
+- url: /
+  script: index.py
+
+- url: /index.html
+  script: index.py
+
+- url: /signup
+  script: signup.py
+  
+- url: /dashboard
+  script: dashboard.py
+  login: required
+
+- url: /errors
+  static_dir: errors
+  

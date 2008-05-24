@@ -1,0 +1,39 @@
+#main {
+	background: url(/images/gradient.gif) repeat-x;
+	width: 100%;
+	min-height: 350px;
+}
+
+#header, #body {
+	width: 100%;
+	text-align: center;
+	position: relative;
+}
+
+#header .logo {
+	padding: 30px 0 0 0;
+}
+
+#body .coming-soon {
+	padding: 100px 0 0 0;
+}
+
+#body .form {
+	padding: 10px 0 0 0;
+}
+
+#body .form .text {
+	font-family:Helvetica,Arial,Sans-Serif;
+	color: #AAA;
+	font-size:18px;
+	width:230px;
+}
+
+#body .form .submit {
+	font-family: Helvetica,Arial,Sans-Serif;
+	font-size: 18px;
+	font-weight: none;
+	min-height: 26px;
+	background-color: #EEE;
+	border: 1px solid black;
+}
