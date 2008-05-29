@@ -82,31 +82,33 @@
 				</div>
 			</div>
 			<hr noshade align="left">
-			<ul id="biglist" class="biglist">
-				<li>
-					<input type="checkbox" class="checkbox" id="check1">
-					<label>TEST</label>
-					<span class="nudge_date">Nudge: Tomorrow</span>
-					<a href="/edit">Edit</a>
-				</li>
-				<li>
-					<input type="checkbox" class="checkbox" id="check2">
-					<label>Another really long Label</label>
-					<span class="nudge_date">Nudge: 5/31/2008</span>
-					<a href="/edit">Edit</a>
-				</li>
-			</ul>
+			<table id="biglist" class="biglist">
+				<tr>
+					<td class="left">
+						<input type="checkbox" class="checkbox" id="check1">
+						<label for="check1">TEST</label>
+					<td class="right">
+						Nudge me tomorrow
+					</td>
+					<td class="right">
+						<a href="/edit">Edit</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="left">
+						<input type="checkbox" class="checkbox" id="check2">
+						<label for="check2">TEST afgasdjfalksdfl afsdjlkjladfs </label>
+					<td class="right">
+						Nudge me later this week
+					</td>
+					<td class="right">
+						<a href="/edit">Edit</a>
+					</td>
+				</tr>
+			</table> <!-- #biglist -->
 			<div class="clear"></div>
 		</div>
 		<p class="copyright">&copy; 2008 Mark Kockerbeck</p>
 	</div>
-	<script type="text/javascript" language="javascript" charset="utf-8">
-	// <![CDATA[
-		$$('#dashboard ul.biglist').each(function(ul){
-			Sortable.create(ul.id,{tag:'li'});
-		});
-	
-	// ]]>
-	</script>
   </body>
 </html>

@@ -159,26 +159,7 @@ h4 {
 
 #dashboard .biglist {
 	margin: 10px 0 10px 0;
-}
-
-#dashboard .biglist li {
-	position: relative;
-}
-
-#dashboard .biglist label {
-	position: absolute;
-	left: 30px;
-	top: 4px;
-}
-
-#dashboard .biglist span {
-	position: absolute;
-	right: 70px;
-}
-
-#dashboard .biglist a {
-	position: absolute;
-	right: 10px;
+	width: 99%;
 }
 
 p.copyright {
