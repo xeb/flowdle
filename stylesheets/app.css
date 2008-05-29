@@ -1,0 +1,200 @@
+body {
+	background: url(/images/gradient.gif) repeat-x;
+	width: 100%;
+	font-family: Helvetica,Arial,Sans-Serif;
+	font-size: 13px;
+}
+
+h4 {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.clear {
+  clear:both;
+  height:1px;
+  overflow:hidden;
+}
+
+#topmenu {
+	width: 100%;
+	position: relative;
+	text-align: right;
+	height: 120px;
+}
+
+#topmenu p {
+	margin: 5px 30px 0 0;
+}
+
+#topmenu .logo {
+	position: absolute;
+	top: 0px;
+	left: 10px;
+}
+
+#newtask {
+	min-height: 50px;
+	margin-left: 160px;
+	position: relative;
+}
+
+#newtask .taskname, #newtask .items .taglist {
+	font-family: Helvetica,Arial,Sans-Serif;
+}
+
+#newtask .items {
+	margin: 10px 0 20px 0;
+}
+
+#newtask .items .taglist {
+	font-size: 12px;
+	width: 400px;
+	padding: 3px;
+}
+
+#newtask .items .commontags {
+	margin: 5px 0 3px 40px;
+}
+
+#newtask .taskname {
+	font-size: 18px;
+	padding: 5px;
+	width: 500px;
+}
+
+#newtask .nudge {
+	position: absolute;
+	top: 0;
+	left: 550px;
+}
+
+#newtask input.hiding {
+	display: none;
+}
+
+#newtask .nudge_date {
+	width: 90px;
+}
+
+#newtask .buttons {
+	position: absolute;
+	top: 50px;
+	left: 550px;
+}
+
+#newtask .buttons .bigbutton {
+	background-color: #EEE;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+#newtask.hiding .taskname {
+	background: url(/images/haveto.gif) no-repeat 3px 3px;
+}
+
+#newtask.hiding .items {
+	display: none;
+}
+
+#content {
+	position: relative;
+	margin-left: 30px;
+	text-align: left;
+	min-width: 500px;
+}
+
+#tags {
+	border-left: 1px solid black;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	background-color: #D3EEFE;
+	float: left;
+	width: 109px;
+	padding: 10px;
+	min-height: 150px;
+	margin-top: 15px;
+}
+
+#tags ul {
+	padding: 5px 0 5px 0;
+}
+
+#tags li {
+	padding: 3px 0 3px 0;
+}
+
+#dashboard {
+	background-color: #FEF7DA;
+	border: 1px solid #3A3A3A;
+	margin-left: 130px;
+	text-align: left;
+	padding: 10px;
+	margin-right: 200px;
+	min-width: 400px;
+}
+
+#dashboard .head {
+	position: relative;
+}
+
+#dashboard .head h4 {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#dashboard .head .menu {
+	text-align: right;
+}
+
+#dashboard hr {
+	height: 1px;
+	width: 100%;
+	text-align: left;
+	color: black;
+	margin: 10px 0 5px 0;
+	background-color: black;
+}
+
+#dashboard .biglist {
+	margin: 10px 0 10px 0;
+}
+
+#dashboard .biglist li {
+	position: relative;
+}
+
+#dashboard .biglist label {
+	position: absolute;
+	left: 30px;
+	top: 4px;
+}
+
+#dashboard .biglist span {
+	position: absolute;
+	right: 70px;
+}
+
+#dashboard .biglist a {
+	position: absolute;
+	right: 10px;
+}
+
+p.copyright {
+	text-align: center;
+	font-size: 10px;
+	margin: 10px 0 0 0;
+}
+
+body.notags #content {
+	margin-left: 0px;
+}
+body.notags #dashboard, 
+body.notags #newtask {
+	margin-left: 30px;
+}
+
+body.notags #tags {
+	display: none;
+}

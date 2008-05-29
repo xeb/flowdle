@@ -2,26 +2,20 @@
 
 import wsgiref.handlers
 import models
-from models import Subscriber
-from google.appengine.api import users
-from google.appengine.ext import db
 from google.appengine.ext import webapp
+from google.appengine.api import users
 from google.appengine.ext.webapp import template
 
 
 class MainHandler(webapp.RequestHandler):
     def get(self):
-	
+		user = users.get_current_user()
 		values = {
-			'user' : users.get_current_user()
+			'user': user,
+			'signout' : users.create_logout_url("/"),
+			'taglist' : 'None'
 		}
-		self.response.out.write(template.render('templates/index.html', values))    
-		            
-    def post(self):
-		subscriber = Subscriber(
-			who = self.request.get('email'))
-		subscriber.put()
-		self.response.out.write('Great Success!');
+		self.response.out.write(template.render('templates/app.html', values))    
 		
 def main():
     app = webapp.WSGIApplication([

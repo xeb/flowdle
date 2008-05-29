@@ -1,3 +1,4 @@
+
 document.observe('dom:loaded', function() {
 
 	$('email').observe('click', function(e){
