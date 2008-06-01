@@ -20,99 +20,88 @@
 	<link href="/stylesheets/ie7.css" rel="stylesheet" type="text/css" />
 	<![endif]-->
   </head>
-  <body {% ifequal taglist None %}class="notags"{% endifequal %}>
+  <body>
 	<div id="topmenu">
 	  <p>{{user.nickname}} | <a href="">Settings</a> | <a href="">Help</a> | <a href="{{signout}}">Logout</a></p>
-      <div class="logo">
-        <a href="/"><img src="/images/logo.png" alt="Flootle" /></a>
-      </div>
+           <div class="logo">
+             <a href="/"><img src="/images/logo.png" alt="Flootle" /></a>
+           </div>
 	</div>
-	<form id="taskForm" name="taskForm" action="/save" method="post">
+	{{path}}
+	<form id="taskForm" name="taskForm" action="{{formaction}}" method="post">
 	<div id="newtask" class="hiding">
-		<input type="text" class="taskname" id="taskname" name="taskname" maxlength="200" />
+		<input type="text" class="taskname" id="taskname" name="taskname" maxlength="200" value="{{edittask.name}}" />
 		<div class="items">
-			Tags: <input type="text" class="taglist" id="taglist" name="taglist" />
-			<div class="commontags">
+			<table>
+			<tr><td>Tags:</td>
+			<td><input type="text" class="taglist" id="taglist" name="taglist" />
+			 <div class="commontags">
 				<a href="">School</a>, <a href="">Work</a>
-			</div>
-			<div class="nudge">
-				<label for="nudgelist">Nudge me:</label>
-				<select name="nudgelist" id="nudgelist">
-					<option>Never</option>
-					<option>Until Finished</option>
-					<option>Tomorrow</option>
-					<option>Friday</option>
-					<option>End of Month</option>
-					<option>Specific Date...</option>
-				</select>
-				<input type="text" class="nudge_date hiding" id="nudge_date" name="nudge_date" maxlength="10" value="12/31/2009">
-				<a href="/help/nudge">?</a>
-			</div>
-			<div class="buttons">
-				<input type="button" value="Save" class="bigbutton" id="save" name="save" />
+			 </div>
+			</td>
+			</tr>
+			<tr>
+				<td><label for="nudgelist">Nudge me:</label></td>
+			<td>
+			<select name="nudgelist" id="nudgelist">
+				<option>Never</option>
+				<option>Until Finished</option>
+				<option>Tomorrow</option>
+				<option>Friday</option>
+				<option>End of Month</option>
+				<option>Specific Date...</option>
+			</select>
+			<input type="text" class="nudge_date hiding" id="nudge_date" name="nudge_date" maxlength="10" value="12/31/2009">
+			<a href="/help/nudge">?</a>
+			</td>
+			</tr>
+			</table><div class="buttons">
+				<input type="submit" value="Save" class="bigbutton" id="save" name="save" />
 			 	<input type="button" value="Cancel" class="bigbutton" id="cancel" name="cancel" />
 			</div>
 		</div>
 	</div> <!-- #newtask -->
 	</form>
 	
-	<div id="content">
-		<div id="tags"><h4>Tags</h4>
-			<ul>
-				<li><a href="">School</a></li>
-				<li><a href="">Work</a></li>
-				<li><a href="">The Big Project</a></li>
-				<li><a href="">School</a></li>
-				<li><a href="">School</a></li>
-				<li><a href="">School</a></li>
-				<li><a href="">Work</a></li>
-				<li><a href="">The Big Project</a></li>
-				<li><a href="">School</a></li>
-				<li><a href="">School</a></li>
-				<li><a href="">School</a></li>
-				<li><a href="">Work</a></li>
-				<li><a href="">The Big Project</a></li>
-				<li><a href="">School</a></li>
-				<li><a href="">School</a></li>
-			<ul>
-		</div>
-		<div id="dashboard">
-			<div class="head">
-				<h4>Big Label</h4>
-				<div class="menu">
-					<a href="">All</a>&nbsp;|&nbsp;
-					<a href="">Complete</a>&nbsp;|&nbsp;
-					<a href="">Tagless</a>
+	<table class="big">
+		<tr>
+			<td class="left"><div id="tags">
+					<ul>
+						<li><a href="">School</a></li>
+						<li><a href="">Work</a></li>
+					</ul>
+				</div> <!-- #tag -->
+			</td>
+			<td id="right">
+				<img src="/images/spacer.gif" width="500" height="1" alt="" />
+				<div class="head">
+					<h4>Big Label</h4>
+					<div class="menu">
+						<a href="">All</a>&nbsp;|&nbsp;
+						<a href="">Complete</a>&nbsp;|&nbsp;
+						<a href="">Tagless</a>
+					</div>
 				</div>
-			</div>
-			<hr noshade align="left">
-			<table id="biglist" class="biglist">
-				<tr>
-					<td class="left">
-						<input type="checkbox" class="checkbox" id="check1">
-						<label for="check1">TEST</label>
-					<td class="right">
-						Nudge me tomorrow
-					</td>
-					<td class="right">
-						<a href="/edit">Edit</a>
-					</td>
-				</tr>
-				<tr>
-					<td class="left">
-						<input type="checkbox" class="checkbox" id="check2">
-						<label for="check2">TEST afgasdjfalksdfl afsdjlkjladfs </label>
-					<td class="right">
-						Nudge me later this week
-					</td>
-					<td class="right">
-						<a href="/edit">Edit</a>
-					</td>
-				</tr>
-			</table> <!-- #biglist -->
-			<div class="clear"></div>
-		</div>
-		<p class="copyright">&copy; 2008 Mark Kockerbeck</p>
-	</div>
+				<hr noshade align="left">
+				<table id="biglist">
+					{% for task in alltasks %}
+					<tr>
+						<td class="left">
+							<input type="checkbox" class="checkbox" id="check{{task.key.id}}" />
+							<label for="check{{task.key.id}}">{{task.name}}</lable>
+						</td>
+						<td class="right">
+							Nudge me tomorrow
+						</td>
+						<td class="right">
+							<a class="editlink" href="/edit/{{task.key}}">Edit</a>
+						</td>
+					</tr>
+					<tr><td style="color: #999">Tags == {{task.tags}}</td></tr>
+					{% endfor %}
+				</table> <!-- #biglist -->
+			</td> <!-- #right -->
+		</tr>		
+	</table>
   </body>
 </html>
