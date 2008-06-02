@@ -21,16 +21,33 @@ indexes:
 # Unused in query history -- copied from input.
 - kind: Task
   properties:
+  - name: tags
+  - name: tags
+  - name: who
   - name: when
     direction: desc
 
-# Used 56 times in query history.
+# Unused in query history -- copied from input.
+- kind: Task
+  properties:
+  - name: tags
+  - name: who
+  - name: when
+    direction: desc
+
+# Unused in query history -- copied from input.
+- kind: Task
+  properties:
+  - name: when
+    direction: desc
+
+# Used once in query history.
 - kind: Task
   properties:
   - name: who
   - name: when
     direction: desc
 
-# Used 18 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   ancestor: yes
