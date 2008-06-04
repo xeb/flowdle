@@ -14,6 +14,49 @@ indexes:
 - kind: Task
   properties:
   - name: complete
+  - name: tags
+  - name: tags
+  - name: tags
+  - name: tags
+  - name: tags
+  - name: who
+  - name: when
+    direction: desc
+
+# Used once in query history.
+- kind: Task
+  properties:
+  - name: complete
+  - name: tags
+  - name: tags
+  - name: tags
+  - name: who
+  - name: when
+    direction: desc
+
+# Used once in query history.
+- kind: Task
+  properties:
+  - name: complete
+  - name: tags
+  - name: tags
+  - name: who
+  - name: when
+    direction: desc
+
+# Used 338 times in query history.
+- kind: Task
+  properties:
+  - name: complete
+  - name: tags
+  - name: who
+  - name: when
+    direction: desc
+
+# Used 221 times in query history.
+- kind: Task
+  properties:
+  - name: complete
   - name: who
   - name: when
     direction: desc
@@ -43,7 +86,7 @@ indexes:
   - name: when
     direction: desc
 
-# Used 114 times in query history.
+# Used 116 times in query history.
 - kind: Task
   properties:
   - name: tags
@@ -57,7 +100,7 @@ indexes:
   - name: when
     direction: desc
 
-# Used 141 times in query history.
+# Used 155 times in query history.
 - kind: Task
   properties:
   - name: who

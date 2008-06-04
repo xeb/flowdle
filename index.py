@@ -13,7 +13,6 @@ class MainHandler(webapp.RequestHandler):
     def get(self):
 	
 		values = {
-			'user' : users.get_current_user()
 		}
 		self.response.out.write(template.render('templates/index.html', values))    
 		            
