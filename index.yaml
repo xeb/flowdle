@@ -10,6 +10,22 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+# Used once in query history.
+- kind: Task
+  properties:
+  - name: complete
+  - name: who
+  - name: when
+    direction: desc
+
+# Unused in query history -- copied from input.
+- kind: Task
+  properties:
+  - name: completed
+  - name: who
+  - name: when
+    direction: desc
+
 # Unused in query history -- copied from input.
 - kind: Task
   properties:
@@ -27,7 +43,7 @@ indexes:
   - name: when
     direction: desc
 
-# Unused in query history -- copied from input.
+# Used 114 times in query history.
 - kind: Task
   properties:
   - name: tags
@@ -41,7 +57,7 @@ indexes:
   - name: when
     direction: desc
 
-# Used once in query history.
+# Used 141 times in query history.
 - kind: Task
   properties:
   - name: who

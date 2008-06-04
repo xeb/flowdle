@@ -1,3 +1,9 @@
+var letters=' ABCÇDEFGHIJKLMNÑOPQRSTUVWXYZabcçdefghijklmnñopqrstuvwxyzàáÀÁéèÈÉíìÍÌïÏóòÓÒúùÚÙüÜ'
+var numbers='1234567890'
+var signs=',.:;@-\''
+var mathsigns='+-=()*/'
+var custom='<>#$%&?¿'
+
 document.observe('dom:loaded', function() {
 	$('taskname').value = '';
 	$('taskname').focus();
@@ -16,7 +22,9 @@ document.observe('dom:loaded', function() {
 	
 	// When TaskName gets focus
 	$('taskname').observe('keydown', function(e){
-		$('newtask').removeClassName('hiding');
+        if(validKey(e, letters + numbers + signs + mathsigns + custom)) {
+		    $('newtask').removeClassName('hiding');
+	    }
 	})
 	
 	// nudge dte show-er
@@ -28,3 +36,9 @@ document.observe('dom:loaded', function() {
 		}
 	});
 });
+
+function validKey(e, allow) {
+ var k;
+ k=document.all?parseInt(e.keyCode): parseInt(e.which);
+ return (allow.indexOf(String.fromCharCode(k))!=-1);
+}

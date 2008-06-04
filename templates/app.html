@@ -7,101 +7,100 @@
     <title>Flowdle</title>
     <link href="/stylesheets/reset.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/app.css" rel="stylesheet" type="text/css" />
-	<script src="http://www.google.com/jsapi"></script>
-	<script>
-	 google.load("prototype", "1.6.0.2");
-	 google.load("scriptaculous", "1.8.1");
-	</script>
-	<script src="/scripts/app.js"></script>
-	<!--[if lt IE 7]>
-	<link href="/stylesheets/ie6.css" rel="stylesheet" type="text/css" />
-	<![endif]-->
-	<!--[if IE 7]>
-	<link href="/stylesheets/ie7.css" rel="stylesheet" type="text/css" />
-	<![endif]-->
+    <script src="http://www.google.com/jsapi"></script>
+    <script>
+     google.load("prototype", "1.6.0.2");
+     google.load("scriptaculous", "1.8.1");
+    </script>
+    <script src="/scripts/app.js"></script>
+    <!--[if lt IE 7]>
+    <link href="/stylesheets/ie6.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <!--[if IE 7]>
+    <link href="/stylesheets/ie7.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
   </head>
   <body>
-	<div id="topmenu">
-	  <p>{{user.nickname}} | <a href="">Settings</a> | <a href="">Help</a> | <a href="{{signout}}">Logout</a></p>
+    <div id="topmenu">
+      <p>{{user.nickname}} | <a href="">Settings</a> | <a href="">Help</a> | <a href="{{signout}}">Logout</a></p>
            <div class="logo">
              <a href="/"><img src="/images/logo.png" alt="Flootle" /></a>
            </div>
-	</div>
-	{{path}}
-	<form id="taskForm" name="taskForm" action="{{formaction}}" method="post">
-	<div id="newtask" class="hiding">
-		<input type="text" class="taskname" id="taskname" name="taskname" maxlength="200" value="{{edittask.name}}" />
-		<div class="items">
-			<table>
-			<tr><td>Tags:</td>
-			<td><input type="text" class="taglist" id="taglist" name="taglist" />
-			 <div class="commontags">
-				<a href="">School</a>, <a href="">Work</a>
-			 </div>
-			</td>
-			</tr>
-			<tr>
-				<td><label for="nudgelist">Nudge me:</label></td>
-			<td>
-			<select name="nudgelist" id="nudgelist">
-				<option>Never</option>
-				<option>Until Finished</option>
-				<option>Tomorrow</option>
-				<option>Friday</option>
-				<option>End of Month</option>
-				<option>Specific Date...</option>
-			</select>
-			<input type="text" class="nudge_date hiding" id="nudge_date" name="nudge_date" maxlength="10" value="12/31/2009">
-			<a href="/help/nudge">?</a>
-			</td>
-			</tr>
-			</table><div class="buttons">
-				<input type="submit" value="Save" class="bigbutton" id="save" name="save" />
-			 	<input type="button" value="Cancel" class="bigbutton" id="cancel" name="cancel" />
-			</div>
-		</div>
-	</div> <!-- #newtask -->
-	</form>
-	
-	<table class="big">
-		<tr>
-			<td class="left"><div id="tags">
-					<ul>
-						<li><a href="">School</a></li>
-						<li><a href="">Work</a></li>
-					</ul>
-				</div> <!-- #tag -->
-			</td>
-			<td id="right">
-				<img src="/images/spacer.gif" width="500" height="1" alt="" />
-				<div class="head">
-					<h4>Big Label</h4>
-					<div class="menu">
-						<a href="">All</a>&nbsp;|&nbsp;
-						<a href="">Complete</a>&nbsp;|&nbsp;
-						<a href="">Tagless</a>
-					</div>
-				</div>
-				<hr noshade align="left">
-				<table id="biglist">
-					{% for task in alltasks %}
-					<tr>
-						<td class="left">
-							<input type="checkbox" class="checkbox" id="check{{task.key.id}}" />
-							<label for="check{{task.key.id}}">{{task.name}}</lable>
-						</td>
-						<td class="right">
-							Nudge me tomorrow
-						</td>
-						<td class="right">
-							<a class="editlink" href="/edit/{{task.key}}">Edit</a>
-						</td>
-					</tr>
-					<tr><td style="color: #999">Tags == {{task.tags}}</td></tr>
-					{% endfor %}
-				</table> <!-- #biglist -->
-			</td> <!-- #right -->
-		</tr>		
-	</table>
+    </div>
+    {{path}}
+    <form id="taskForm" name="taskForm" action="{{formaction}}" method="post">
+    <div id="newtask" class="hiding">
+        <input type="text" class="taskname" id="taskname" name="taskname" maxlength="200" value="{{edittask.name}}" />
+        <div class="items">
+            <table>
+            <tr><td>Tags:</td>
+            <td><input type="text" class="taglist" id="taglist" name="taglist" />
+             <div class="commontags">
+             </div>
+            </td>
+            </tr>
+            <tr>
+                <td><label for="nudgelist">Nudge me:</label></td>
+            <td>
+            <select name="nudgelist" id="nudgelist">
+                <option>Never</option>
+                <option>Until Finished</option>
+                <option>Tomorrow</option>
+                <option>Friday</option>
+                <option>End of Month</option>
+                <option>Specific Date...</option>
+            </select>
+            <input type="text" class="nudge_date hiding" id="nudge_date" name="nudge_date" maxlength="10" value="12/31/2009">
+            <a href="/help/nudge">?</a>
+            </td>
+            </tr>
+            </table><div class="buttons">
+                <input type="submit" value="Save" class="bigbutton" id="save" name="save" />
+                <input type="button" value="Cancel" class="bigbutton" id="cancel" name="cancel" />
+            </div>
+        </div>
+    </div> <!-- #newtask -->
+    </form>
+    
+    <table class="big">
+        <tr>
+            <td class="left"><div id="tags">
+                    <ul>
+                        {% for tag in alltags %}
+                            <li><a href="{{tagbaseurl}},{{tag}}">{{tag}}</a></li> 
+                        {% endfor %}
+                    </ul>
+                </div> <!-- #tag -->
+            </td>
+            <td id="right">
+                <img src="/images/spacer.gif" width="500" height="1" alt="" />
+                <div class="head"><h4>{{tagtitle}}</h4>
+                    <div class="menu">
+                        {% ifnotequal tagtitle 'All' %}<a href="/app/all">All</a>{% endifnotequal %}
+                        {% ifnotequal tagtitle 'Completed' %}&nbsp;|&nbsp; <a href="/app/completed">Completed</a>{% endifnotequal %}
+                        {% ifnotequal tagtitle 'Tagless' %}&nbsp;|&nbsp; <a href="/app/tagless">Tagless</a>{% endifnotequal %}
+                    </div>
+                </div>
+                <hr noshade align="left">
+                <table id="biglist">
+                    {% for task in alltasks %}
+                    <tr>
+                        <td class="left">
+                            <input type="checkbox" class="checkbox" id="check{{task.key.id}}" />
+                            <label for="check{{task.key.id}}">{{task.name}}</lable>
+                        </td>
+                        <td class="right">
+                            Nudge me tomorrow
+                        </td>
+                        <td class="right">
+                            <a class="editlink" href="/edit/{{task.key}}">Edit</a>
+                        </td>
+                    </tr>
+                    <tr><td style="color: #999">Tags == {{task.tags}}</td></tr>
+                    {% endfor %}
+                </table> <!-- #biglist -->
+            </td> <!-- #right -->
+        </tr>       
+    </table>
   </body>
 </html>

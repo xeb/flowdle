@@ -15,3 +15,4 @@ class Task(db.Model):
 class Subscriber(db.Model):
 	who = db.StringProperty(required=True)
 	when = db.DateTimeProperty(auto_now_add=True)
+	

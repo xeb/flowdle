@@ -22,7 +22,7 @@ handlers:
 - url: /index.html
   script: index.py
 
-- url: /app
+- url: /app(.*)
   script: app.py
   login: required
 
