@@ -28,21 +28,25 @@ class Common:
         # Show All Tasks
         if urlparam == "/all":
             values['formaction'] = '/app'
-            values['tagbaseurl'] = '/app/tagged?tags='
+            values['tagbaseurl'] = '/app/tagged/'
             values['tagtitle'] = 'All'
             values['taglinks'] = cmn.getTagLinks(values['alltags'], None)
         
         # Show Tagged Tasks
-        elif urlparam == "/tagged":
-            tagstr = handler.request.get('tags')[:200]
+        elif urlparam[:7] == "/tagged":
+            tagstr = urlparam[8:]
             if tagstr:
-                tags = sorted(list(set(tagstr.split(','))), reverse=False)
-                values['tagtitle'] = cmn.getTagTitle(tags)
-                values['taglinks'] = cmn.getTagLinks(values['alltags'], tags)
+                tags = [tagstr]
                 values['alltasks'] = db.GqlQuery(" SELECT * FROM Task WHERE who = :1 "
                                                  " AND complete = False AND tags IN :2 "
                                                  " ORDER BY when DESC ", user, tags)
-                values['formaction'] = '/app/tagged?tags=' + tagstr
+                if(values['alltasks'].count(10) == 0):
+                    handler.redirect('/app/all')
+                values['tagtitle'] = tagstr.title()
+                values['tagdefault'] = tagstr
+                values['taglinks'] = cmn.getTagLinks(values['alltags'], tags)
+                values['formaction'] = '/app/tagged/' + tagstr
+                values['headmenu'] = '<a href="">Nudge for all "' + tagstr + '"</a>'
             else:
                 handler.redirect('/app/all')
 
@@ -53,8 +57,8 @@ class Common:
             values['taglinks'] = cmn.getTagLinks(values['alltags'], None)
             values['tagtitle'] = 'Completed'
             
-        # Show Tagless Tags
-        elif urlparam == "/tagless":
+        # Show No Tag
+        elif urlparam == "/notag":
             tasks = []
             for task in db.GqlQuery( "SELECT * FROM Task WHERE who = :1 " 
                                 " ORDER BY when DESC ", user):
@@ -63,12 +67,12 @@ class Common:
                     tasks.append(task)
             values['alltasks'] = tasks
             values['taglinks'] = cmn.getTagLinks(values['alltags'], None)
-            values['tagtitle'] = 'Tagless'
+            values['tagtitle'] = 'No Tag'
 
         # Send to All if Nothing has been matched
         else:
             handler.redirect('/app/all')
-
+                
         # write out the main template to the given handler
         handler.response.out.write(template.render('templates/app.html', values))   
         return
@@ -83,33 +87,19 @@ class Common:
     
     def getTagLinks(self, alltags, selected):
         taglinks = ""
-        if selected:
-            params = ','.join(selected)
-            if params[0] == ',':
-                params = params[1:len(params)]
-            baselink = "/app/tagged?tags=" + params
-        else:
-            baselink = "/app/tagged?tags="
+        baselink = "/app/tagged/"
         for tag in alltags:
             if selected and tag in selected:
                 taglinks += '<li>' + tag + '</li>'
             else:
-                taglinks += '<li><a href="' + baselink + ',' + tag + '">' + tag + '</a></li>'
+                taglinks += '<li><a href="/app/tagged/' + tag + '">' + tag + '</a></li>'
         return taglinks
-        
-    def getTagTitle(self, selected):
-        tagtitle = ""
-        for tag in selected:
-            if tag != u'':
-                tagtitle += tag.title() + ", "
-        tagtitle = tagtitle[:len(tagtitle)-2]
-        return tagtitle
     
     def setTags(self, tagString):
         """ parses a string & returns a list of proper tags (no spaces) """
         newlist = []
         for tag in tagString[:500].split(' '):
-            if tag != u' ' and tag != u'':
+            if tag != u' ' and tag != u'' and tag not in newlist:
                 newlist.append(tag.strip())
         return newlist
 
@@ -125,14 +115,16 @@ class MainHandler(webapp.RequestHandler):
         cmn = Common()
         task = Task(
             name=self.request.get('taskname')[:200],
-            who=users.get_current_user())
-        # apply Tags if necessary...
+            who=users.get_current_user(),
+            nudge=self.request.get('nudge'))
         if self.request.get('taglist'):
             task.tags = cmn.setTags(self.request.get('taglist'))
+        if self.request.get('nudge_date') and task.nudge == "specific":
+            task.nudge_date = self.request.get('nudge_date')[:10]
         task.put()
-        tagstr = self.request.get('tags')[:200]
+        tagstr = urlparam[8:]
         if tagstr:
-            self.redirect('/app/tagged?tags=' + tagstr)
+            self.redirect('/app/tagged/' + tagstr)
         else:
             self.redirect('/app/all')
 

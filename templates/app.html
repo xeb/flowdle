@@ -34,27 +34,26 @@
         <div class="items">
             <table>
             <tr><td>Tags:</td>
-            <td><input type="text" class="taglist" id="taglist" name="taglist" />
+            <td><input type="text" class="taglist" id="taglist" name="taglist" value="{{tagdefault}}" />
              <div class="commontags">
              </div>
             </td>
             </tr>
             <tr>
-                <td><label for="nudgelist">Nudge me:</label></td>
+                <td><label for="nudgelist"><a href="">Nudge</a> me:</label></td>
             <td>
-            <select name="nudgelist" id="nudgelist">
-                <option>Never</option>
-                <option>Until Finished</option>
-                <option>Tomorrow</option>
-                <option>Friday</option>
-                <option>End of Month</option>
-                <option>Specific Date...</option>
+            <select name="nudge" id="nudge">
+                <option value="never">Never</option>
+                <option value="daily">Every Day</option>
+                <option value="weekly">Every Week</option>
+                <option value="monthly">Every Month</option>
+                <option value="specific">On a Specific Date...</option>
             </select>
             <input type="text" class="nudge_date hiding" id="nudge_date" name="nudge_date" maxlength="10" value="12/31/2009">
-            <a href="/help/nudge">?</a>
             </td>
             </tr>
             </table><div class="buttons">
+                <input type="hidden" name="editkey" id="editkey" value="">
                 <input type="submit" value="Save" class="bigbutton" id="save" name="save" />
                 <input type="button" value="Cancel" class="bigbutton" id="cancel" name="cancel" />
             </div>
@@ -62,10 +61,29 @@
     </div> <!-- #newtask -->
     </form>
     
-    <table class="big">
+    <table id="mainTable">
         <tr>
             <td class="left"><div id="tags">
                     <ul>
+                        {% ifnotequal tagtitle 'All' %}
+                            <li><strong><a href="/app/all">All</a></strong></li>
+                        {% else %}
+                            <li><strong>All</strong></li>
+                        {% endifnotequal %}
+                        
+                        {% ifnotequal tagtitle 'Completed' %}
+                            <li><strong><a href="/app/completed">Completed</a></strong></li>
+                        {% else %}
+                            <li><strong>Completed</strong></li>
+                        {% endifnotequal %}
+                        
+                        {% ifnotequal tagtitle 'No Tag' %}
+                            <li><strong><a href="/app/notag">No Tag</a></strong></li>
+                        {% else %}
+                            <li><strong>No Tag</strong></li>
+                        {% endifnotequal %}
+                        
+                            <li>&nbsp;</li>
                         {{taglinks}}
                     </ul>
                 </div> <!-- #tag -->
@@ -74,9 +92,8 @@
                 <img src="/images/spacer.gif" width="500" height="1" alt="" />
                 <div class="head"><h4>{{tagtitle}}</h4>
                     <div class="menu">
-                        {% ifnotequal tagtitle 'All' %}<a href="/app/all">All</a>{% endifnotequal %}
-                        {% ifnotequal tagtitle 'Completed' %}&nbsp;|&nbsp; <a href="/app/completed">Completed</a>{% endifnotequal %}
-                        {% ifnotequal tagtitle 'Tagless' %}&nbsp;|&nbsp; <a href="/app/tagless">Tagless</a>{% endifnotequal %}
+                        {{headmenu}}
+                       &nbsp;
                     </div>
                 </div>
                 <hr noshade align="left">
@@ -85,16 +102,22 @@
                     <tr>
                         <td class="left">
                             <input type="checkbox" class="checkbox" id="check{{task.key.id}}" />
-                            <label for="check{{task.key.id}}">{{task.name}}</lable>
+                            <label id="name{{task.key}}" for="check{{task.key.id}}">{{task.name}}</lable>
+                        </td>
+                        <td class="right">Nudge me 
+                            <span id="nudge">{% ifequal task.nudge 'specific' %}
+                                {{task.nudge_date}}
+                            {% else %}
+                                {{task.nudge}}
+                            {% endifequal %}</span>
                         </td>
                         <td class="right">
-                            Nudge me tomorrow
-                        </td>
-                        <td class="right">
-                            <a class="editlink" href="/edit/{{task.key}}">Edit</a>
+                            <a class="editlink" id="{{task.key}}">Edit</a>
                         </td>
                     </tr>
-                    <tr><td style="color: #999">Tags == {{task.tags}}</td></tr>
+                    <tr><td style="color: gray;">
+                        {{task.tags}}
+                        </td></tr>
                     {% endfor %}
                 </table> <!-- #biglist -->
             </td> <!-- #right -->

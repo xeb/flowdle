@@ -26,6 +26,8 @@ handlers:
   script: app.py
   login: required
 
-- url: /edit/(.*)
-  script: app.py
+- url: /rpc(.*)
+  script: rpc.py
   login: required
+  
+ 

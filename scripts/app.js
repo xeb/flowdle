@@ -15,10 +15,10 @@ document.observe('dom:loaded', function() {
 	hideNewTask = function() {
 		$('newtask').addClassName('hiding');
 		$('taskname').value = '';
+		$('mainTable').show();
 	}
 	
 	$('cancel').observe('click', hideNewTask);
-	//$('save').observe('click', hideNewTask);
 	
 	// When TaskName gets focus
 	$('taskname').observe('keydown', function(e){
@@ -27,13 +27,25 @@ document.observe('dom:loaded', function() {
 	    }
 	})
 	
-	// nudge dte show-er
-	$('nudgelist').observe('change', function(e){
-		if($('nudgelist').getValue() == 'Specific Date...') { 
+	// nudge date show-er
+	$('nudge').observe('change', function(e){ 
+		if($('nudge').getValue() == 'specific') { 
 			$('nudge_date').removeClassName('hiding');
 		} else {
 			$('nudge_date').addClassName('hiding');
 		}
+	});
+	
+	// edit 
+	$$('#biglist .right a').invoke('observe', 'click', function(event){
+       var id = event.element().id;
+       var nudge = $$('#' + id + ' span.nudge_date')
+       alert(nudge);
+       $('editkey').setValue(id);
+       $('newtask').removeClassName('hiding');
+       $('mainTable').hide();
+       $('taskname').setValue($('name' + id).innerHTML)
+       return false;
 	});
 });
 
