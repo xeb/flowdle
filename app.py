@@ -85,6 +85,12 @@ class Common:
         tagdict = sorted(list(set(taglist)), reverse=False)
         return tagdict
     
+    def getTagString(self, alltags):
+        tagstr = ""
+        for tag in alltags:
+            tagstr = tagstr + tag + " "
+        return tagstr
+    
     def getTagLinks(self, alltags, selected):
         taglinks = ""
         baselink = "/app/tagged/"
@@ -128,10 +134,37 @@ class MainHandler(webapp.RequestHandler):
         else:
             self.redirect('/app/all')
 
+class EditHandler(webapp.RequestHandler):
+    
+    def get(self, urlparam):  
+        cmn = Common()  
+        task = db.GqlQuery('SELECT * FROM Task WHERE ANCESTOR IS :1',db.Key(urlparam[1:])).get()
+        if task:
+            values = {
+                'user': users.get_current_user(),
+                'signout' : users.create_logout_url("/app"),        
+                'name' : task.name,
+                'nudge' : task.nudge,
+                'tags' : cmn.getTagString(task.tags),
+                'winloc' : '/app/all'
+            }   
+            self.response.out.write(template.render('templates/edit.html', values)) 
 
+    def post(self, urlparam):
+        cmn = Common()
+        task = db.GqlQuery('SELECT * FROM Task WHERE ANCESTOR IS :1',db.Key(urlparam[1:])).get()
+        if task:
+            task.name=self.request.get('taskname')[:200]            
+            task.nudge=self.request.get('nudge')
+            if self.request.get('taglist'):
+                task.tags = cmn.setTags(self.request.get('taglist'))
+            task.put()
+        self.redirect('/app/all')
+            
 def main():
     app = webapp.WSGIApplication(
                 [
+                    ('/app/edit(.*)', EditHandler),
                     ('/app(.*)', MainHandler)
                 ], 
                 debug=True)

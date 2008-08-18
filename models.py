@@ -10,8 +10,8 @@ class Task(db.Expando):
     when = db.DateTimeProperty(auto_now_add=True)
     tags = db.StringListProperty()
     complete = db.BooleanProperty(default=False)
-    nudge = db.StringProperty(required=True, choices=set(["never", "daily", "weekly", "monthly", "specific"]))
-    nudge_date = db.StringProperty()
+    nudge = db.StringProperty(required=True, choices=set(["never", "daily", "weekly", "monthly","yearly"]))
+    nudge_day = db.IntegerProperty()
     
 
 class Subscriber(db.Model):

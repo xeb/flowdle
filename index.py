@@ -15,12 +15,7 @@ class MainHandler(webapp.RequestHandler):
 		values = {
 		}
 		self.response.out.write(template.render('templates/index.html', values))    
-		            
-    def post(self):
-		subscriber = Subscriber(
-			who = self.request.get('email'))
-		subscriber.put()
-		self.response.out.write('Great Success!');
+
 		
 def main():
     app = webapp.WSGIApplication([

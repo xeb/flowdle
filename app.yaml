@@ -10,8 +10,8 @@ handlers:
 - url: /images
   static_dir: images
 
-- url: /scripts
-  static_dir: scripts
+- url: /javascripts
+  static_dir: javascripts
 
 - url: /errors
   static_dir: errors
@@ -29,5 +29,8 @@ handlers:
 - url: /rpc(.*)
   script: rpc.py
   login: required
+
+- url: /nudger/send
+  script: nudger.py
   
  
