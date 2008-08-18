@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Flowdle</title>
+    <link href="/stylesheets/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/app.css" rel="stylesheet" type="text/css" />
+    <script src="http://www.google.com/jsapi"></script>
+    <script>
+     google.load("prototype", "1.6.0.2");
+     google.load("scriptaculous", "1.8.1");
+    </script>
+    <!--[if lt IE 7]>
+    <link href="/stylesheets/ie6.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <!--[if IE 7]>
+    <link href="/stylesheets/ie7.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+  </head>
+  <body>
+    <div id="topmenu">
+      <p>{{user.nickname}} | <a href="">Settings</a> | <a href="">Help</a> | <a href="{{signout}}">Logout</a></p>
+           <div class="logo">
+             <a href="/"><img src="/images/logo.png" alt="Flootle" /></a>
+           </div>
+    </div>
+    {{path}}
+    <form id="taskForm" name="taskForm" action="{{formaction}}" method="post">
+    <div id="newtask" class="">
+        <input type="text" class="taskname" id="taskname" name="taskname" maxlength="200" value="{{name}}" />
+        <div class="items">
+            <table>
+            <tr><td>Tags:</td>
+            <td><input type="text" class="taglist" id="taglist" name="taglist" value="{{tags}}" />
+             <div class="commontags">
+             </div>
+            </td>
+            </tr>
+            <tr>
+                <td><label for="nudgelist"><a href="">Nudge</a> me:</label></td>
+            <td>
+            <select name="nudge" id="nudge">
+                <option value="never" {% ifequal nudge 'never' %} selected="selected" {%endifequal%}>Never</option>
+                <option value="daily" {% ifequal nudge 'daily' %} selected="selected" {%endifequal%}>Every Day</option>
+                <option value="weekly" {% ifequal nudge 'weekly' %} selected="selected" {%endifequal%}>Every Week</option>
+                <option value="monthly" {% ifequal nudge 'monthly' %} selected="selected" {%endifequal%}>Every Month</option>
+            </select>
+            </td>
+            </tr>
+            </table><div class="buttons">
+                <input type="hidden" name="editkey" id="editkey" value="">
+                <input type="submit" value="Save" class="bigbutton" id="save" name="save" />
+                <input type="button" value="Cancel" class="bigbutton" id="cancel" name="cancel" onclick="window.location = '{{winloc}}'" />
+            </div>
+        </div>
+    </div> <!-- #newtask -->
+    </form>
+  </body>
+</html>
