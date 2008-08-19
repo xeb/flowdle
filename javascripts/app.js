@@ -29,18 +29,7 @@ document.observe('dom:loaded', function() {
 	// nudge date show-er
 	$('nudge').observe('change', function(e){ 
 		var val = $('nudge').getValue();
-		if(val == 'daily') {
-		    $('nudge_week').addClassName('hiding');
-		}
-		if(val == 'weekly') { 
-			$('nudge_week').removeClassName('hiding');
-		}
-		if(val == 'monthly') {
-		    $('nudge_week').addClassName('hiding');
-		}
-		if(val == 'never') {
-		    $('nudge_week').addClassName('hiding');
-		}
+        setNudgeValue(val, '')
 	});
 	
 	// edit 
@@ -52,12 +41,9 @@ document.observe('dom:loaded', function() {
           $('taskname').setValue(task.name);
           $('taglist').setValue(task.tags);
           $('nudge').setValue(task.nudge);
+          
+          
        });
-       //$('editkey').setValue(id);
-       //$('newtask').removeClassName('hiding');
-       //$('mainTable').hide();
-       //$('taskname').setValue($('name' + id).innerHTML)
-       //return false;
 	});
 	
 	
@@ -87,4 +73,25 @@ document.observe('dom:loaded', function() {
 	    })
 	});
 });
+
+function setNudgeValue(val, nudgeVal) {
+    	if(val == 'daily') {
+		    $('nudge_week').addClassName('hiding');
+		    $('nudge_month').addClassName('hiding');
+		}
+		if(val == 'weekly') { 
+			$('nudge_week').removeClassName('hiding');
+		    $('nudge_month').addClassName('hiding');
+		    $('nudge_day').setValue(nudgeVal);
+		}
+		if(val == 'monthly') {
+		    $('nudge_week').addClassName('hiding');
+		    $('nudge_month').removeClassName('hiding');
+		    $('nudge_month_val').setValue(nudgeVal);
+		}
+		if(val == 'never') {
+		    $('nudge_week').addClassName('hiding');
+		    $('nudge_month').addClassName('hiding');
+		}
+}
 

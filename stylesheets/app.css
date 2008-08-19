@@ -68,10 +68,13 @@ a:active, a:visited, a:link {
 #newtask div {
 	margin: 10px;
 }
-#newtask .items .taglist {
-	font-size: 12px;
+#newtask .items .text {
+	font-size: 14px;
 	width: 400px;
 	padding: 3px;
+}
+#newtask #nudge_month_val {
+    width: 50px;
 }
 #newtask .items td {
     padding: 7px;
@@ -80,7 +83,7 @@ a:active, a:visited, a:link {
 	margin: 5px 0 3px 40px;
 }
 
-#newtask #nudge_week {
+#newtask fieldset {
     margin: 10px 0 0 0;
 }
 
@@ -107,6 +110,16 @@ a:active, a:visited, a:link {
 	background-color: #EEE;
 	font-weight: bold;
 	font-size: 15px;
+}
+
+#newtask select {
+    font-size: 15px;
+    margin: 3px;
+}
+
+#newtask .bigbutton {
+    font-size: 18px;
+    margin: 5px;
 }
 
 #newtask.hiding .items {

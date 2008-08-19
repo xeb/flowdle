@@ -44,7 +44,7 @@ indexes:
   - name: when
     direction: desc
 
-# Used 2 times in query history.
+# Used 20 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -53,7 +53,7 @@ indexes:
   - name: when
     direction: desc
 
-# Used 14 times in query history.
+# Used 81 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -107,6 +107,6 @@ indexes:
   - name: when
     direction: desc
 
-# Used 2 times in query history.
+# Used 15 times in query history.
 - kind: Task
   ancestor: yes

@@ -35,7 +35,7 @@
         <div class="items">
             <table cellpadding="3" cellspacing="3">
             <tr><td>Tags:</td>
-            <td><input type="text" class="taglist" id="taglist" name="taglist" value="{{tagdefault}}" />
+            <td><input type="text" class="text" id="taglist" name="taglist" value="{{tagdefault}}" />
              <div class="commontags">
              </div>
             </td>
@@ -58,7 +58,10 @@
                 <input type="radio" id="nudge_saturday" name="nudge_day" value="6" /><label for="nudge_saturday">Saturday</label>
                 <input type="radio" id="nudge_sunday" name="nudge_day" value="7" /><label for="nudge_sunday">Sunday</label>
             </fieldset>
-            
+            <fieldset id="nudge_month" class="nudge_month hiding">
+                <label for="nudge_month_val">Day of the Month:</label>
+                <input type="text" class="text" id="nudge_month_val" name="nudge_month_val" value="15">
+            </fieldset>
             <input type="text" class="nudge_day hiding" id="nudge_day" name="nudge_day" maxlength="10" value="07/31">
             </td>
             </tr>
