@@ -1,10 +1,9 @@
-var letters=' ABCÇDEFGHIJKLMNÑOPQRSTUVWXYZabcçdefghijklmnñopqrstuvwxyzàáÀÁéèÈÉíìÍÌïÏóòÓÒúùÚÙüÜ'
-var numbers='1234567890'
-var signs=',.:;@-\''
-var mathsigns='+-=()*/'
-var custom='<>#$%&?¿'
-
+var server = {};
+InstallFunction(server, 'toggleComplete');
+InstallFunction(server, 'getTask');
+    
 document.observe('dom:loaded', function() {
+    
 	$('taskname').value = '';
 	$('taskname').focus();
 	
@@ -22,7 +21,7 @@ document.observe('dom:loaded', function() {
 	
 	// When TaskName gets focus
 	$('taskname').observe('keydown', function(e){
-        if(validKey(e, letters + numbers + signs + mathsigns + custom)) {
+        if($('taskname').getValue() != '') {
 		    $('newtask').removeClassName('hiding');
 	    }
 	})
@@ -30,44 +29,62 @@ document.observe('dom:loaded', function() {
 	// nudge date show-er
 	$('nudge').observe('change', function(e){ 
 		var val = $('nudge').getValue();
+		if(val == 'daily') {
+		    $('nudge_week').addClassName('hiding');
+		}
 		if(val == 'weekly') { 
 			$('nudge_week').removeClassName('hiding');
 		}
-		if(val == 'daily') {
+		if(val == 'monthly') {
+		    $('nudge_week').addClassName('hiding');
+		}
+		if(val == 'never') {
 		    $('nudge_week').addClassName('hiding');
 		}
 	});
 	
 	// edit 
 	$$('#biglist .right a').invoke('observe', 'click', function(event){
-       //var id = event.element().id;
+       var id = event.element().id.substring(4);
+       server.getTask(id, function(task){
+          $('newtask').removeClassName('hiding');
+          $('mainTable').hide();
+          $('taskname').setValue(task.name);
+          $('taglist').setValue(task.tags);
+          $('nudge').setValue(task.nudge);
+       });
        //$('editkey').setValue(id);
        //$('newtask').removeClassName('hiding');
        //$('mainTable').hide();
        //$('taskname').setValue($('name' + id).innerHTML)
        //return false;
 	});
+	
+	
+	$('logo').observe('click', function(event){
+	    var img = $(event.element().id);
+	    if(img.src.match('logo.gif')) { img.src = img.src.replace('logo.gif', 'logo2.gif'); }
+	    else if(img.src.match('logo2.gif')) { img.src = img.src.replace('logo2.gif', 'logo3.gif'); }
+	    else if(img.src.match('logo3.gif')) { img.src = img.src.replace('logo3.gif', 'logo4.gif'); }
+	    else if(img.src.match('logo4.gif')) { img.src = img.src.replace('logo4.gif', 'logo.gif'); }
+	});
+	
+	// complete
+	$$('#biglist .left .checkbox').invoke('observe', 'click', function(event){
+	    var id = event.element().id.substring(5);
+	    //alert(id);
+	    server.toggleComplete(id, function(event){
+	        if(event){
+	            if($('check'+id).checked) {
+	                $('name'+id).addClassName('complete'); 
+                } else {
+                    $('name'+id).removeClassName('complete')
+                }
+	        }
+	        else {
+                alert('Oops!  Something went wrong.');
+            }
+	    })
+	});
 });
 
-function setCheck(event) {
-    var id = event.element().id.substring(5);
-    alert(id);
-    new Ajax.Request('/rpc?action=togglecomplete&key=' + id, {
-        method: 'get',
-        onSuccess: function(transport) {
-            alert('SUCCESS!' + transport.responseText);
-        },
-        onFailure: function(transport) {
-            alert('FAIL!' + transport.responseText);
-        },
-        onComplete: function(transport) {
-            alert('COMPLETE!' + transport.responseText);
-        }
-    });
-}
-
-function validKey(e, allow) {
- var k;
- k=document.all?parseInt(e.keyCode): parseInt(e.which);
- return (allow.indexOf(String.fromCharCode(k))!=-1);
-}

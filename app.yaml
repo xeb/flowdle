@@ -20,17 +20,17 @@ handlers:
   script: index.py
 
 - url: /index.html
-  script: index.py
+  script: python/index.py
 
 - url: /app(.*)
-  script: app.py
+  script: python/app.py
   login: required
 
 - url: /rpc(.*)
-  script: rpc.py
+  script: python/rpc.py
   login: required
 
 - url: /nudger/send
-  script: nudger.py
+  script: python/nudger.py
   
  

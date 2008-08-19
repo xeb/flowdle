@@ -5,6 +5,8 @@ import os
 
 from django.utils import simplejson
 from google.appengine.ext import webapp
+from google.appengine.ext import db
+from google.appengine.api import users
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp import util
 
@@ -22,9 +24,10 @@ class RPCHandler(webapp.RequestHandler):
     webapp.RequestHandler.__init__(self)
     self.methods = RPCMethods()
  
-  def get(self):
+  def get(self, urlparam):
     func = None
-   
+    
+    #self.response.out.write('HERE')
     action = self.request.get('action')
     if action:
       if action[0] == '_':
@@ -54,10 +57,25 @@ class RPCMethods:
   NOTE: Do not allow remote callers access to private/protected "_*" methods.
   """
 
-  def ToggleComplete(self, *args):
-    return 'Cool'
+  def getTask(self, *args):
+    user = users.get_current_user()
     task = db.GqlQuery('SELECT * FROM Task WHERE ANCESTOR IS :1',db.Key(args[0])).get()
-    if task:
+    if task.complete == False and task.who == user:
+        val = {
+            'name' : task.name,
+            'tags' : task.tags,
+            'nudge' : task.nudge,
+            'nudge_value' : task.nudge_value
+        }
+        return val
+    else:
+        return False
+    
+
+  def toggleComplete(self, *args):
+    user = users.get_current_user()
+    task = db.GqlQuery('SELECT * FROM Task WHERE ANCESTOR IS :1',db.Key(args[0])).get()
+    if task and task.who == user:
         if task.complete:
             task.complete = False
         else:
@@ -70,8 +88,7 @@ class RPCMethods:
  
 def main():
   app = webapp.WSGIApplication([
-    ('/rpcget', MainPage),
-    ('/rpccmd', RPCHandler),
+    ('/rpc(.*)', RPCHandler),
     ], debug=True)
   util.run_wsgi_app(app)
 

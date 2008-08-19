@@ -53,10 +53,10 @@ class Common:
         # Show Completed Tags
         elif urlparam == "/completed":
             values['alltasks'] = db.GqlQuery(" SELECT * FROM Task WHERE who = :1 "
-                                            " AND completed = True", user)
+                                            " AND complete = :2 ", user, True)
             values['taglinks'] = cmn.getTagLinks(values['alltags'], None)
             values['tagtitle'] = 'Completed'
-            
+            values['title'] = 'Completed Tasks will be automatically deleted after one month'
         # Show No Tag
         elif urlparam == "/notag":
             tasks = []
@@ -74,7 +74,7 @@ class Common:
             handler.redirect('/app/all')
                 
         # write out the main template to the given handler
-        handler.response.out.write(template.render('templates/app.html', values))   
+        handler.response.out.write(template.render('../templates/app.html', values))   
         return
         
     def getTags(self, alltasks):
@@ -106,7 +106,7 @@ class Common:
         newlist = []
         for tag in tagString[:500].split(' '):
             if tag != u' ' and tag != u'' and tag not in newlist:
-                newlist.append(tag.strip())
+                newlist.append(tag.strip()[:30])
         return newlist
 
         
@@ -148,7 +148,7 @@ class EditHandler(webapp.RequestHandler):
                 'tags' : cmn.getTagString(task.tags),
                 'winloc' : '/app/all'
             }   
-            self.response.out.write(template.render('templates/edit.html', values)) 
+            self.response.out.write(template.render('../templates/edit.html', values)) 
 
     def post(self, urlparam):
         cmn = Common()

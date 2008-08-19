@@ -1,3 +1,4 @@
+
     //
     // As mentioned at http://en.wikipedia.org/wiki/XMLHttpRequest
     //
@@ -64,26 +65,4 @@
     // Adds a stub function that will pass the arguments to the AJAX call 
     function InstallFunction(obj, functionName) {
       obj[functionName] = function() { Request(functionName, arguments); }
-    }
-
-    // Server object that will contain the callable methods
-    var server = {};
-
-    // Insert 'Add' as the name of a callable method
-    InstallFunction(server, 'Add');
-
-
-    // Handy "macro"
-    function $(id){
-      return document.getElementById(id);
-    }
-
-    // Client function that calls a server rpc and provides a callback
-    function doAdd() {
-      server.Add($('num1').value, $('num2').value, onAddSuccess);
-    }
-
-    // Callback for after a successful doAdd
-    function onAddSuccess(response) {
-      $('result').value = response;
     }

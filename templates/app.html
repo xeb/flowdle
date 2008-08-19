@@ -11,6 +11,8 @@
     <script>
      google.load("prototype", "1.6.0.2");
      </script>
+    <script src="/javascripts/json2.js"></script>
+    <script src="/javascripts/rpc.js"></script>
     <script src="/javascripts/app.js"></script>
     <!--[if lt IE 7]>
     <link href="/stylesheets/ie6.css" rel="stylesheet" type="text/css" />
@@ -23,7 +25,7 @@
     <div id="topmenu">
       <p>{{user.nickname}} | <a href="">Settings</a> | <a href="">Help</a> | <a href="{{signout}}">Logout</a></p>
            <div class="logo">
-             <a href="/"><img src="/images/logo.png" alt="Flootle" /></a>
+             <img src="/images/logo.gif" alt="Flowdle" id="logo" />
            </div>
     </div>
     {{path}}
@@ -68,7 +70,7 @@
         </div>
     </div> <!-- #newtask -->
     </form>
-    
+    <h5>{{title}}</h5>
     <table id="mainTable">
         <tr>
             <td class="left"><div id="tags">
@@ -103,8 +105,8 @@
                     {% for task in alltasks %}
                     <tr>
                         <td class="left">
-                            <input type="checkbox" onclick="setCheck(event)" class="checkbox" id="check{{task.key}}" />
-                            <label id="name{{task.key}}" for="check{{task.key}}">{{task.name}}</lable>
+                            <input type="checkbox" class="checkbox" id="check{{task.key}}" {% ifequal task.complete 1 %}checked="checked"{% endifequal %} />
+                            <label id="name{{task.key}}" for="check{{task.key}}" {% ifequal task.complete 1 %}class="complete"{% endifequal %}>{{task.name}}</lable>
                         </td>
                         <td class="right">Nudge me 
                             <span id="nudge">{% ifequal task.nudge 'specific' %}
@@ -114,7 +116,7 @@
                             {% endifequal %}</span>
                         </td>
                         <td class="right">
-                            <a class="editlink" href="/app/edit/{{task.key}}" id="{{task.key}}">Edit</a>
+                            <a class="editlink" id="edit{{task.key}}">Edit</a>
                         </td>
                     </tr>
 

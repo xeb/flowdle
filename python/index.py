@@ -14,7 +14,7 @@ class MainHandler(webapp.RequestHandler):
 	
 		values = {
 		}
-		self.response.out.write(template.render('templates/index.html', values))    
+		self.response.out.write(template.render('../templates/index.html', values))    
 
 		
 def main():

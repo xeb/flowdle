@@ -1,5 +1,5 @@
 body {
-	background: url(/images/gradient.gif) repeat-x;
+	background: url(/images/newgradient.gif) repeat-x;
 	width: 100%;
 	font-family: Helvetica,Arial,Sans-Serif;
 	font-size: 16px;
@@ -10,21 +10,40 @@ h4 {
 	font-weight: bold;
 }
 
+h5 {
+    font-size:14px;
+    font-weight: bold;
+    color: #777;
+    margin: 3px 0 0 120px;
+}
+
+input {
+    border: 1px solid #CCC;
+}
+
 .clear {
   clear:both;
   height:1px;
   overflow:hidden;
 }
 
+a:active, a:visited, a:link {
+	color: #009BF4;
+	text-decoration: none;
+}
+
 #topmenu {
 	width: 100%;
 	position: relative;
 	text-align: right;
-	height: 120px;
+	height: 70px;
 }
 
 #topmenu p {
 	margin: 5px 30px 0 0;
+	font-weight: bold;
+	font-size: 12px;
+	color: #CCC;
 }
 
 #topmenu .logo {
@@ -61,10 +80,19 @@ h4 {
 	margin: 5px 0 3px 40px;
 }
 
+#newtask #nudge_week {
+    margin: 10px 0 0 0;
+}
+
 #newtask .taskname {
 	font-size: 18px;
-	padding: 5px;
-	width: 500px;
+	padding: 10px;
+	width: 600px;
+	background-color: #FFFFFF;
+}
+
+#newtask.hiding .taskname {
+	background: url(/images/haveto.gif) #FFFFFF no-repeat 15px 7px;
 }
 
 #newtask input.hiding, #newtask fieldset.hiding {
@@ -81,20 +109,12 @@ h4 {
 	font-size: 15px;
 }
 
-#newtask.hiding .taskname {
-	background: url(/images/haveto.gif) no-repeat 3px 3px;
-}
-
 #newtask.hiding .items {
 	display: none;
 }
 
 #mainTable {
 	margin: 10px 200px 10px 30px;
-}
-
-#mainTable #biglist .left input {
-
 }
 
 #mainTable #tags {
@@ -116,8 +136,7 @@ h4 {
 }
 
 #mainTable #right {
-	background-color: #FEF7DA;
-	border: 1px solid #3A3A3A;
+	background-color: #FEFEFE;
 	vertical-align: top;
 	padding: 10px;
 	width: 100%;
@@ -137,14 +156,19 @@ h4 {
 	width: 70%;
 }
 
+#biglist .left label.complete {
+    text-decoration: line-through;
+    color: #AAAAAA;
+}
+
 #biglist td {
 	padding: 7px;
 }
 
 #biglist .editlink {
-    color: #0000FF;
+    color: #009BF4;
     cursor: pointer;
-    text-decoration: underline;
+    font-weight: bold;
 }
 
 #mainTable #ads {
