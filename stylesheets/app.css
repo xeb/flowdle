@@ -30,6 +30,11 @@ input {
 a:active, a:visited, a:link {
 	color: #009BF4;
 	text-decoration: none;
+	padding: 4px;
+}
+a:hover {
+	color: #FFFFFF;
+	background-color: #009BF4;
 }
 
 #topmenu {
@@ -73,7 +78,7 @@ a:active, a:visited, a:link {
 	width: 400px;
 	padding: 3px;
 }
-#newtask #nudge_month_val {
+#newtask #nudge_month_value {
     width: 50px;
 }
 #newtask .items td {
@@ -95,7 +100,7 @@ a:active, a:visited, a:link {
 }
 
 #newtask.hiding .taskname {
-	background: url(/images/haveto.gif) #FFFFFF no-repeat 15px 7px;
+	background: url(/images/haveto.gif) #FFFFFF no-repeat 20px 8px;
 }
 
 #newtask input.hiding, #newtask fieldset.hiding {
@@ -160,6 +165,11 @@ a:active, a:visited, a:link {
 	position: relative;
 }
 
+#mainTable #right #tablemenu {
+    text-align: left;
+    font-size: 12px;
+    margin: 30px 30px 0 0;
+}
 
 #biglist {
 	width: 100%;
@@ -179,9 +189,14 @@ a:active, a:visited, a:link {
 }
 
 #biglist .editlink {
-    color: #009BF4;
     cursor: pointer;
     font-weight: bold;
+    color: #009BF4;
+    padding: 4px;
+}
+
+#biglist a:hover {
+	color: #FFFFFF;
 }
 
 #mainTable #ads {

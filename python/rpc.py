@@ -2,6 +2,7 @@
 
 
 import os
+import datetime
 
 from django.utils import simplejson
 from google.appengine.ext import webapp
@@ -65,12 +66,21 @@ class RPCMethods:
             'name' : task.name,
             'tags' : task.tags,
             'nudge' : task.nudge,
-            'nudge_value' : task.nudge_value
+            'nudge_value' : task.nudge_value,
+            'key' : task.key().__str__()
         }
         return val
     else:
         return False
-    
+
+  def getTaskCompleteDate(self, *args):
+    user = users.get_current_user()
+    task = db.GqlQuery('SELECT * FROM Task WHERE ANCESTOR IS :1',db.Key(args[0])).get()
+    if task.complete == True and task.complete_date != None and task.who == user:
+        val = task.complete_date.month.__str__() + '/' + task.complete_date.day.__str__() + '/' + task.complete_date.year.__str__()
+        return val
+    else:
+        return None
 
   def toggleComplete(self, *args):
     user = users.get_current_user()
@@ -80,6 +90,7 @@ class RPCMethods:
             task.complete = False
         else:
             task.complete = True
+            task.complete_date = datetime.datetime.today()
         task.put()
         return True
     else:

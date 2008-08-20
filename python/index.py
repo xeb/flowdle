@@ -11,11 +11,8 @@ from google.appengine.ext.webapp import template
 
 class MainHandler(webapp.RequestHandler):
     def get(self):
-	
-		values = {
-		}
-		self.response.out.write(template.render('../templates/index.html', values))    
-
+		self.response.out.write(template.render('../templates/index.html', None))    
+		
 		
 def main():
     app = webapp.WSGIApplication([

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import datetime
 import wsgiref.handlers
 
 from models import Task
@@ -16,18 +17,30 @@ class Common:
     def showMain(self, handler, urlparam):
         cmn = Common()
         user = users.get_current_user()
+        
+        orderBy = "when"
+        if handler.request.get('s') == "1":
+            orderBy = "name"
+        elif handler.request.get('s') == "2":
+            orderBy = "nudge"
+            
+        orderDir = "ASC"
+        if handler.request.get('o') == "1":
+            orderDir = "DESC"
+        
         alltasks = db.GqlQuery( "SELECT * FROM Task WHERE who = :1 AND complete = False" 
-                                " ORDER BY when DESC ", user)
+                                " ORDER BY "+orderBy+" "+orderDir, user)
         values = {
             'user': user,
             'signout' : users.create_logout_url("/app"),
             'alltasks' : alltasks,
-            'alltags' : cmn.getTags(alltasks)
+            'alltags' : cmn.getTags(alltasks),
+            'orderDir' : orderDir
         }
         
         # Show All Tasks
         if urlparam == "/all":
-            values['formaction'] = '/app'
+            values['formaction'] = '/app/all'
             values['tagbaseurl'] = '/app/tagged/'
             values['tagtitle'] = 'All'
             values['taglinks'] = cmn.getTagLinks(values['alltags'], None)
@@ -39,7 +52,7 @@ class Common:
                 tags = [tagstr]
                 values['alltasks'] = db.GqlQuery(" SELECT * FROM Task WHERE who = :1 "
                                                  " AND complete = False AND tags IN :2 "
-                                                 " ORDER BY when DESC ", user, tags)
+                                                 " ORDER BY "+orderBy+" "+orderDir, user, tags)
                 if(values['alltasks'].count(10) == 0):
                     handler.redirect('/app/all')
                 values['tagtitle'] = tagstr.title()
@@ -53,15 +66,19 @@ class Common:
         # Show Completed Tags
         elif urlparam == "/completed":
             values['alltasks'] = db.GqlQuery(" SELECT * FROM Task WHERE who = :1 "
-                                            " AND complete = :2 ", user, True)
+                                            " AND complete = :2 ORDER BY "+orderBy+" "+orderDir,
+                                            user, True)
             values['taglinks'] = cmn.getTagLinks(values['alltags'], None)
             values['tagtitle'] = 'Completed'
-            values['title'] = 'Completed Tasks will be automatically deleted after one month'
+            
+            if values['alltasks'].count(1) > 0:
+                values['title'] = 'Completed Tasks will be automatically deleted after one month'
+                
         # Show No Tag
         elif urlparam == "/notag":
             tasks = []
             for task in db.GqlQuery( "SELECT * FROM Task WHERE who = :1 " 
-                                " ORDER BY when DESC ", user):
+                                " ORDER BY " + orderBy + " "+orderDir, user):
                 # sigh...can't do this in GQL
                 if len(task.tags) == 0:
                     tasks.append(task)
@@ -72,6 +89,9 @@ class Common:
         # Send to All if Nothing has been matched
         else:
             handler.redirect('/app/all')
+        
+        # Do we have a Task        
+        values['hastasks'] = values['alltasks'].count(1) > 0
                 
         # write out the main template to the given handler
         handler.response.out.write(template.render('../templates/app.html', values))   
@@ -119,54 +139,41 @@ class MainHandler(webapp.RequestHandler):
         
     def post(self, urlparam):
         cmn = Common()
-        task = Task(
-            name=self.request.get('taskname')[:200],
-            who=users.get_current_user(),
-            nudge=self.request.get('nudge'))
+        user = users.get_current_user()
+        taskkey = len(str(self.request.get('taskkey')))
+        if taskkey > 0:
+            task = db.GqlQuery('SELECT * FROM Task WHERE ANCESTOR IS :1 AND who = :2',
+                                    db.Key(self.request.get('taskkey')), user).get()
+            if task == None:
+                self.redirect('/app/all')
+            else:
+                task.name = self.request.get('taskname')[:200]
+                task.nudge = self.request.get('nudge')
+        else:
+            task = Task(
+                name=self.request.get('taskname')[:200],
+                who=user,
+                nudge=self.request.get('nudge'))
+        
         if self.request.get('taglist'):
             task.tags = cmn.setTags(self.request.get('taglist'))
-        if self.request.get('nudge_date') and task.nudge == "specific":
-            task.nudge_date = self.request.get('nudge_date')[:10]
+          
+        if task.nudge == 'monthly':
+            task.nudge_value = self.request.get('nudge_month_value')[:3]
+        elif task.nudge == 'weekly':
+            task.nudge_value = self.request.get('nudge_day')[:3]
+            
         task.put()
+        
         tagstr = urlparam[8:]
         if tagstr:
             self.redirect('/app/tagged/' + tagstr)
         else:
             self.redirect('/app/all')
-
-class EditHandler(webapp.RequestHandler):
-    
-    def get(self, urlparam):  
-        cmn = Common()  
-        task = db.GqlQuery('SELECT * FROM Task WHERE ANCESTOR IS :1',db.Key(urlparam[1:])).get()
-        if task:
-            values = {
-                'user': users.get_current_user(),
-                'signout' : users.create_logout_url("/app"),        
-                'name' : task.name,
-                'nudge' : task.nudge,
-                'tags' : cmn.getTagString(task.tags),
-                'winloc' : '/app/all'
-            }   
-            self.response.out.write(template.render('../templates/edit.html', values)) 
-
-    def post(self, urlparam):
-        cmn = Common()
-        task = db.GqlQuery('SELECT * FROM Task WHERE ANCESTOR IS :1',db.Key(urlparam[1:])).get()
-        if task:
-            task.name=self.request.get('taskname')[:200]            
-            task.nudge=self.request.get('nudge')
-            if self.request.get('taglist'):
-                task.tags = cmn.setTags(self.request.get('taglist'))
-            task.put()
-        self.redirect('/app/all')
             
 def main():
     app = webapp.WSGIApplication(
-                [
-                    ('/app/edit(.*)', EditHandler),
-                    ('/app(.*)', MainHandler)
-                ], 
+                [('/app(.*)', MainHandler)], 
                 debug=True)
     wsgiref.handlers.CGIHandler().run(app)
 

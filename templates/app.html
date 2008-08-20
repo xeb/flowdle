@@ -23,13 +23,14 @@
   </head>
   <body>
     <div id="topmenu">
-      <p>{{user.nickname}} | <a href="">Settings</a> | <a href="">Help</a> | <a href="{{signout}}">Logout</a></p>
+      <p>{{user.nickname}} | <a href="/help">Help</a> | <a href="{{signout}}">Logout</a></p>
            <div class="logo">
              <img src="/images/logo.gif" alt="Flowdle" id="logo" />
            </div>
     </div>
     {{path}}
     <form id="taskForm" name="taskForm" action="{{formaction}}" method="post">
+    <input type="hidden" name="taskkey" id="taskkey" />
     <div id="newtask" class="hiding">
         <input type="text" class="taskname" id="taskname" name="taskname" maxlength="200" value="{{edittask.name}}" />
         <div class="items">
@@ -49,18 +50,19 @@
                 <option value="weekly">Every Week</option>
                 <option value="monthly">Every Month</option>
             </select>
+            <label>until complete</label>
             <fieldset id="nudge_week" class="nudge_week hiding"> 
-                <input type="radio" id="nudge_monday" name="nudge_day" value="1" checked="checked" /><label for="nudge_monday">Monday</label>
-                <input type="radio" id="nudge_tuesday" name="nudge_day" value="2" /><label for="nudge_tuesday">Tuesday</label>
-                <input type="radio" id="nudge_wednesday" name="nudge_day" value="3" /><label for="nudge_wednesday">Wednesday</label>
-                <input type="radio" id="nudge_thursday" name="nudge_day" value="4" /><label for="nudge_thursday">Thursday</label>
-                <input type="radio" id="nudge_friday" name="nudge_day" value="5" /><label for="nudge_friday">Friday</label>
-                <input type="radio" id="nudge_saturday" name="nudge_day" value="6" /><label for="nudge_saturday">Saturday</label>
-                <input type="radio" id="nudge_sunday" name="nudge_day" value="7" /><label for="nudge_sunday">Sunday</label>
+                <input type="radio" id="nudge_1" name="nudge_day" value="1" /><label for="nudge_1">Monday</label>
+                <input type="radio" id="nudge_2" name="nudge_day" value="2" /><label for="nudge_2">Tuesday</label>
+                <input type="radio" id="nudge_3" name="nudge_day" value="3" /><label for="nudge_3">Wednesday</label>
+                <input type="radio" id="nudge_4" name="nudge_day" value="4" /><label for="nudge_4">Thursday</label>
+                <input type="radio" id="nudge_5" name="nudge_day" value="5" /><label for="nudge_5">Friday</label>
+                <input type="radio" id="nudge_6" name="nudge_day" value="6" /><label for="nudge_6">Saturday</label>
+                <input type="radio" id="nudge_7" name="nudge_day" value="7" /><label for="nudge_7">Sunday</label>
             </fieldset>
             <fieldset id="nudge_month" class="nudge_month hiding">
                 <label for="nudge_month_val">Day of the Month:</label>
-                <input type="text" class="text" id="nudge_month_val" name="nudge_month_val" value="15">
+                <input type="text" class="text" id="nudge_month_value" name="nudge_month_value" value="15">
             </fieldset>
             <input type="text" class="nudge_day hiding" id="nudge_day" name="nudge_day" maxlength="10" value="07/31">
             </td>
@@ -101,30 +103,40 @@
                     </ul>
                 </div> <!-- #tag -->
             </td>
-            <td id="right">
+            <td id="right" {% ifequal hastasks 0 %}class="notasks"{% endifequal %}>
                 <img src="/images/spacer.gif" width="500" height="1" alt="" />
-
                 <table id="biglist">
                     {% for task in alltasks %}
                     <tr>
                         <td class="left">
                             <input type="checkbox" class="checkbox" id="check{{task.key}}" {% ifequal task.complete 1 %}checked="checked"{% endifequal %} />
-                            <label id="name{{task.key}}" for="check{{task.key}}" {% ifequal task.complete 1 %}class="complete"{% endifequal %}>{{task.name}}</lable>
+                            <label id="name{{task.key}}" for="check{{task.key}}" {% ifequal task.complete 1 %}class="complete"{% endifequal %}>{{task.name}}</label>
                         </td>
-                        <td class="right">Nudge me 
-                            <span id="nudge">{% ifequal task.nudge 'specific' %}
-                                {{task.nudge_date}}
-                            {% else %}
-                                {{task.nudge}}
-                            {% endifequal %}</span>
+                        <td class="right">
+                            <span id="nudge{{task.key}}">
+                                {% ifequal task.complete 1 %}
+                                    Done on {{task.complete_date.month}}/{{task.complete_date.day}}/{{task.complete_date.year}}
+                                {% else %}
+                                Nudge me {{task.nudge}}
+                                {% endifequal %}
+                            </span>
                         </td>
+                        {% ifequal task.complete 0 %}
                         <td class="right">
                             <a class="editlink" id="edit{{task.key}}">Edit</a>
                         </td>
+                        {% endifequal %}
                     </tr>
 
                     {% endfor %}
                 </table> <!-- #biglist -->
+                {% ifequal hastasks 1 %}
+                <div id="tablemenu">
+                    Sort by: <a href="{{formaction}}?s=0{% ifequal orderDir 'ASC' %}&o=1{% endifequal %}">time</a>, 
+                             <a href="{{formaction}}?s=1{% ifequal orderDir 'ASC' %}&o=1{% endifequal %}">name</a>, 
+                             <a href="{{formaction}}?s=2{% ifequal orderDir 'ASC' %}&o=1{% endifequal %}">nudge</a>
+                </div>
+                {% endifequal %}
             </td> <!-- #right -->
         </tr>       
     </table>

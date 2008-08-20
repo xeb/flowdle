@@ -1,10 +1,11 @@
 var server = {};
 InstallFunction(server, 'toggleComplete');
 InstallFunction(server, 'getTask');
-    
+InstallFunction(server, 'getTaskCompleteDate')
+
 document.observe('dom:loaded', function() {
     
-	$('taskname').value = '';
+	$('taskname').setValue('');
 	$('taskname').focus();
 	
 	if($('taskname').getValue() != '') {
@@ -13,13 +14,15 @@ document.observe('dom:loaded', function() {
 	
 	hideNewTask = function() {
 		$('newtask').addClassName('hiding');
-		$('taskname').value = '';
+		$('taskname').setValue('');
+		$('taskname').focus();
+		$('taskkey').setValue('');
 		$('mainTable').show();
 	}
 	
 	$('cancel').observe('click', hideNewTask);
 	
-	// When TaskName gets focus
+	// new task
 	$('taskname').observe('keydown', function(e){
         if($('taskname').getValue() != '') {
 		    $('newtask').removeClassName('hiding');
@@ -29,42 +32,48 @@ document.observe('dom:loaded', function() {
 	// nudge date show-er
 	$('nudge').observe('change', function(e){ 
 		var val = $('nudge').getValue();
-        setNudgeValue(val, '')
+        setNudgeValue(val)
 	});
 	
 	// edit 
 	$$('#biglist .right a').invoke('observe', 'click', function(event){
        var id = event.element().id.substring(4);
        server.getTask(id, function(task){
-          $('newtask').removeClassName('hiding');
-          $('mainTable').hide();
-          $('taskname').setValue(task.name);
-          $('taglist').setValue(task.tags);
-          $('nudge').setValue(task.nudge);
-          
-          
+          if(task) {
+              $('newtask').removeClassName('hiding');
+              $('mainTable').hide();
+              $('taskname').setValue(task.name);
+              $('taglist').setValue(task.tags);
+              $('nudge').setValue(task.nudge);
+              $('taskkey').setValue(task.key);
+              setNudgeValue(task.nudge, task.nudge_value);
+           }
        });
-	});
-	
-	
-	$('logo').observe('click', function(event){
-	    var img = $(event.element().id);
-	    if(img.src.match('logo.gif')) { img.src = img.src.replace('logo.gif', 'logo2.gif'); }
-	    else if(img.src.match('logo2.gif')) { img.src = img.src.replace('logo2.gif', 'logo3.gif'); }
-	    else if(img.src.match('logo3.gif')) { img.src = img.src.replace('logo3.gif', 'logo4.gif'); }
-	    else if(img.src.match('logo4.gif')) { img.src = img.src.replace('logo4.gif', 'logo.gif'); }
 	});
 	
 	// complete
 	$$('#biglist .left .checkbox').invoke('observe', 'click', function(event){
 	    var id = event.element().id.substring(5);
-	    //alert(id);
 	    server.toggleComplete(id, function(event){
 	        if(event){
 	            if($('check'+id).checked) {
 	                $('name'+id).addClassName('complete'); 
+	                $('edit'+id).hide();
+	                
+	                server.getTaskCompleteDate(id, function(date) {
+	                    if(date) {
+	                        $('nudge'+id).update('Done on ' + date)
+	                    }
+	                });
+	                
                 } else {
                     $('name'+id).removeClassName('complete')
+                    $('edit'+id).show();
+                    server.getTask(id, function(task){
+                        if(task) {
+                            $('nudge'+id).update('Nudge me '+ task.nudge)
+                        }
+                    });
                 }
 	        }
 	        else {
@@ -82,12 +91,14 @@ function setNudgeValue(val, nudgeVal) {
 		if(val == 'weekly') { 
 			$('nudge_week').removeClassName('hiding');
 		    $('nudge_month').addClassName('hiding');
-		    $('nudge_day').setValue(nudgeVal);
+		    if(nudgeVal){
+		        $('nudge_' + nudgeVal).checked = true;
+		    }
 		}
 		if(val == 'monthly') {
 		    $('nudge_week').addClassName('hiding');
 		    $('nudge_month').removeClassName('hiding');
-		    $('nudge_month_val').setValue(nudgeVal);
+		    $('nudge_month_value').setValue(nudgeVal);
 		}
 		if(val == 'never') {
 		    $('nudge_week').addClassName('hiding');

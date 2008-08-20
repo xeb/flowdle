@@ -17,7 +17,7 @@ handlers:
   static_dir: errors
   
 - url: /
-  script: index.py
+  script: python/index.py
 
 - url: /index.html
   script: python/index.py

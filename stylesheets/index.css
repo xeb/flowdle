@@ -1,46 +1,17 @@
 #main {
 	background: url(/images/gradient.gif) repeat-x;
 	width: 100%;
-	min-height: 350px;
-}
-
-#header, #body {
-	width: 100%;
-	position: relative;
-}
-
-#header {
-	text-align: left;
-}
-
-#body {
 	text-align: center;
 }
 
+#header {
+	width: 500px;
+	position: relative;
+	padding: 200px 0 0 0;
+	text-align: left;
+	background: #444444;
+}
+
 #header .logo {
-	padding: 0px 0 0 0;
-}
-
-#body .coming-soon {
-	padding: 100px 0 0 0;
-}
-
-#body .form {
-	padding: 10px 0 0 0;
-}
-
-#body .form .text {
-	font-family:Helvetica,Arial,Sans-Serif;
-	color: #AAA;
-	font-size:18px;
-	width:230px;
-}
-
-#body .form .submit {
-	font-family: Helvetica,Arial,Sans-Serif;
-	font-size: 18px;
-	font-weight: none;
-	min-height: 26px;
-	background-color: #EEE;
-	border: 1px solid black;
+	padding: 50px 0 0 0;
 }
