@@ -4,6 +4,14 @@ body {
 	text-align: center;
 }
 
+a.light {
+    color: #4F4F4F;
+}
+
+a.bottom {
+    color: #ccc;
+}
+
 div.line {
     height: 3px;
     width: 100%;
@@ -15,7 +23,7 @@ div.line {
 #frame {
     margin:0 auto;
     text-align:left;
-    width: 400px;
+    width: 500px;
     padding: 100px 0 0 0;
 }
 
@@ -46,10 +54,12 @@ div.line {
 
 #inner span.hint {
     position: absolute;
-    top: 43px;
-    left: 230px;
-    font-size: 20px;
-    color: #4C4C4C;
+    top: 39px;
+    left: 240px;
+    font-size: 22px;
+    color: #494949;
+    font-family: Georgia;
+    font-style:italic;
 }
 
 #inner ul {
@@ -58,9 +68,16 @@ div.line {
 
 #inner ul li {
     font-size: 18px;
-    margin: 7px 0 7px 0;
-    list-style-type: disc;
+    margin: 11px 0 20px 0;
+    list-style-type: none;
     color: #CCCCCC;
+}
+
+#inner ul li p {
+    font-size: 12px;
+    font-weight: none;
+    color: #777;
+    font-family: arial, sans-serif;
 }
 
 #inner div.bottom {
@@ -69,8 +86,8 @@ div.line {
 }
 
 #inner p {
-    font-size: 14px;
-    margin: 0 0 7px 0;
+    font-size: 16px;
+    margin: 0 0 20px 0;
 }
 
 #inner input.check {
@@ -78,12 +95,12 @@ div.line {
     width: 200px;
     height: 40px;
     font-size:18px;
-    background: #FFFFFF;
-    color: #444444;
+    background: #009BF4;
+    color: #FFFFFF;
 }
 
 #inner input.check:hover {
-    background: #009BF4;
-    color: #FFFFFF;
+    background: #FFFFFF;
+    color: #444444;
     cursor: pointer;
 }
