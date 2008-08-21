@@ -113,7 +113,7 @@
                             <label id="name{{task.key}}" for="check{{task.key}}" {% ifequal task.complete 1 %}class="complete"{% endifequal %}>{{task.name}}</label>
                         </td>
                         <td class="right">
-                            <span id="nudge{{task.key}}">
+                            <span id="nudge{{task.key}}" {% ifequal task.complete 1 %}class="complete"{%endifequal%}>
                                 {% ifequal task.complete 1 %}
                                     Done on {{task.complete_date.month}}/{{task.complete_date.day}}/{{task.complete_date.year}}
                                 {% else %}
@@ -121,11 +121,11 @@
                                 {% endifequal %}
                             </span>
                         </td>
-                        {% ifequal task.complete 0 %}
+                        
                         <td class="right">
-                            <a class="editlink" id="edit{{task.key}}">Edit</a>
+                            <a class="editlink" {% ifequal task.complete 1 %}style="display:none"{% endifequal %} id="edit{{task.key}}">Edit</a>
                         </td>
-                        {% endifequal %}
+                        
                     </tr>
 
                     {% endfor %}

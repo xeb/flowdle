@@ -32,7 +32,7 @@ class Common:
                                 " ORDER BY "+orderBy+" "+orderDir, user)
         values = {
             'user': user,
-            'signout' : users.create_logout_url("/app"),
+            'signout' : users.create_logout_url("/"),
             'alltasks' : alltasks,
             'alltags' : cmn.getTags(alltasks),
             'orderDir' : orderDir
@@ -91,7 +91,7 @@ class Common:
             handler.redirect('/app/all')
         
         # Do we have a Task        
-        values['hastasks'] = values['alltasks'].count(1) > 0
+        values['hastasks'] = values['alltasks'].count(2) > 1
                 
         # write out the main template to the given handler
         handler.response.out.write(template.render('../templates/app.html', values))   

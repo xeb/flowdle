@@ -22,8 +22,13 @@ document.observe('dom:loaded', function() {
 	
 	$('cancel').observe('click', hideNewTask);
 	
+	// home
+	$('logo').observe('click',function(e){ 
+	    window.location = '/';  
+	});
+	
 	// new task
-	$('taskname').observe('keydown', function(e){
+	$('taskname').observe('keyup', function(e){
         if($('taskname').getValue() != '') {
 		    $('newtask').removeClassName('hiding');
 	    }
@@ -63,6 +68,7 @@ document.observe('dom:loaded', function() {
 	                server.getTaskCompleteDate(id, function(date) {
 	                    if(date) {
 	                        $('nudge'+id).update('Done on ' + date)
+	                        $('nudge'+id).addClassName('complete')
 	                    }
 	                });
 	                
@@ -72,6 +78,7 @@ document.observe('dom:loaded', function() {
                     server.getTask(id, function(task){
                         if(task) {
                             $('nudge'+id).update('Nudge me '+ task.nudge)
+                            $('nudge'+id).removeClassName('complete')
                         }
                     });
                 }

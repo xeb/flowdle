@@ -57,6 +57,10 @@ a:hover {
 	left: 10px;
 }
 
+#topmenu #logo {
+    cursor: pointer;
+}
+
 #newtask {
 	min-height: 50px;
 	margin-left: 30px;
@@ -127,6 +131,12 @@ a:hover {
     margin: 5px;
 }
 
+#newtask .bigbutton:hover {
+    background: #009BF4;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
 #newtask.hiding .items {
 	display: none;
 }
@@ -186,6 +196,10 @@ a:hover {
 
 #biglist td {
 	padding: 7px;
+}
+
+#biglist span.complete {
+    color: #AAAAAA;
 }
 
 #biglist .editlink {

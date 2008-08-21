@@ -9,19 +9,26 @@
     <link href="/stylesheets/index.css" rel="stylesheet" type="text/css" />
 	<script src="http://www.google.com/jsapi"></script>
 	<script>google.load("prototype", "1.6.0.2");</script>
-	<script type="text/javascript" src="/scripts/main.js"></script>
+	<script src="/javascripts/index.js" type="text/javascript"></script>
   </head>
   <body>
-	<div id="main">
-	  <center>
-          <div id="header">
-              <div class="logo" style="text-align:center;">
-                <a href="/"><img src="/images/logo.gif" alt="Flowdle" /></a>
-              </div>
-              <p>Flowdle lets you keep track of tasks using tags and nudges to remind you when something isn't finished</p>
-              <p>Use your existing Google Account to sign-in and let us keep track of your flow.</p>
-	      </div>
-	  </center>
+	<div id="frame">
+	    <div id="inner">
+            <a href="/app/all"><img src="/images/logo.gif" alt="Flowdle" /></a> 
+            <span class="is">is...</span>
+            <span class="hint">(flow + doodle)</span>
+            <div class="line"></div>
+            <ul>
+                <li>tasks with tags</li>
+                <li>reminder "nudges"</li>
+                <li>on-going events</li>
+            </ul>
+            <div class="line"></div>
+            <div class="bottom">
+                <p>Use your existing <u>Google Account</u> and</p>
+                <input type="button" value="Check It Out!" class="check">
+            </div>
+        </div>
 	</div>
   </body>
 </html>
