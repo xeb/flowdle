@@ -14,6 +14,28 @@ indexes:
 - kind: Task
   properties:
   - name: complete
+  - name: nudge
+
+# Unused in query history -- copied from input.
+- kind: Task
+  properties:
+  - name: complete
+  - name: nudge
+  - name: who
+  - name: last_nudge
+
+# Unused in query history -- copied from input.
+- kind: Task
+  properties:
+  - name: complete
+  - name: nudge
+  - name: who
+  - name: last_nudgeg
+
+# Unused in query history -- copied from input.
+- kind: Task
+  properties:
+  - name: complete
   - name: tags
   - name: tags
   - name: tags
@@ -69,7 +91,7 @@ indexes:
   - name: who
   - name: nudge
 
-# Used 24 times in query history.
+# Used 3 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -86,14 +108,14 @@ indexes:
   - name: when
     direction: desc
 
-# Used 15 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
   - name: who
   - name: name
 
-# Used 12 times in query history.
+# Used 4 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -101,14 +123,14 @@ indexes:
   - name: name
     direction: desc
 
-# Used 36 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
   - name: who
   - name: nudge
 
-# Used 12 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
@@ -116,14 +138,14 @@ indexes:
   - name: nudge
     direction: desc
 
-# Used 144 times in query history.
+# Used 324 times in query history.
 - kind: Task
   properties:
   - name: complete
   - name: who
   - name: when
 
-# Used 6 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
@@ -170,7 +192,7 @@ indexes:
   - name: when
     direction: desc
 
-# Unused in query history -- copied from input.
+# Used 2 times in query history.
 - kind: Task
   properties:
   - name: who
@@ -183,6 +205,6 @@ indexes:
   - name: when
     direction: desc
 
-# Used 110 times in query history.
+# Used 193 times in query history.
 - kind: Task
   ancestor: yes

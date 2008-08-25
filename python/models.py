@@ -13,8 +13,8 @@ class Task(db.Expando):
     complete_date = db.DateTimeProperty()
     nudge = db.StringProperty(required=True, choices=set(["never", "daily", "weekly", "monthly","yearly"]))
     nudge_value = db.StringProperty()
-    last_nudge = db.DateTimeProperty()
-
+    last_nudge = db.DateProperty()
+    repeat = db.BooleanProperty(default=False)
 
 class Setting(db.Expando):
     name = db.StringProperty(required=True)

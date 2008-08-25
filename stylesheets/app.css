@@ -82,7 +82,8 @@ a:hover {
 	width: 400px;
 	padding: 3px;
 }
-#newtask #nudge_month_value {
+#newtask #nudge_month_value, 
+#newtask #repeat_month_value {
     width: 50px;
 }
 #newtask .items td {
@@ -111,7 +112,8 @@ a:hover {
 	display: none;
 }
 
-#newtask .nudge_date {
+#newtask .nudge_date,
+#newtask .repeat_date {
 	width: 90px;
 }
 
@@ -186,7 +188,7 @@ a:hover {
 }
 
 #biglist .left {
-	width: 70%;
+	width: 60%;
 }
 
 #biglist .left label.complete {
@@ -202,7 +204,8 @@ a:hover {
     color: #AAAAAA;
 }
 
-#biglist .editlink {
+#biglist .editlink,
+#biglist .deletelink {
     cursor: pointer;
     font-weight: bold;
     color: #009BF4;

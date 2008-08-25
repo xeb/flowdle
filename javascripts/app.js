@@ -1,7 +1,9 @@
 var server = {};
-InstallFunction(server, 'toggleComplete');
 InstallFunction(server, 'getTask');
 InstallFunction(server, 'getTaskCompleteDate')
+InstallFunction(server, 'deleteTask')
+InstallFunction(server, 'toggleComplete');
+InstallFunction(server, 'isRepeat')
 
 document.observe('dom:loaded', function() {
     
@@ -37,11 +39,17 @@ document.observe('dom:loaded', function() {
 	// nudge date show-er
 	$('nudge').observe('change', function(e){ 
 		var val = $('nudge').getValue();
-        setNudgeValue(val)
+        setValue('nudge', val)
+	});
+	
+	// repeat date show-er
+	$('repeat').observe('change', function(e){ 
+		var val = $('repeat').getValue();
+        setValue('repeat', val)
 	});
 	
 	// edit 
-	$$('#biglist .right a').invoke('observe', 'click', function(event){
+	$$('#biglist .right a.editlink').invoke('observe', 'click', function(event){
        var id = event.element().id.substring(4);
        server.getTask(id, function(task){
           if(task) {
@@ -51,33 +59,68 @@ document.observe('dom:loaded', function() {
               $('taglist').setValue(task.tags);
               $('nudge').setValue(task.nudge);
               $('taskkey').setValue(task.key);
-              setNudgeValue(task.nudge, task.nudge_value);
+              if(task.repeat && task.repeat == 'True') {
+                  $('repeat').checked = true;
+              } else {
+                  $('repeat').checked == false;
+              }
+              setValue('nudge', task.nudge, task.nudge_value);
            }
        });
 	});
+	
+	$$('#biglist .right a.deletelink').invoke('observe', 'click', function(event){
+       var id = event.element().id.substring(6);
+       if(confirm('Are you sure you want to delete this task?')) {
+           server.deleteTask(id, function(result) {
+              if(result) {
+                  $('tr'+id).hide()
+              } 
+           });
+       }
+    });    
 	
 	// complete
 	$$('#biglist .left .checkbox').invoke('observe', 'click', function(event){
 	    var id = event.element().id.substring(5);
 	    server.toggleComplete(id, function(event){
-	        if(event){
+            if(event){
 	            if($('check'+id).checked) {
 	                $('name'+id).addClassName('complete'); 
 	                $('edit'+id).hide();
+	                $('delete'+id).hide();
 	                
-	                server.getTaskCompleteDate(id, function(date) {
-	                    if(date) {
-	                        $('nudge'+id).update('Done on ' + date)
-	                        $('nudge'+id).addClassName('complete')
+	                var repeat = false
+	                server.isRepeat(id, function(result) {
+	                    if(result) {
+	                        $('check'+id).disable();
+	                        repeat = true
 	                    }
+	                    
+    	                server.getTaskCompleteDate(id, function(date) {
+	                        if(date) {
+	                            if(repeat) {
+                                    $('nudge'+id).update('Done on ' + date + ' <br /> (repeat created)')
+	                            } else {
+	                                $('nudge'+id).update('Done on ' + date)
+	                            }
+	                            $('nudge'+id).addClassName('complete')
+	                        }
+	                    });
+
 	                });
 	                
                 } else {
                     $('name'+id).removeClassName('complete')
                     $('edit'+id).show();
+                    $('delete'+id).show();
                     server.getTask(id, function(task){
                         if(task) {
-                            $('nudge'+id).update('Nudge me '+ task.nudge)
+                            if(task.repeat == 'True') {
+                              $('nudge'+id).update('Nudge me '+ task.nudge +  ' (repeats)')
+                            } else {
+                                $('nudge'+id).update('Nudge me '+ task.nudge)
+                            }
                             $('nudge'+id).removeClassName('complete')
                         }
                     });
@@ -90,26 +133,26 @@ document.observe('dom:loaded', function() {
 	});
 });
 
-function setNudgeValue(val, nudgeVal) {
+function setValue(type, val, nudgeVal) {
     	if(val == 'daily') {
-		    $('nudge_week').addClassName('hiding');
-		    $('nudge_month').addClassName('hiding');
+		    $(type + '_week').addClassName('hiding');
+		    $(type + '_month').addClassName('hiding');
 		}
 		if(val == 'weekly') { 
-			$('nudge_week').removeClassName('hiding');
-		    $('nudge_month').addClassName('hiding');
+			$(type + '_week').removeClassName('hiding');
+		    $(type + '_month').addClassName('hiding');
 		    if(nudgeVal){
-		        $('nudge_' + nudgeVal).checked = true;
+		        $(type + '_' + nudgeVal).checked = true;
 		    }
 		}
 		if(val == 'monthly') {
-		    $('nudge_week').addClassName('hiding');
-		    $('nudge_month').removeClassName('hiding');
-		    $('nudge_month_value').setValue(nudgeVal);
+		    $(type + '_week').addClassName('hiding');
+		    $(type + '_month').removeClassName('hiding');
+		    $(type + '_month_value').setValue(nudgeVal);
 		}
 		if(val == 'never') {
-		    $('nudge_week').addClassName('hiding');
-		    $('nudge_month').addClassName('hiding');
+		    $(type + '_week').addClassName('hiding');
+		    $(type + '_month').addClassName('hiding');
 		}
 }
 

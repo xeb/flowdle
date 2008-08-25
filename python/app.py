@@ -149,6 +149,7 @@ class MainHandler(webapp.RequestHandler):
             else:
                 task.name = self.request.get('taskname')[:200]
                 task.nudge = self.request.get('nudge')
+                task.when = datetime.datetime.today()
         else:
             task = Task(
                 name=self.request.get('taskname')[:200],
@@ -162,7 +163,14 @@ class MainHandler(webapp.RequestHandler):
             task.nudge_value = self.request.get('nudge_month_value')[:3]
         elif task.nudge == 'weekly':
             task.nudge_value = self.request.get('nudge_day')[:3]
-            
+        
+        if self.request.get('repeat') == 'True':
+            task.repeat = True
+        else:
+            task.repeat = False
+        
+        task.last_nudge = datetime.datetime.today()
+        
         task.put()
         
         tagstr = urlparam[8:]

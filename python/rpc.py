@@ -5,6 +5,7 @@ import os
 import datetime
 
 from django.utils import simplejson
+from models import Task
 from google.appengine.ext import webapp
 from google.appengine.ext import db
 from google.appengine.api import users
@@ -52,22 +53,42 @@ class RPCHandler(webapp.RequestHandler):
     result = func(*args)
     self.response.out.write(simplejson.dumps(result))
 
+class Common():
+    
+    def parseTags(self, tags):
+        lst = ""
+        for tag in tags:
+            lst = lst + tag + " "
+        return lst
+
 
 class RPCMethods:
   """ Defines the methods that can be RPCed.
   NOTE: Do not allow remote callers access to private/protected "_*" methods.
   """
 
+
+  def isRepeat(self, *args):
+    cmn = Common()
+    user = users.get_current_user()
+    task = db.GqlQuery('SELECT * FROM Task WHERE ANCESTOR IS :1',db.Key(args[0])).get()
+    if task and task.repeat == True:
+        return True
+    else:
+        return False
+
   def getTask(self, *args):
+    cmn = Common()
     user = users.get_current_user()
     task = db.GqlQuery('SELECT * FROM Task WHERE ANCESTOR IS :1',db.Key(args[0])).get()
     if task.complete == False and task.who == user:
         val = {
             'name' : task.name,
-            'tags' : task.tags,
+            'tags' : cmn.parseTags(task.tags),
             'nudge' : task.nudge,
             'nudge_value' : task.nudge_value,
-            'key' : task.key().__str__()
+            'key' : task.key().__str__(),
+            'repeat' : task.repeat.__str__()
         }
         return val
     else:
@@ -82,6 +103,15 @@ class RPCMethods:
     else:
         return None
 
+  def deleteTask(self, *args):
+    user = users.get_current_user()
+    task = db.GqlQuery('SELECT * FROM Task WHERE ANCESTOR IS :1',db.Key(args[0])).get()
+    if task:
+        task.delete()
+        return True
+    else:
+        return False
+        
   def toggleComplete(self, *args):
     user = users.get_current_user()
     task = db.GqlQuery('SELECT * FROM Task WHERE ANCESTOR IS :1',db.Key(args[0])).get()
@@ -92,6 +122,18 @@ class RPCMethods:
             task.complete = True
             task.complete_date = datetime.datetime.today()
         task.put()
+        if task.complete == True and task.repeat == True:
+            # verify that we haven't repeated this already
+            repeatTask = db.GqlQuery('SELECT * FROM Task WHERE who = :1 AND name = :2 AND complete = False', task.who, task.name)
+            if hasattr(repeatTask, "name") == False:
+                repeatTask = Task(name=task.name,
+                            who=task.who,
+                            tags=task.tags,
+                            nudge=task.nudge,
+                            nudge_value=task.nudge_value,
+                            repeat=task.repeat,
+                            last_nudge=task.last_nudge)
+                repeatTask.put()
         return True
     else:
         return False

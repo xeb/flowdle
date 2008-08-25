@@ -26,6 +26,7 @@
       <p>{{user.nickname}} | <a href="/help">Help</a> | <a href="{{signout}}">Logout</a></p>
            <div class="logo">
              <img src="/images/logo.gif" alt="Flowdle" id="logo" />
+    <!--#config timefmt="%A" --> <!--#echo var="DATE_LOCAL" -->
            </div>
     </div>
     {{path}}
@@ -43,29 +44,35 @@
             </tr>
             <tr>
                 <td><label for="nudgelist">Nudge me:</label></td>
-            <td>
-            <select name="nudge" id="nudge">
-                <option value="never">Never</option>
-                <option value="daily">Every Day</option>
-                <option value="weekly">Every Week</option>
-                <option value="monthly">Every Month</option>
-            </select>
-            <label>until complete</label>
-            <fieldset id="nudge_week" class="nudge_week hiding"> 
-                <input type="radio" id="nudge_1" name="nudge_day" value="1" /><label for="nudge_1">Monday</label>
-                <input type="radio" id="nudge_2" name="nudge_day" value="2" /><label for="nudge_2">Tuesday</label>
-                <input type="radio" id="nudge_3" name="nudge_day" value="3" /><label for="nudge_3">Wednesday</label>
-                <input type="radio" id="nudge_4" name="nudge_day" value="4" /><label for="nudge_4">Thursday</label>
-                <input type="radio" id="nudge_5" name="nudge_day" value="5" /><label for="nudge_5">Friday</label>
-                <input type="radio" id="nudge_6" name="nudge_day" value="6" /><label for="nudge_6">Saturday</label>
-                <input type="radio" id="nudge_7" name="nudge_day" value="7" /><label for="nudge_7">Sunday</label>
-            </fieldset>
-            <fieldset id="nudge_month" class="nudge_month hiding">
-                <label for="nudge_month_val">Day of the Month:</label>
-                <input type="text" class="text" id="nudge_month_value" name="nudge_month_value" value="15">
-            </fieldset>
-            <input type="text" class="nudge_day hiding" id="nudge_day" name="nudge_day" maxlength="10" value="07/31">
-            </td>
+                <td>
+                    <select name="nudge" id="nudge">
+                        <option value="never">Never</option>
+                        <option value="daily">Every Day</option>
+                        <option value="weekly">Every Week</option>
+                        <option value="monthly">Every Month</option>
+                    </select>
+                    <label>until complete</label>
+                    <fieldset id="nudge_week" class="nudge_week hiding"> 
+                        <input type="radio" id="nudge_1" name="nudge_day" value="1" /><label for="nudge_1">Monday</label>
+                        <input type="radio" id="nudge_2" name="nudge_day" value="2" /><label for="nudge_2">Tuesday</label>
+                        <input type="radio" id="nudge_3" name="nudge_day" value="3" /><label for="nudge_3">Wednesday</label>
+                        <input type="radio" id="nudge_4" name="nudge_day" value="4" /><label for="nudge_4">Thursday</label>
+                        <input type="radio" id="nudge_5" name="nudge_day" value="5" /><label for="nudge_5">Friday</label>
+                        <input type="radio" id="nudge_6" name="nudge_day" value="6" /><label for="nudge_6">Saturday</label>
+                        <input type="radio" id="nudge_7" name="nudge_day" value="7" /><label for="nudge_7">Sunday</label>
+                    </fieldset>
+                    <fieldset id="nudge_month" class="nudge_month hiding">
+                        <label for="nudge_month_val">Day of the Month:</label>
+                        <input type="text" class="text" id="nudge_month_value" name="nudge_month_value" value="15">
+                    </fieldset>
+                    <input type="text" class="nudge_day hiding" id="nudge_day" name="nudge_day" maxlength="10" value="07/31">
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="checkbox" id="repeat" name="repeat" value="True"><label for="repeat">Repeat this task after completed</label>
+                </td>
             </tr>
             </table><div class="buttons">
                 <input type="hidden" name="editkey" id="editkey" value="">
@@ -75,7 +82,7 @@
         </div>
     </div> <!-- #newtask -->
     </form>
-    <h5>{{title}}</h5>
+    <h5 id="msgTitle">{{title}}</h5>
     <table id="mainTable">
         <tr>
             <td class="left"><div id="tags">
@@ -107,17 +114,20 @@
                 <img src="/images/spacer.gif" width="500" height="1" alt="" />
                 <table id="biglist">
                     {% for task in alltasks %}
-                    <tr>
+                    <tr id="tr{{task.key}}">
                         <td class="left">
-                            <input type="checkbox" class="checkbox" id="check{{task.key}}" {% ifequal task.complete 1 %}checked="checked"{% endifequal %} />
+                            <input type="checkbox" class="checkbox" id="check{{task.key}}" {% ifequal task.complete 1 %}checked="checked" {% ifequal task.repeat 1 %}disabled="disabled"{% endifequal %}{% endifequal %} />
                             <label id="name{{task.key}}" for="check{{task.key}}" {% ifequal task.complete 1 %}class="complete"{% endifequal %}>{{task.name}}</label>
                         </td>
                         <td class="right">
                             <span id="nudge{{task.key}}" {% ifequal task.complete 1 %}class="complete"{%endifequal%}>
                                 {% ifequal task.complete 1 %}
                                     Done on {{task.complete_date.month}}/{{task.complete_date.day}}/{{task.complete_date.year}}
+                                    {% ifequal task.repeat 1 %}
+                                        <br />(repeat created)
+                                    {% endifequal %}
                                 {% else %}
-                                Nudge me {{task.nudge}}
+                                Nudge me {{task.nudge}}{% ifequal task.repeat 1 %} (repeats){% endifequal %}
                                 {% endifequal %}
                             </span>
                         </td>
@@ -125,7 +135,9 @@
                         <td class="right">
                             <a class="editlink" {% ifequal task.complete 1 %}style="display:none"{% endifequal %} id="edit{{task.key}}">Edit</a>
                         </td>
-                        
+                        <td class="right">
+                            <a class="deletelink" {% ifequal task.complete 1 %}style="display:none"{% endifequal %} id="delete{{task.key}}">Delete</a>
+                        </td>
                     </tr>
 
                     {% endfor %}
