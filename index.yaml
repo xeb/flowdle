@@ -91,46 +91,46 @@ indexes:
   - name: who
   - name: nudge
 
+# Used 21 times in query history.
+- kind: Task
+  properties:
+  - name: complete
+  - name: tags
+  - name: who
+  - name: when
+
+# Unused in query history -- copied from input.
+- kind: Task
+  properties:
+  - name: complete
+  - name: tags
+  - name: who
+  - name: when
+    direction: desc
+
+# Used 9 times in query history.
+- kind: Task
+  properties:
+  - name: complete
+  - name: who
+  - name: name
+
 # Used 3 times in query history.
 - kind: Task
   properties:
   - name: complete
-  - name: tags
-  - name: who
-  - name: when
-
-# Unused in query history -- copied from input.
-- kind: Task
-  properties:
-  - name: complete
-  - name: tags
-  - name: who
-  - name: when
-    direction: desc
-
-# Unused in query history -- copied from input.
-- kind: Task
-  properties:
-  - name: complete
-  - name: who
-  - name: name
-
-# Used 4 times in query history.
-- kind: Task
-  properties:
-  - name: complete
   - name: who
   - name: name
     direction: desc
 
-# Unused in query history -- copied from input.
+# Used 6 times in query history.
 - kind: Task
   properties:
   - name: complete
   - name: who
   - name: nudge
 
-# Unused in query history -- copied from input.
+# Used 27 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -138,14 +138,14 @@ indexes:
   - name: nudge
     direction: desc
 
-# Used 324 times in query history.
+# Used 82 times in query history.
 - kind: Task
   properties:
   - name: complete
   - name: who
   - name: when
 
-# Unused in query history -- copied from input.
+# Used 6 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -192,7 +192,7 @@ indexes:
   - name: when
     direction: desc
 
-# Used 2 times in query history.
+# Used 3 times in query history.
 - kind: Task
   properties:
   - name: who
@@ -205,6 +205,6 @@ indexes:
   - name: when
     direction: desc
 
-# Used 193 times in query history.
+# Used 10 times in query history.
 - kind: Task
   ancestor: yes

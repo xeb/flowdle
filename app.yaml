@@ -17,20 +17,24 @@ handlers:
   static_dir: errors
   
 - url: /
-  script: python/index.py
+  script: python/main.py
 
 - url: /index.html
-  script: python/index.py
+  script: python/main.py
+
+- url: /closed(.*)
+  script: python/main.py
 
 - url: /app(.*)
   script: python/app.py
-  login: required
+  login: admin
 
 - url: /rpc(.*)
   script: python/rpc.py
-  login: required
+  login: admin
 
-- url: /nudger/send
+- url: /nudger(.*)
   script: python/nudger.py
+  login: admin
   
  

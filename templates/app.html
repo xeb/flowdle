@@ -23,7 +23,7 @@
   </head>
   <body>
     <div id="topmenu">
-      <p>{{user.nickname}} | <a href="/help">Help</a> | <a href="{{signout}}">Logout</a></p>
+      <p>{{user.nickname}} | <a href="/">Help</a> | <a href="{{signout}}">Logout</a></p>
            <div class="logo">
              <img src="/images/logo.gif" alt="Flowdle" id="logo" />
     <!--#config timefmt="%A" --> <!--#echo var="DATE_LOCAL" -->
@@ -51,7 +51,7 @@
                         <option value="weekly">Every Week</option>
                         <option value="monthly">Every Month</option>
                     </select>
-                    <label>until complete</label>
+                    <label style="display:none;" id="nudge_label">until complete</label>
                     <fieldset id="nudge_week" class="nudge_week hiding"> 
                         <input type="radio" id="nudge_1" name="nudge_day" value="1" /><label for="nudge_1">Monday</label>
                         <input type="radio" id="nudge_2" name="nudge_day" value="2" /><label for="nudge_2">Tuesday</label>

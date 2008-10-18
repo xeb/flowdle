@@ -90,17 +90,53 @@ div.line {
     margin: 0 0 20px 0;
 }
 
+#inner input.button {
+    background: #009BF4;
+    color: #FFFFFF;
+    border: 0px;    
+}
+
 #inner input.check {
-    border: 0px;
     width: 200px;
     height: 40px;
     font-size:18px;
-    background: #009BF4;
-    color: #FFFFFF;
 }
 
-#inner input.check:hover {
+#inner input.request {
+    width: 120px;
+    height: 28px;
+    font-size: 14px;
+}
+
+#inner input.button:hover {
     background: #FFFFFF;
     color: #444444;
     cursor: pointer;
+}
+
+h5, p {
+    text-align: center;
+    font-family: arial, sans-serif;
+}
+
+h5 {
+    color: #fff;
+    font-size: 26px;
+}
+
+p, p a {
+    font-size: 14px;
+    color: #ddd;
+    padding-top: 10px;
+}
+
+input.who {
+    border: 1px solid #999;
+    font-size: 19px;
+    margin: 4px;
+    font-family: arial, sans-serif;
+}
+
+input.request {
+    
 }

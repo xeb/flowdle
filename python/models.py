@@ -15,14 +15,14 @@ class Task(db.Expando):
     nudge_value = db.StringProperty()
     last_nudge = db.DateProperty()
     repeat = db.BooleanProperty(default=False)
-
-class Setting(db.Expando):
-    name = db.StringProperty(required=True)
-    value = db.StringProperty(required=True)
-    who = db.UserProperty(required=True)
-
-
+    
+    
 class Subscriber(db.Model):
+    who = db.UserProperty(required=True)
+    when = db.DateTimeProperty(auto_now_add=True)
+    
+    
+class BetaRequest(db.Model):
     who = db.StringProperty(required=True)
     when = db.DateTimeProperty(auto_now_add=True)
     

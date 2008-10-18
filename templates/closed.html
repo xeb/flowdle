@@ -8,8 +8,16 @@
     <link href="/stylesheets/reset.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/index.css" rel="stylesheet" type="text/css" />
 	<script src="http://www.google.com/jsapi"></script>
-	<script>google.load("prototype", "1.6.0.2");</script>
-	<script src="/javascripts/index.js" type="text/javascript"></script>
+	<script>google.load("jquery", "1.2.6");</script>
+	<script type="text/javascript">
+	    $(document).ready(function(){
+	        $('#who').click(function(){
+	            if($(this).val() == 'Enter your email') {
+	                $(this).val('');
+	            }
+	        });
+	    });
+	</script>    
   </head>
   <body>
 	<div id="frame">
@@ -18,23 +26,14 @@
             <span class="is">is...</span>
             <span class="hint">(<a class="light" href="http://en.wikipedia.org/wiki/Flow_(psychology)">flow</a> + <a class="light" href="http://en.wikipedia.org/wiki/Doodling">doodle</a>)</span>
             <div class="line"></div>
-            <ul>
-                <li>tasks with tags
-                    <p>organize your lists for personal or professional tasks however you see fit with familiarity, ease and simplicity</p>
-                    </li>
-                    
-                <li>reminder "nudges"
-                    <p>get us to automatically nudge you to complete that important task either every day, once a week, once a month or never</p>
-                    </li>
-                
-                <li>on-going events
-                    <p>setup nudges for those tasks that are never truly complete and re-occur on a daily, weekly, or monthly basis</p> 
-                    </li>
-            </ul>
+            <h5>currently in private beta.</h5>
+            <p>Beta User? <a href="/app">Click here</a></p>
             <div class="line"></div>
             <div class="bottom">
-                <p>Use your existing <a class="bottom" href="https://www.google.com/accounts/">Google Account</a> and</p>
-                <input type="button" value="Check It Out!" class="check button">
+                <form action="/closed" method="post">
+                    <input type="text" name="who" id="who" class="who" value="Enter your email" />
+                    <input type="button" value="Request Invite" class="request button" />
+                </form>
             </div>
         </div>
 	</div>

@@ -137,6 +137,7 @@ function setValue(type, val, nudgeVal) {
     	if(val == 'daily') {
 		    $(type + '_week').addClassName('hiding');
 		    $(type + '_month').addClassName('hiding');
+            $('nudge_label').show();
 		}
 		if(val == 'weekly') { 
 			$(type + '_week').removeClassName('hiding');
@@ -144,15 +145,18 @@ function setValue(type, val, nudgeVal) {
 		    if(nudgeVal){
 		        $(type + '_' + nudgeVal).checked = true;
 		    }
+            $('nudge_label').show();
 		}
 		if(val == 'monthly') {
 		    $(type + '_week').addClassName('hiding');
 		    $(type + '_month').removeClassName('hiding');
 		    $(type + '_month_value').setValue(nudgeVal);
+            $('nudge_label').show();		    
 		}
 		if(val == 'never') {
 		    $(type + '_week').addClassName('hiding');
 		    $(type + '_month').addClassName('hiding');
+            $('nudge_label').hide();		    
 		}
 }
 

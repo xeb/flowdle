@@ -24,8 +24,18 @@ class Common():
         else:
             return False
               
+class MasterBlaster(webapp.RequestHandler):
+    
+    def get(self):
+        query = "SELECT * FROM Subscriber"
+        people = db.GqlQuery(query)
+        if people:
+            for person in people:
+                self.response.out.write('fds<br>')
+                self.response.out.write(person.who.email() + '<br/>')
+                self.response.out.write(person)
 
-class NudgeHandler(webapp.RequestHandler):
+class Sender(webapp.RequestHandler):
     
     def get(self):  
         user = users.User(self.request.get('user'))
@@ -61,7 +71,8 @@ class NudgeHandler(webapp.RequestHandler):
 def main():
     app = webapp.WSGIApplication(
                 [
-                    ('/nudger/send', NudgeHandler)
+                    ('/nudger', MasterBlaster),
+                    ('/nudger/send', Sender)
                 ], 
                 debug=True)
     wsgiref.handlers.CGIHandler().run(app)

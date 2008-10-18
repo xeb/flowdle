@@ -5,6 +5,7 @@ import datetime
 import wsgiref.handlers
 
 from models import Task
+from models import Subscriber
 from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.api import users
@@ -135,11 +136,20 @@ class MainHandler(webapp.RequestHandler):
     
     def get(self, urlparam):
         cmn = Common()
+        user = users.get_current_user()
+
+        # create a subscriber...
+        numUsers = db.GqlQuery('SELECT * FROM Subscriber WHERE who = :1', user.email()).count(3)
+        if numUsers == 0:
+            sub = Subscriber(who=user.email())
+            sub.put()
+        
         cmn.showMain(self, urlparam)
         
     def post(self, urlparam):
         cmn = Common()
         user = users.get_current_user()
+        
         taskkey = len(str(self.request.get('taskkey')))
         if taskkey > 0:
             task = db.GqlQuery('SELECT * FROM Task WHERE ANCESTOR IS :1 AND who = :2',
