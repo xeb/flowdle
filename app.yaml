@@ -19,6 +19,9 @@ handlers:
 - url: /
   script: python/main.py
 
+- url: /logout
+  script: python/logout.py
+
 - url: /index.html
   script: python/main.py
 

@@ -3,7 +3,6 @@
 import os
 import datetime
 import wsgiref.handlers
-
 from models import Task
 from models import Subscriber
 from google.appengine.ext import db
@@ -33,7 +32,6 @@ class Common:
                                 " ORDER BY "+orderBy+" "+orderDir, user)
         values = {
             'user': user,
-            'signout' : users.create_logout_url("/"),
             'alltasks' : alltasks,
             'alltags' : cmn.getTags(alltasks),
             'orderDir' : orderDir
@@ -139,10 +137,11 @@ class MainHandler(webapp.RequestHandler):
         user = users.get_current_user()
 
         # create a subscriber...
-        numUsers = db.GqlQuery('SELECT * FROM Subscriber WHERE who = :1', user.email()).count(3)
+        numUsers = db.GqlQuery('SELECT * FROM Subscriber WHERE who = :1', user).count(3)
         if numUsers == 0:
-            sub = Subscriber(who=user.email())
+            sub = Subscriber(who=user)
             sub.put()
+            self.response.out.write('Creating...')
         
         cmn.showMain(self, urlparam)
         

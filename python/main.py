@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 import wsgiref.handlers
-import models
-from models import Subscriber
+#from current import flowdlemodels
+
+from models import BetaRequest
 from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.ext import webapp
@@ -20,8 +21,8 @@ class ClosedHandler(webapp.RequestHandler):
         self.response.out.write(template.render('../templates/closed.html', None))
     
     def post(self):
-        sub = Subscriber(who=self.request.get('who'))
-        sub.put()
+        req = BetaRequest(who=self.request.get('who'))
+        req.put()
         self.redirect('/closed/thankyou')
         
         

@@ -10,6 +10,7 @@ from google.appengine.ext import webapp
 from google.appengine.api import users
 from google.appengine.ext.webapp import template
 from google.appengine.api import mail
+from google.appengine.api import urlfetch
 
 
 class Common():
@@ -31,10 +32,10 @@ class MasterBlaster(webapp.RequestHandler):
         people = db.GqlQuery(query)
         if people:
             for person in people:
-                self.response.out.write('fds<br>')
-                self.response.out.write(person.who.email() + '<br/>')
-                self.response.out.write(person)
-
+                self.response.out.write('Sending to...' + person.who.email() + '<br/>')
+                #result = urlfetch.fetch('http://localhost:8080/nudger/send?user=' + person.who.email())
+                
+                
 class Sender(webapp.RequestHandler):
     
     def get(self):  
