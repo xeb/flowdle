@@ -18,7 +18,10 @@ class MainHandler(webapp.RequestHandler):
 
 class ClosedHandler(webapp.RequestHandler):
     def get(self):
-        self.response.out.write(template.render('../templates/closed.html', None))
+        if users.is_current_user_admin():
+            self.redirect('/app')
+        else:
+            self.response.out.write(template.render('../templates/closed.html', None))
     
     def post(self):
         req = BetaRequest(who=self.request.get('who'))

@@ -38,6 +38,6 @@ handlers:
 
 - url: /nudger(.*)
   script: python/nudger.py
-  login: admin
+
   
  

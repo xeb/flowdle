@@ -83,10 +83,10 @@ document.observe('dom:loaded', function() {
 	// complete
 	$$('#biglist .left .checkbox').invoke('observe', 'click', function(event){
 	    var id = event.element().id.substring(5);
+        $('name'+id).addClassName('complete'); 
 	    server.toggleComplete(id, function(event){
             if(event){
 	            if($('check'+id).checked) {
-	                $('name'+id).addClassName('complete'); 
 	                $('edit'+id).hide();
 	                $('delete'+id).hide();
 	                

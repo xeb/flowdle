@@ -141,7 +141,7 @@ class MainHandler(webapp.RequestHandler):
         if numUsers == 0:
             sub = Subscriber(who=user)
             sub.put()
-            self.response.out.write('Creating...')
+            #self.response.out.write('Creating...')
         
         cmn.showMain(self, urlparam)
         
@@ -178,7 +178,7 @@ class MainHandler(webapp.RequestHandler):
         else:
             task.repeat = False
         
-        task.last_nudge = datetime.datetime.today()
+        #task.last_nudge = datetime.datetime.today()
         
         task.put()
         
