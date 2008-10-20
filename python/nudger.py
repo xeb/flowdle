@@ -16,7 +16,7 @@ from google.appengine.api import urlfetch
 class Common():
     def sendTask(self, task, handler):
         if task.last_nudge == None or task.last_nudge.day.__str__() != datetime.date.today().day.__str__() or task.last_nudge.month.__str__() != datetime.date.today().month.__str__() or task.last_nudge.year.__str__() != datetime.date.today().year.__str__():
-            message = mail.EmailMessage(sender="flowdle.admin@gmail.com",
+            message = mail.EmailMessage(sender="no-reply@flowdle.com",
                   to=task.who.email(),
                   subject="Flowdle Nudge for: " + task.name,
                   body=task.name)        
@@ -51,9 +51,9 @@ class Sender(webapp.RequestHandler):
             tasks = db.GqlQuery(query, 'daily', user)
             if tasks:
                 for task in tasks:
-                    self.response.out.write('Last_Nudge' + task.last_nudge.__str__() + '<br />')
+                    self.response.out.write('(' + task.key().id().__str__() + ') Last_Nudge was ' + task.last_nudge.__str__() + '<br />')
                     if cmn.sendTask(task, self):  
-                        self.response.out.write('SENT DAILY <br />')
+                        self.response.out.write('Sending...' + task.key().id().__str__() + ' <br />')
 
             # Weekly Tasks
             tasks = db.GqlQuery( query, 'weekly', user)

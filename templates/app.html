@@ -7,13 +7,13 @@
     <title>Flowdle</title>
     <link href="/stylesheets/reset.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/app.css" rel="stylesheet" type="text/css" />
-    <script src="http://www.google.com/jsapi"></script>
-    <script>
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript">
      google.load("prototype", "1.6.0.2");
      </script>
-    <script src="/javascripts/json2.js"></script>
-    <script src="/javascripts/rpc.js"></script>
-    <script src="/javascripts/app.js"></script>
+    <script src="/javascripts/json2.js" type="text/javascript"></script>
+    <script src="/javascripts/rpc.js" type="text/javascript"></script>
+    <script src="/javascripts/app.js" type="text/javascript"></script>
     <!--[if lt IE 7]>
     <link href="/stylesheets/ie6.css" rel="stylesheet" type="text/css" />
     <![endif]-->
@@ -23,7 +23,7 @@
   </head>
   <body>
     <div id="topmenu">
-      <p>{{user.email}} | <a href="/">Help</a> | <a href="/logout">Logout</a></p>
+      <p>{{user.email}} | <a href="/nudger/send?user={{user.email}}">Send Nudges</a> | <a href="http://flowdle.blogspot.com">Blog</a> | <a href="/">Help</a> | <a href="/logout">Logout</a></p>
            <div class="logo">
              <img src="/images/logo.gif" alt="Flowdle" id="logo" />
     <!--#config timefmt="%A" --> <!--#echo var="DATE_LOCAL" -->
