@@ -7,9 +7,15 @@
     <title>Flowdle</title>
     <link href="/stylesheets/reset.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/index.css" rel="stylesheet" type="text/css" />
-	<script src="http://www.google.com/jsapi"></script>
-	<script>google.load("prototype", "1.6.0.2");</script>
-	<script src="/javascripts/index.js" type="text/javascript"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript">google.load("jquery", "1.2.6");</script>
+	<script type="text/javascript">
+	    $(document).ready(function(){
+	       $('input.check').click(function(){
+	          window.location = '/app' 
+	       }); 
+	    });
+	</script>
   </head>
   <body>
 	<div id="frame">

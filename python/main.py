@@ -12,8 +12,8 @@ from google.appengine.ext.webapp import template
 
 class MainHandler(webapp.RequestHandler):
     def get(self):
-        #self.response.out.write(template.render('../templates/index.html', None))    
-        self.redirect('/closed')
+        self.response.out.write(template.render('../templates/index.html', None))    
+        #self.redirect('/closed')
 
 
 class ClosedHandler(webapp.RequestHandler):
@@ -36,7 +36,7 @@ class ThankYouHandler(webapp.RequestHandler):
 
 def main():
     app = webapp.WSGIApplication([
-        ('/', MainHandler),
+        ('/', ClosedHandler),
         ('/index.html', MainHandler),
         ('/closed', ClosedHandler),
         ('/closed/', ClosedHandler),

@@ -114,7 +114,7 @@ div.line {
     cursor: pointer;
 }
 
-h5, p {
+h5, p.center {
     text-align: center;
     font-family: arial, sans-serif;
 }
