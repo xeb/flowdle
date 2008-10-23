@@ -28,6 +28,10 @@ handlers:
 - url: /closed(.*)
   script: python/main.py
 
+- url: /settings
+  script: python/settings.py
+  login: admin
+
 - url: /app(.*)
   script: python/app.py
   login: admin

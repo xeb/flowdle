@@ -6,6 +6,7 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <title>Flowdle</title>
     <link href="/stylesheets/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/app.css" rel="stylesheet" type="text/css" />
     <script src="http://www.google.com/jsapi" type="text/javascript"></script>
     <script type="text/javascript">
@@ -14,16 +15,10 @@
     <script src="/javascripts/json2.js" type="text/javascript"></script>
     <script src="/javascripts/rpc.js" type="text/javascript"></script>
     <script src="/javascripts/japp.js" type="text/javascript"></script>
-    <!--[if lt IE 7]>
-    <link href="/stylesheets/ie6.css" rel="stylesheet" type="text/css" />
-    <![endif]-->
-    <!--[if IE 7]>
-    <link href="/stylesheets/ie7.css" rel="stylesheet" type="text/css" />
-    <![endif]-->
   </head>
   <body>
     <div id="topmenu">
-      <p>{{user.email}} | <a href="/nudger/send?user={{user.email}}">Send Nudges</a> | <a href="http://flowdle.blogspot.com">Blog</a> | <a href="/">Help</a> | <a href="/logout">Logout</a></p>
+      <p>{{user.email}} | <a href="/nudger/send?user={{user.email}}">Send Nudges</a> | <a href="/settings">Settings</a> | <a href="http://flowdle.blogspot.com">Blog</a> | <a href="/">Help</a> | <a href="/logout">Logout</a></p>
            <div class="logo">
              <img src="/images/logo.gif" alt="Flowdle" id="logo" />
     <!--#config timefmt="%A" --> <!--#echo var="DATE_LOCAL" -->
@@ -33,11 +28,11 @@
     <form id="taskForm" name="taskForm" action="{{formaction}}" method="post">
     <input type="hidden" name="taskkey" id="taskkey" />
     <div id="newtask" class="hiding">
-        <input type="text" class="taskname" id="taskname" name="taskname" maxlength="200" value="{{edittask.name}}" />
+        <input type="text" class="taskname" id="taskname" name="taskname" maxlength="200" tabindex="1" value="{{edittask.name}}" />
         <div class="items">
             <table cellpadding="3" cellspacing="3">
             <tr><td>Tags:</td>
-            <td><input type="text" class="text" id="taglist" name="taglist" value="{{tagdefault}}" />
+            <td><input type="text" class="text" id="taglist" name="taglist" tabindex="2" value="{{tagdefault}}" />
              <div class="commontags">
              </div>
             </td>
@@ -45,7 +40,7 @@
             <tr>
                 <td><label for="nudgelist">Nudge me:</label></td>
                 <td>
-                    <select name="nudge" id="nudge">
+                    <select name="nudge" id="nudge" tabindex="3">
                         <option value="never">Never</option>
                         <option value="daily">Every Day</option>
                         <option value="weekly">Every Week</option>
@@ -53,17 +48,17 @@
                     </select>
                     <label style="display:none;" id="nudge_label">until complete</label>
                     <fieldset id="nudge_week" class="nudge_week hiding"> 
-                        <input type="radio" id="nudge_1" name="nudge_day" value="1" /><label for="nudge_1">Monday</label>
-                        <input type="radio" id="nudge_2" name="nudge_day" value="2" /><label for="nudge_2">Tuesday</label>
-                        <input type="radio" id="nudge_3" name="nudge_day" value="3" /><label for="nudge_3">Wednesday</label>
-                        <input type="radio" id="nudge_4" name="nudge_day" value="4" /><label for="nudge_4">Thursday</label>
-                        <input type="radio" id="nudge_5" name="nudge_day" value="5" /><label for="nudge_5">Friday</label>
-                        <input type="radio" id="nudge_6" name="nudge_day" value="6" /><label for="nudge_6">Saturday</label>
-                        <input type="radio" id="nudge_7" name="nudge_day" value="7" /><label for="nudge_7">Sunday</label>
+                        <input type="radio" id="nudge_1" name="nudge_day" value="1" tabindex="4" /><label for="nudge_1">Monday</label>
+                        <input type="radio" id="nudge_2" name="nudge_day" value="2" tabindex="5" /><label for="nudge_2">Tuesday</label>
+                        <input type="radio" id="nudge_3" name="nudge_day" value="3" tabindex="6" /><label for="nudge_3">Wednesday</label>
+                        <input type="radio" id="nudge_4" name="nudge_day" value="4" tabindex="7" /><label for="nudge_4">Thursday</label>
+                        <input type="radio" id="nudge_5" name="nudge_day" value="5" tabindex="8" /><label for="nudge_5">Friday</label>
+                        <input type="radio" id="nudge_6" name="nudge_day" value="6" tabindex="9" /><label for="nudge_6">Saturday</label>
+                        <input type="radio" id="nudge_7" name="nudge_day" value="7" tabindex="10" /><label for="nudge_7">Sunday</label>
                     </fieldset>
                     <fieldset id="nudge_month" class="nudge_month hiding">
                         <label for="nudge_month_val">Day of the Month:</label>
-                        <input type="text" class="text" id="nudge_month_value" name="nudge_month_value" value="15">
+                        <input type="text" class="text" id="nudge_month_value" name="nudge_month_value" tabindex="11" value="15">
                     </fieldset>
                     <input type="text" class="nudge_day hiding" id="nudge_day" name="nudge_day" maxlength="10" value="07/31">
                 </td>
@@ -71,13 +66,13 @@
             <tr>
                 <td>&nbsp;</td>
                 <td>
-                    <input type="checkbox" id="repeat" name="repeat" value="True"><label for="repeat">Repeat this task after completed</label>
+                    <input type="checkbox" id="repeat" name="repeat" value="True" tabindex="12"><label for="repeat">Repeat this task after completed</label>
                 </td>
             </tr>
             </table><div class="buttons">
                 <input type="hidden" name="editkey" id="editkey" value="">
-                <input type="submit" value="Save" class="bigbutton" id="save" name="save" />
-                <input type="button" value="Cancel" class="bigbutton" id="cancel" name="cancel" />
+                <input type="submit" value="Save" class="bigbutton" id="save" name="save"  tabindex="13"/>
+                <input type="button" value="Cancel" class="bigbutton" id="cancel" name="cancel"  tabindex="14"/>
             </div>
         </div>
     </div> <!-- #newtask -->

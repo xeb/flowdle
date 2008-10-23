@@ -1,0 +1,16 @@
+h5 {
+    font-size: 22px;
+    margin-left: 70px;
+    margin-top: 20px;
+}
+
+input {
+    font-size: 14px;
+    line-height: 18px;
+    margin-left: 10px;
+}
+
+div.form-input-submit input {
+    margin: 30px 30px 0 0px;
+    width: 100px;
+}

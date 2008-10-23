@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import re
 import datetime
 import wsgiref.handlers
 from models import Task
@@ -128,6 +129,9 @@ class Common:
                 newlist.append(tag.strip()[:30])
         return newlist
 
+    def strip_tags(self, value):
+        """Return the given HTML with all tags stripped."""
+        return re.sub(r'<[^>]*?>', '', value) 
         
 """ Our MainHandler for /app"""
 class MainHandler(webapp.RequestHandler):
@@ -156,12 +160,12 @@ class MainHandler(webapp.RequestHandler):
             if task == None:
                 self.redirect('/app/all')
             else:
-                task.name = self.request.get('taskname')[:200]
+                task.name = cmn.strip_tags(self.request.get('taskname')[:200])
                 task.nudge = self.request.get('nudge')
                 task.when = datetime.datetime.today()
         else:
             task = Task(
-                name=self.request.get('taskname')[:200],
+                name=cmn.strip_tags(self.request.get('taskname')[:200]),
                 who=user,
                 nudge=self.request.get('nudge'))
         

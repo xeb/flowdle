@@ -7,6 +7,10 @@ InstallFunction(server, 'isRepeat')
 
 $(document).ready(function() {
     
+    $('body').keypress(function(){
+        
+    });
+    
 	$('#taskname').val('');
 	$('#taskname').focus();
 	
@@ -33,6 +37,7 @@ $(document).ready(function() {
 	$('#taskname').keyup(function(e){
         if($('#taskname').val() != '') {
 		    $('#newtask').removeClass('hiding');
+		    $('#newtask').show("slow");
 	    }
 	})
 	
