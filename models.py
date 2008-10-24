@@ -20,6 +20,7 @@ class Task(db.Expando):
 class Subscriber(db.Model):
     who = db.UserProperty(required=True)
     when = db.DateTimeProperty(auto_now_add=True)
+    default_tag = db.StringProperty(required=False)
     
     
 class BetaRequest(db.Model):
