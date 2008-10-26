@@ -42,24 +42,24 @@
                 <td><label for="nudgelist">Nudge me:</label></td>
                 <td>
                     <select name="nudge" id="nudge" tabindex="3">
-                        <option value="never">Never</option>
-                        <option value="daily">Every Day</option>
-                        <option value="weekly">Every Week</option>
-                        <option value="monthly">Every Month</option>
+                        <option value="never" {% ifequal subscriber.nudge 'never' %}selected{% endifequal %}>Never</option>
+                        <option value="daily" {% ifequal subscriber.nudge 'daily' %}selected{% endifequal %}>Every Day</option>
+                        <option value="weekly" {% ifequal subscriber.nudge 'weekly' %}selected{% endifequal %}>Every Week</option>
+                        <option value="monthly" {% ifequal subscriber.nudge 'monthly' %}selected{% endifequal %}>Every Month</option>
                     </select>
                     <label style="display:none;" id="nudge_label">until complete</label>
                     <fieldset id="nudge_week" class="nudge_week hiding"> 
-                        <input type="radio" id="nudge_1" name="nudge_day" value="1" tabindex="4" /><label for="nudge_1">Monday</label>
-                        <input type="radio" id="nudge_2" name="nudge_day" value="2" tabindex="5" /><label for="nudge_2">Tuesday</label>
-                        <input type="radio" id="nudge_3" name="nudge_day" value="3" tabindex="6" /><label for="nudge_3">Wednesday</label>
-                        <input type="radio" id="nudge_4" name="nudge_day" value="4" tabindex="7" /><label for="nudge_4">Thursday</label>
-                        <input type="radio" id="nudge_5" name="nudge_day" value="5" tabindex="8" /><label for="nudge_5">Friday</label>
-                        <input type="radio" id="nudge_6" name="nudge_day" value="6" tabindex="9" /><label for="nudge_6">Saturday</label>
-                        <input type="radio" id="nudge_7" name="nudge_day" value="7" tabindex="10" /><label for="nudge_7">Sunday</label>
+                        <input type="radio" id="nudge_1" name="nudge_day" value="1" tabindex="4" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '1' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_1">Monday</label>
+                        <input type="radio" id="nudge_2" name="nudge_day" value="2" tabindex="5" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '2' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_2">Tuesday</label>
+                        <input type="radio" id="nudge_3" name="nudge_day" value="3" tabindex="6" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '3' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_3">Wednesday</label>
+                        <input type="radio" id="nudge_4" name="nudge_day" value="4" tabindex="7" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '4' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_4">Thursday</label>
+                        <input type="radio" id="nudge_5" name="nudge_day" value="5" tabindex="8" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '5' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_5">Friday</label>
+                        <input type="radio" id="nudge_6" name="nudge_day" value="6" tabindex="9" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '6' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_6">Saturday</label>
+                        <input type="radio" id="nudge_7" name="nudge_day" value="7" tabindex="10" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '7' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_7">Sunday</label>
                     </fieldset>
                     <fieldset id="nudge_month" class="nudge_month hiding">
                         <label for="nudge_month_val">Day of the Month:</label>
-                        <input type="text" class="text" id="nudge_month_value" name="nudge_month_value" tabindex="11" value="15">
+                        <input type="text" class="text" id="nudge_month_value" name="nudge_month_value" tabindex="11" value="{% ifequal subscriber.nudge 'monthly' %}{% ifnotequal subscriber.nudge_value 'None' %}{{subscriber.nudge_value}}{% else %}15{% endifnotequal %}{% endifequal %}">
                     </fieldset>
                     <input type="text" class="nudge_day hiding" id="nudge_day" name="nudge_day" maxlength="10" value="07/31">
                 </td>

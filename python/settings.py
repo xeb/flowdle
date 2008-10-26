@@ -15,6 +15,9 @@ class SettingsHandler(webapp.RequestHandler):
         user = users.get_current_user()
         sub = db.GqlQuery('SELECT * FROM Subscriber WHERE who = :1', user).get()
         if sub:
+            if sub.nudge_time == None:
+                sub.nudge_time = "morning"
+                sub.put()
             values = { 'user' : user, 'subscriber' : sub }
             self.response.out.write(template.render('../templates/settings.html', values))    
         else:
@@ -33,8 +36,9 @@ class SettingsHandler(webapp.RequestHandler):
                 sub.nudge_value = self.request.get('nudge_month_value')[:3]
             elif sub.nudge == 'weekly':
                 sub.nudge_value = self.request.get('nudge_day')[:3]
+            sub.nudge_time = self.request.get('nudge_time')
             sub.put()
-            values['message'] = 'Settings saved.' + sub.nudge_value
+            values['message'] = 'Settings saved.'
             values['message_class'] = 'success'
             values['subscriber'] = sub
             self.response.out.write(template.render('../templates/settings.html', values))

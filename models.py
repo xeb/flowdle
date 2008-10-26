@@ -25,6 +25,7 @@ class Subscriber(db.Model):
     mobile_tag = db.StringProperty(required=False)
     nudge = db.StringProperty(required=False, choices=set(["never", "daily", "weekly", "monthly","yearly"]))
     nudge_value = db.StringProperty(required=False)
+    nudge_time = db.StringProperty(required=False, choices=set(["morning", "noon", "evening"]))
     
 class BetaRequest(db.Model):
     who = db.StringProperty(required=True)

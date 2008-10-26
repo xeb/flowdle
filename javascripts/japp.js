@@ -44,7 +44,7 @@ $(document).ready(function() {
 	// nudge date show-er
 	$('#nudge, #repeat').change(function(e){ 
         setValue('nudge', $(this).val())
-	});
+	}).change();
 	
 	// edit 
 	$('#biglist .right a.editlink').click(function(){

@@ -37,6 +37,7 @@ class Common:
             'user': user,
             'alltasks' : alltasks,
             'alltags' : cmn.getTags(alltasks),
+            'subscriber' : subscriber,
             'orderDir' : orderDir  }
         
         # Show All Tasks
