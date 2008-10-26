@@ -31,12 +31,13 @@ class Common:
         
         alltasks = db.GqlQuery( "SELECT * FROM Task WHERE who = :1 AND complete = False" 
                                 " ORDER BY "+orderBy+" "+orderDir, user)
+        subscriber = db.GqlQuery("SELECT * FROM Subscriber WHERE who = :1 ", user).get()
+        
         values = {
             'user': user,
             'alltasks' : alltasks,
             'alltags' : cmn.getTags(alltasks),
-            'orderDir' : orderDir
-        }
+            'orderDir' : orderDir  }
         
         # Show All Tasks
         if urlparam == "/all":
@@ -88,7 +89,12 @@ class Common:
 
         # Send to All if Nothing has been matched
         else:
-            handler.redirect('/app/all')
+            if subscriber.default_tag:
+                handler.redirect('/app/tagged/' + subscriber.default_tag)
+                return
+            else:
+                handler.redirect('/app/all')
+                return
         
         # Do we have a Task        
         values['hastasks'] = values['alltasks'].count(2) > 1
@@ -140,14 +146,13 @@ class MainHandler(webapp.RequestHandler):
         cmn = Common()
         user = users.get_current_user()
 
-        # create a subscriber...
-        numUsers = db.GqlQuery('SELECT * FROM Subscriber WHERE who = :1', user).count(3)
+        # create or get a subscriber...
+        query = db.GqlQuery('SELECT * FROM Subscriber WHERE who = :1', user)
+        numUsers = query.count(1)
         if numUsers == 0:
             sub = Subscriber(who=user)
             sub.put()
-            #self.response.out.write('Creating...')
-        
-        cmn.showMain(self, urlparam)
+        cmn.showMain(self, urlparam) 
         
     def post(self, urlparam):
         cmn = Common()

@@ -21,7 +21,10 @@ class Subscriber(db.Model):
     who = db.UserProperty(required=True)
     when = db.DateTimeProperty(auto_now_add=True)
     default_tag = db.StringProperty(required=False)
-    
+    mobile = db.StringProperty(required=False)
+    mobile_tag = db.StringProperty(required=False)
+    nudge = db.StringProperty(required=False, choices=set(["never", "daily", "weekly", "monthly","yearly"]))
+    nudge_value = db.StringProperty(required=False)
     
 class BetaRequest(db.Model):
     who = db.StringProperty(required=True)
