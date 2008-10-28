@@ -147,7 +147,7 @@ indexes:
   - name: nudge
     direction: desc
 
-# Used 389 times in query history.
+# Used 422 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -214,6 +214,6 @@ indexes:
   - name: when
     direction: desc
 
-# Used 27 times in query history.
+# Used 78 times in query history.
 - kind: Task
   ancestor: yes
