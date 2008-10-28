@@ -201,7 +201,7 @@ class MainHandler(webapp.RequestHandler):
 def main():
     app = webapp.WSGIApplication(
                 [('/app(.*)', MainHandler)], 
-                debug=True)
+                debug=False)
     wsgiref.handlers.CGIHandler().run(app)
 
     

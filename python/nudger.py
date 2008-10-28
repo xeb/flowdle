@@ -94,7 +94,7 @@ def main():
                     ('/nudger', MasterBlaster),
                     ('/nudger/send', SingleSender)
                 ], 
-                debug=True)
+                debug=False)
     wsgiref.handlers.CGIHandler().run(app)
 
     

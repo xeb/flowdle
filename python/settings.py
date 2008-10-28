@@ -36,7 +36,7 @@ class SettingsHandler(webapp.RequestHandler):
                 sub.nudge_value = self.request.get('nudge_month_value')[:3]
             elif sub.nudge == 'weekly':
                 sub.nudge_value = self.request.get('nudge_day')[:3]
-            sub.nudge_time = self.request.get('nudge_time')
+            #sub.nudge_time = self.request.get('nudge_time')
             sub.put()
             values['message'] = 'Settings saved.'
             values['message_class'] = 'success'
@@ -49,7 +49,7 @@ class SettingsHandler(webapp.RequestHandler):
 
 def main():
     app = webapp.WSGIApplication([
-        ('/settings', SettingsHandler)], debug=True)
+        ('/settings', SettingsHandler)], debug=False)
     wsgiref.handlers.CGIHandler().run(app)
 
     

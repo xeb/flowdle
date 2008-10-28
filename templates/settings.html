@@ -86,18 +86,7 @@
                                 </fieldset>
                                 <input type="text" class="nudge_day hiding" id="nudge_day" name="nudge_day" maxlength="10" value="07/31">
                             </td>
-                        </tr>
-                        <tr>
-                            <th><label for="default_tag">Nudge Time:</label>
-                            </th>
-                            <td>
-                                <input type="radio" name="nudge_time" id="nudge_time_1" {% ifequal subscriber.nudge_time 'morning' %}checked="checked"{% endifequal %} value="morning" /><label for="nudge_time_1">Morning</label>
-                                <input type="radio" name="nudge_time" id="nudge_time_2" {% ifequal subscriber.nudge_time 'noon' %}checked="checked"{% endifequal %} value="noon" /><label for="nudge_time_2">Noon</label>
-                                <input type="radio" name="nudge_time" id="nudge_time_3" {% ifequal subscriber.nudge_time 'evening' %}checked="checked"{% endifequal %} value="evening" /><label for="nudge_time_3">Evening</label>
-
-                                <p>The time of day you would like all of your nudges to be sent.</p>
-                            </td>
-                        </tr>            
+                        </tr>           
                         <tr>
                             <th>&nbsp;</th>
                             <td class="button">

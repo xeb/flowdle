@@ -142,7 +142,7 @@ class RPCMethods:
 def main():
   app = webapp.WSGIApplication([
     ('/rpc(.*)', RPCHandler),
-    ], debug=True)
+    ], debug=False)
   util.run_wsgi_app(app)
 
 if __name__ == '__main__':

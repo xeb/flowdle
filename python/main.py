@@ -40,7 +40,7 @@ def main():
         ('/index.html', MainHandler),
         ('/closed', ClosedHandler),
         ('/closed/', ClosedHandler),
-        ('/closed/thankyou', ThankYouHandler)], debug=True)
+        ('/closed/thankyou', ThankYouHandler)], debug=False)
     wsgiref.handlers.CGIHandler().run(app)
 
     

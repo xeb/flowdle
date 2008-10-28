@@ -24,8 +24,12 @@
 #newtask #repeat_month_value {
     width: 50px;
 }
-#newtask .items td {
+#newtask .items td,
+#newtask .items th {
     padding: 7px;
+}
+#newtask .items th {
+    text-align: right;
 }
 #newtask .items .commontags {
 	margin: 5px 0 3px 40px;
