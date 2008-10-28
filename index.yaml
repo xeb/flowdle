@@ -83,7 +83,7 @@ indexes:
   - name: name
     direction: desc
 
-# Used 6 times in query history.
+# Used 10 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -91,7 +91,7 @@ indexes:
   - name: who
   - name: nudge
 
-# Used 8 times in query history.
+# Used 12 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -100,7 +100,7 @@ indexes:
   - name: nudge
     direction: desc
 
-# Used 141 times in query history.
+# Used 153 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -131,6 +131,13 @@ indexes:
   - name: who
   - name: name
     direction: desc
+
+# Used 17 times in query history.
+- kind: Task
+  properties:
+  - name: complete
+  - name: who
+  - name: nudge
 
 # Used 15 times in query history.
 - kind: Task
@@ -138,16 +145,9 @@ indexes:
   - name: complete
   - name: who
   - name: nudge
-
-# Used 13 times in query history.
-- kind: Task
-  properties:
-  - name: complete
-  - name: who
-  - name: nudge
     direction: desc
 
-# Used 366 times in query history.
+# Used 389 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -214,6 +214,6 @@ indexes:
   - name: when
     direction: desc
 
-# Used 20 times in query history.
+# Used 27 times in query history.
 - kind: Task
   ancestor: yes

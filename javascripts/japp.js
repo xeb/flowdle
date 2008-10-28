@@ -93,7 +93,7 @@ $(document).ready(function() {
 	                var repeat = false
 	                server.isRepeat(id, function(result) {
 	                    if(result) {
-	                        $('check'+id).disable();
+	                        $('check'+id).attr('enabled', 'false');
 	                        repeat = true
 	                    }
 	                    
