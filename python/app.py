@@ -52,11 +52,8 @@ class Common:
             tagstr = urlparam[8:]
             if tagstr:
                 tags = [tagstr]
-                values['alltasks'] = db.GqlQuery(" SELECT * FROM Task WHERE who = :1 "
-                                                 " AND complete = False AND tags IN :2 "
-                                                 " ORDER BY "+orderBy+" "+orderDir, user, tags)
-                if(values['alltasks'].count(10) == 0):
-                    handler.redirect('/app/all')
+                querystr = " SELECT * FROM Task WHERE who = :1  AND complete = False AND tags IN :2 ORDER BY " + orderBy + " " + orderDir
+                values['alltasks'] = db.GqlQuery(querystr, user, tags)
                 values['tagtitle'] = tagstr.title()
                 values['tagdefault'] = tagstr
                 values['taglinks'] = cmn.getTagLinks(values['alltags'], tags)
@@ -98,7 +95,7 @@ class Common:
                 return
         
         # Do we have a Task        
-        values['hastasks'] = values['alltasks'].count(2) > 1
+        values['hastasks'] = values['alltasks'] != None and values['alltasks'].count(2) > 1
                 
         # write out the main template to the given handler
         handler.response.out.write(template.render('../templates/app.html', values))   
