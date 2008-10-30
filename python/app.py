@@ -20,15 +20,24 @@ class Common:
         user = users.get_current_user()
         subscriber = db.GqlQuery("SELECT * FROM Subscriber WHERE who = :1 ", user).get()
         
-        orderBy = "when"
+        orderBy = "when" 
+        if subscriber.sort:
+            orderBy = subscriber.sort
+            
         if handler.request.get('s') == "1":
             orderBy = "name"
         elif handler.request.get('s') == "2":
             orderBy = "nudge"
             
         orderDir = "ASC"
+        if subscriber.sort_asc:
+            orderDir = "ASC"
+        else:
+            orderDir = "DESC"
         if handler.request.get('o') == "1":
             orderDir = "DESC"
+        elif handler.request.get('o') == "0":
+            orderDir = "ASC"
         
         alltasks = db.GqlQuery( "SELECT * FROM Task WHERE who = :1 AND complete = False" 
                                 " ORDER BY "+orderBy+" "+orderDir, user)

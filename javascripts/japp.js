@@ -79,7 +79,7 @@ $(document).ready(function() {
            });
        }
     });    
-	
+    
 	// complete
 	$('#biglist .left .checkbox').click(function(){
 	    var id = $(this).attr('id').substring(5);

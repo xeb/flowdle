@@ -141,9 +141,9 @@
                 </table> <!-- #biglist -->
                 {% ifequal hastasks 1 %}
                 <div id="tablemenu">
-                    Sort by: <a href="{{formaction}}?s=0{% ifequal orderDir 'ASC' %}&o=1{% endifequal %}">time</a>, 
-                             <a href="{{formaction}}?s=1{% ifequal orderDir 'ASC' %}&o=1{% endifequal %}">name</a>, 
-                             <a href="{{formaction}}?s=2{% ifequal orderDir 'ASC' %}&o=1{% endifequal %}">nudge</a>
+                    Sort by: <a href="{{formaction}}?s=0{% ifequal orderDir 'ASC' %}&amp;o=1{% else %}&amp;o=0{% endifequal %}">time</a>, 
+                             <a href="{{formaction}}?s=1{% ifequal orderDir 'ASC' %}&amp;o=1{% else %}&amp;o=0{% endifequal %}">name</a>, 
+                             <a href="{{formaction}}?s=2{% ifequal orderDir 'ASC' %}&amp;o=1{% else %}&amp;o=0{% endifequal %}">nudge</a>
                 </div>
                 {% endifequal %}
             </td> <!-- #right -->
