@@ -19,7 +19,7 @@ class Common():
         if task.last_nudge == None or task.last_nudge.day.__str__() != datetime.now().day.__str__() or task.last_nudge.month.__str__() != datetime.now().month.__str__() or task.last_nudge.year.__str__() != datetime.now().year.__str__():
             message = mail.EmailMessage(sender="no-reply@flowdle.com",
                   to=task.who.email(),
-                  subject="Flowdle Nudge for: " + task.name,
+                  subject="Flowdle Nudge: " + task.name,
                   body=task.name + "\n\n http://www.flowdle.com/")        
             message.send()
             
@@ -46,8 +46,7 @@ class MasterBlaster(webapp.RequestHandler):
         people = db.GqlQuery(query)
         if people:
             for person in people:
-                self.response.out.write(person.who.email() + '<br/>')
-                #result = urlfetch.fetch('http://localhost:8080/nudger/send?user=' + person.who.email())            
+                self.response.out.write(person.who.email() + '<br/>')       
 
 class SingleSender(webapp.RequestHandler):
     
@@ -84,7 +83,6 @@ class SingleSender(webapp.RequestHandler):
                         if cmn.sendSingleTask(task, sub, self):
                             self.response.out.write('Sent...' + task.key().id().__str__() + '  <br />')
                             
-            self.response.out.write('<br /><br /><a href="/app/all">Go Back to All</a>')
 
 
 def main():

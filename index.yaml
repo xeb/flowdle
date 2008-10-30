@@ -132,14 +132,14 @@ indexes:
   - name: who
   - name: DESC
 
-# Used 3 times in query history.
+# Used 21 times in query history.
 - kind: Task
   properties:
   - name: complete
   - name: who
   - name: name
 
-# Used 26 times in query history.
+# Used 29 times in query history.
 - kind: Task
   properties:
   - name: complete

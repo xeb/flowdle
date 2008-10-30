@@ -26,7 +26,7 @@ class ClosedHandler(webapp.RequestHandler):
     def post(self):
         req = BetaRequest(who=self.request.get('who'))
         req.put()
-        self.redirect('/closed/thankyou')
+        #self.redirect('/closed/thankyou')
         
         
 class ThankYouHandler(webapp.RequestHandler):
@@ -36,10 +36,10 @@ class ThankYouHandler(webapp.RequestHandler):
 
 def main():
     app = webapp.WSGIApplication([
-        ('/', ClosedHandler),
+        ('/', MainHandler),
         ('/index.html', MainHandler),
-        ('/closed', ClosedHandler),
-        ('/closed/', ClosedHandler),
+        ('/closed', MainHandler),
+        ('/closed/', MainHandler),
         ('/closed/thankyou', ThankYouHandler)], debug=False)
     wsgiref.handlers.CGIHandler().run(app)
 

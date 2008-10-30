@@ -85,6 +85,7 @@
                                     <input type="text" class="text small" id="nudge_month_value" name="nudge_month_value" tabindex="11" value="{% ifequal subscriber.nudge 'monthly' %}{% ifnotequal subscriber.nudge_value 'None' %}{{subscriber.nudge_value}}{% else %}15{% endifnotequal %}{% endifequal %}">
                                 </fieldset>
                                 <input type="text" class="nudge_day hiding" id="nudge_day" name="nudge_day" maxlength="10" value="07/31">
+                                <p>The default Nudge that is selected when creating a new task</p>
                             </td>
                         </tr>    
                         <tr>
@@ -96,8 +97,8 @@
                                         <option value="name" {% ifequal subscriber.sort 'name' %}selected="selected"{% endifequal %}>name</option>
                                         <option value="nudge" {% ifequal subscriber.sort 'nudge' %}selected="selected"{% endifequal %}>nudge</option>
                                     </select>
-                                    <input type="radio" id="sort_asc_1" name="sort_asc" value="1" {% ifequal subscriber.sort_asc 1 %}checked="checked"{% endifequal %} /><label for="sort_asc_1">Ascending</label>
-                                    <input type="radio" id="sort_asc_0" name="sort_asc" value="0" {% ifequal subscriber.sort_asc 0 %}checked="checked"{% endifequal %} /><label for="sort_asc_0">Descending</label>
+                                    <input type="radio" id="sort_asc_1" name="sort_asc" value="yes" {% ifequal subscriber.sort_asc 1 %}checked="checked"{% endifequal %} /><label for="sort_asc_1">Ascending</label>
+                                    <input type="radio" id="sort_asc_0" name="sort_asc" value="no" {% ifequal subscriber.sort_asc 0 %}checked="checked"{% endifequal %} /><label for="sort_asc_0">Descending</label>
                                     <p>The default sort field &amp; sort order (for lists with more than one task).</p>
                                 </fieldset>
                             </td>
