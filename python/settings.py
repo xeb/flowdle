@@ -18,6 +18,12 @@ class SettingsHandler(webapp.RequestHandler):
             if sub.nudge_time == None:
                 sub.nudge_time = "morning"
                 sub.put()
+            if sub.sort == None:
+                sub.sort = "time"
+                sub.put()
+            if sub.sort_asc == None:
+                sub.sort_asc = True
+                sub.put()
             values = { 'user' : user, 'subscriber' : sub }
             self.response.out.write(template.render('../templates/settings.html', values))    
         else:
@@ -37,6 +43,8 @@ class SettingsHandler(webapp.RequestHandler):
             elif sub.nudge == 'weekly':
                 sub.nudge_value = self.request.get('nudge_day')[:3]
             #sub.nudge_time = self.request.get('nudge_time')
+            sub.sort = self.request.get('sort')
+            sub.sort_asc = self.request.get('sort_asc') == 1
             sub.put()
             values['message'] = 'Settings saved.'
             values['message_class'] = 'success'

@@ -39,7 +39,8 @@ fieldset.nudge_month {
 }
 
 fieldset.nudge_week label,
-fieldset.nudge_month label {
+fieldset.nudge_month label,
+fieldset.sort label {
     font-size: 13px;
 }
 

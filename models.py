@@ -28,7 +28,7 @@ class Subscriber(db.Model):
     nudge_time = db.StringProperty(required=False, choices=set(["morning", "noon", "evening"]))
     sort = db.StringProperty(required=False, choices=set(["time", "name", "nudge"]))
     sort_asc = db.BooleanProperty(default=True)
-    
+    group_nudges = db.BooleanProperty(default=True)
     
 class BetaRequest(db.Model):
     who = db.StringProperty(required=True)

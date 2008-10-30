@@ -86,7 +86,22 @@
                                 </fieldset>
                                 <input type="text" class="nudge_day hiding" id="nudge_day" name="nudge_day" maxlength="10" value="07/31">
                             </td>
-                        </tr>           
+                        </tr>    
+                        <tr>
+                            <th><label for="sort">Default Sort:</label>
+                            </th>
+                            <td><fieldset class="sort">
+                                    <select name="sort" id="sort">
+                                        <option value="time" {% ifequal subscriber.sort 'time' %}selected="selected"{% endifequal %}>time</option>
+                                        <option value="name" {% ifequal subscriber.sort 'name' %}selected="selected"{% endifequal %}>name</option>
+                                        <option value="nudge" {% ifequal subscriber.sort 'nudge' %}selected="selected"{% endifequal %}>nudge</option>
+                                    </select>
+                                    <input type="radio" id="sort_asc_1" name="sort_asc" value="1" {% ifequal subscriber.sort_asc 1 %}checked="checked"{% endifequal %} /><label for="sort_asc_1">Ascending</label>
+                                    <input type="radio" id="sort_asc_0" name="sort_asc" value="0" {% ifequal subscriber.sort_asc 0 %}checked="checked"{% endifequal %} /><label for="sort_asc_0">Descending</label>
+                                    <p>The default sort field &amp; sort order (for lists with more than one task).</p>
+                                </fieldset>
+                            </td>
+                        </tr>       
                         <tr>
                             <th>&nbsp;</th>
                             <td class="button">
