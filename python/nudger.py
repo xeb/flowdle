@@ -19,7 +19,6 @@ class Common():
         if task.last_nudge == None or task.last_nudge.day.__str__() != datetime.now().day.__str__() or task.last_nudge.month.__str__() != datetime.now().month.__str__() or task.last_nudge.year.__str__() != datetime.now().year.__str__():
             message = mail.EmailMessage(sender="no-reply@flowdle.com",
                   to=task.who.email(),
-                  #to='xebxeb@gmail.com',
                   subject="Flowdle Nudge for: " + task.name,
                   body=task.name + "\n\n http://www.flowdle.com/")        
             message.send()

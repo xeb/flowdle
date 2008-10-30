@@ -114,6 +114,7 @@
                         <td class="left">
                             <input type="checkbox" class="checkbox" id="check{{task.key}}" {% ifequal task.complete 1 %}checked="checked" {% ifequal task.repeat 1 %}disabled="disabled"{% endifequal %}{% endifequal %} />
                             <label id="name{{task.key}}" for="check{{task.key}}" {% ifequal task.complete 1 %}class="complete"{% endifequal %}>{{task.name}}</label>
+                            {% ifequal alltasksview 1 %}<p class="tags">{% for tag in task.tags %}{{tag}} {% endfor %}</p>{% endifequal %}
                         </td>
                         <td class="right">
                             <span id="nudge{{task.key}}" {% ifequal task.complete 1 %}class="complete"{%endifequal%}>

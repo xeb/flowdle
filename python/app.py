@@ -18,6 +18,7 @@ class Common:
     def showMain(self, handler, urlparam):
         cmn = Common()
         user = users.get_current_user()
+        subscriber = db.GqlQuery("SELECT * FROM Subscriber WHERE who = :1 ", user).get()
         
         orderBy = "when"
         if handler.request.get('s') == "1":
@@ -31,8 +32,6 @@ class Common:
         
         alltasks = db.GqlQuery( "SELECT * FROM Task WHERE who = :1 AND complete = False" 
                                 " ORDER BY "+orderBy+" "+orderDir, user)
-        subscriber = db.GqlQuery("SELECT * FROM Subscriber WHERE who = :1 ", user).get()
-        
         values = {
             'user': user,
             'alltasks' : alltasks,
@@ -46,6 +45,7 @@ class Common:
             values['tagbaseurl'] = '/app/tagged/'
             values['tagtitle'] = 'All'
             values['taglinks'] = cmn.getTagLinks(values['alltags'], None)
+            values['alltasksview'] = 1
         
         # Show Tagged Tasks
         elif urlparam[:7] == "/tagged":
@@ -184,8 +184,6 @@ class MainHandler(webapp.RequestHandler):
             task.repeat = True
         else:
             task.repeat = False
-        
-        #task.last_nudge = datetime.datetime.today()
         
         task.put()
         
