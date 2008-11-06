@@ -19,7 +19,7 @@ class SettingsHandler(webapp.RequestHandler):
                 sub.nudge_time = "morning"
                 sub.put()
             if sub.sort == None:
-                sub.sort = "time"
+                sub.sort = "when"
                 sub.put()
             if sub.sort_asc == None:
                 sub.sort_asc = True
@@ -45,6 +45,7 @@ class SettingsHandler(webapp.RequestHandler):
             #sub.nudge_time = self.request.get('nudge_time')
             sub.sort = self.request.get('sort')
             sub.sort_asc = self.request.get('sort_asc') != "no"
+            sub.group_nudges = self.request.get('group_nudges') == "yes"
             sub.put()
             values['message'] = 'Settings saved.'
             values['message_class'] = 'success'
@@ -57,7 +58,7 @@ class SettingsHandler(webapp.RequestHandler):
 
 def main():
     app = webapp.WSGIApplication([
-        ('/settings', SettingsHandler)], debug=False)
+        ('/settings', SettingsHandler)], debug=True)
     wsgiref.handlers.CGIHandler().run(app)
 
     

@@ -36,10 +36,10 @@ class ThankYouHandler(webapp.RequestHandler):
 
 def main():
     app = webapp.WSGIApplication([
-        ('/', MainHandler),
-        ('/index.html', MainHandler),
-        ('/closed', MainHandler),
-        ('/closed/', MainHandler),
+        ('/', ClosedHandler),
+        ('/index.html', ClosedHandler),
+        ('/closed', ClosedHandler),
+        ('/closed/', ClosedHandler),
         ('/closed/thankyou', ThankYouHandler)], debug=False)
     wsgiref.handlers.CGIHandler().run(app)
 

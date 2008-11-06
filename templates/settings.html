@@ -53,6 +53,14 @@
                                     <p>Only tasks with this Tag will be sent to your mobile.</p>
                             </td>
                         </tr>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <td><input type="checkbox" name="group_nudges" id="group_nudges" value="yes" {% ifequal subscriber.group_nudges 1 %}checked="checked"{% endifequal %} />
+                                    <label for="group_nudges">Group my Nudges into 1 email</label>
+                                    <p>If selected all of your nudges will be grouped into 1 email / SMS message every day.</p>
+                                    <p>If not selected, they will each be sent individually.</p>
+                            </td>
+                        </tr>
                         <tr><td colspan="2">&nbsp;</td></tr>
                         <tr>
                             <th><label for="default_tag">Default Tag:</label>

@@ -3,6 +3,7 @@
 import os
 import wsgiref.handlers
 
+from sets import Set
 from datetime import datetime
 from models import Task
 from google.appengine.ext import db
@@ -14,6 +15,34 @@ from google.appengine.api import urlfetch
 
 
 class Common():
+    def sendGroupTasks(self, tasks, sub, handler):
+        bodytext = ""
+        tasks_to_remove = Set([])
+        for task in tasks:
+            if task.last_nudge != None and task.last_nudge.day.__str__() == datetime.now().day.__str__() and task.last_nudge.month.__str__() == datetime.now().month.__str__() and task.last_nudge.year.__str__() == datetime.now().year.__str__():
+                tasks_to_remove.add(task)
+            else:
+                bodytext = bodytext + task.name + "\n\n"
+                task.last_nudge = datetime.now()
+                task.put()
+        
+        if len(tasks_to_remove) > 0:
+            for task in tasks_to_remove:
+                tasks.remove(task)
+        
+        #send the message
+        if len(tasks) > 0:
+            message = mail.EmailMessage(sender="no-reply@flowdle.com",
+                #to=task.who.email(),
+                to="xebxeb@gmail.com",
+                subject="Flowdle Nudges (" + datetime.now().month.__str__() + "/" + datetime.now().day.__str__() + "/" + datetime.now().year.__str__() + ")",
+                body=bodytext + "\n\n http://www.flowdle.com/")        
+            message.send()
+            return True
+        else:
+            return False
+        
+        
     def sendSingleTask(self, task, sub, handler):
         # if hasn't been sent today...
         if task.last_nudge == None or task.last_nudge.day.__str__() != datetime.now().day.__str__() or task.last_nudge.month.__str__() != datetime.now().month.__str__() or task.last_nudge.year.__str__() != datetime.now().year.__str__():
@@ -48,11 +77,14 @@ class MasterBlaster(webapp.RequestHandler):
             for person in people:
                 self.response.out.write(person.who.email() + '<br/>')       
 
-class SingleSender(webapp.RequestHandler):
+class Sender(webapp.RequestHandler):
     
     def get(self):  
         user = users.User(self.request.get('user'))
         sub = db.GqlQuery("SELECT * FROM Subscriber WHERE who = :1", user).get()
+        #sub.group_nudges = False
+        tasks_to_nudge = Set([])
+        
         if user and sub:
             cmn = Common()
             query =  "SELECT * FROM Task WHERE nudge = :1 AND who = :2 AND complete = False "
@@ -62,8 +94,11 @@ class SingleSender(webapp.RequestHandler):
             if tasks:
                 for task in tasks:
                     self.response.out.write('(' + task.key().id().__str__() + ', daily) Last_Nudge was ' + task.last_nudge.__str__() + '<br />')
-                    if cmn.sendSingleTask(task, sub, self):  
-                        self.response.out.write('Sent...' + task.key().id().__str__() + ' <br />')
+                    if sub.group_nudges:
+                        tasks_to_nudge.add(task)
+                    else:
+                        if cmn.sendSingleTask(task, sub, self):  
+                            self.response.out.write('Sent...' + task.key().id().__str__() + ' <br />')
 
             # Weekly Tasks
             tasks = db.GqlQuery(query, 'weekly', user)
@@ -71,8 +106,11 @@ class SingleSender(webapp.RequestHandler):
                 for task in tasks:
                     if datetime.now().isoweekday().__str__() == task.nudge_value.__str__():
                         self.response.out.write('(' + task.key().id().__str__() + ', weekly) Last_Nudge was ' + task.last_nudge.__str__() + '<br />')
-                        if cmn.sendSingleTask(task, sub, self):
-                            self.response.out.write('Sent...' + task.key().id().__str__() + '  <br />')
+                        if sub.group_nudges:
+                            tasks_to_nudge.add(task)
+                        else:
+                            if cmn.sendSingleTask(task, sub, self):
+                                self.response.out.write('Sent...' + task.key().id().__str__() + '  <br />')
                             
             # Monthly Tasks
             tasks = db.GqlQuery(query, 'monthly', user)
@@ -80,16 +118,21 @@ class SingleSender(webapp.RequestHandler):
                 for task in tasks:
                     if datetime.now().day.__str__() == task.nudge_value.__str__():
                         self.response.out.write('(' + task.key().id().__str__() + ', monthly) Last_Nudge was ' + task.last_nudge.__str__() + '<br />')
-                        if cmn.sendSingleTask(task, sub, self):
-                            self.response.out.write('Sent...' + task.key().id().__str__() + '  <br />')
-                            
+                        if sub.group_nudges:
+                            tasks_to_nudge.add(task)
+                        else:
+                            if cmn.sendSingleTask(task, sub, self):
+                                self.response.out.write('Sent...' + task.key().id().__str__() + '  <br />')
+            
+            if sub.group_nudges and cmn.sendGroupTasks(tasks_to_nudge, sub, self):
+                self.response.out.write('Sent a group Nudge...with ' + len(tasks_to_nudge).__str__() + ' tasks. <br />')
 
 
 def main():
     app = webapp.WSGIApplication(
                 [
                     ('/nudger', MasterBlaster),
-                    ('/nudger/send', SingleSender)
+                    ('/nudger/send', Sender)
                 ], 
                 debug=False)
     wsgiref.handlers.CGIHandler().run(app)

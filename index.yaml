@@ -66,7 +66,7 @@ indexes:
   - name: when
     direction: desc
 
-# Used 8 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
@@ -82,7 +82,7 @@ indexes:
   - name: who
   - name: name
 
-# Used 2 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
@@ -91,7 +91,7 @@ indexes:
   - name: name
     direction: desc
 
-# Used 10 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
@@ -99,7 +99,7 @@ indexes:
   - name: who
   - name: nudge
 
-# Used 12 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
@@ -108,7 +108,7 @@ indexes:
   - name: nudge
     direction: desc
 
-# Used 171 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
@@ -125,21 +125,21 @@ indexes:
   - name: when
     direction: desc
 
-# Used 25 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
   - name: who
   - name: DESC
 
-# Used 21 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
   - name: who
   - name: name
 
-# Used 29 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
@@ -147,14 +147,14 @@ indexes:
   - name: name
     direction: desc
 
-# Used 17 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
   - name: who
   - name: nudge
 
-# Used 21 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
@@ -162,14 +162,14 @@ indexes:
   - name: nudge
     direction: desc
 
-# Used 466 times in query history.
+# Used 52 times in query history.
 - kind: Task
   properties:
   - name: complete
   - name: who
   - name: when
 
-# Unused in query history -- copied from input.
+# Used 4 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -229,6 +229,6 @@ indexes:
   - name: when
     direction: desc
 
-# Used 80 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   ancestor: yes
