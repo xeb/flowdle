@@ -17,7 +17,9 @@ from google.appengine.api import urlfetch
 class Common():
     def sendGroupTasks(self, tasks, sub, handler):
         bodytext = ""
+        mobilebody = ""
         tasks_to_remove = Set([])
+        
         for task in tasks:
             if task.last_nudge != None and task.last_nudge.day.__str__() == datetime.now().day.__str__() and task.last_nudge.month.__str__() == datetime.now().month.__str__() and task.last_nudge.year.__str__() == datetime.now().year.__str__():
                 tasks_to_remove.add(task)
@@ -25,6 +27,9 @@ class Common():
                 bodytext = bodytext + task.name + "\n\n"
                 task.last_nudge = datetime.now()
                 task.put()
+                
+                if sub and sub.mobile and ( sub.mobile_tag == None or sub.mobile_tag == '' or ( sub.mobile_tag in task.tags ) ):
+                    mobilebody = mobilebody + task.name + "\n\n"
         
         if len(tasks_to_remove) > 0:
             for task in tasks_to_remove:
@@ -33,11 +38,19 @@ class Common():
         #send the message
         if len(tasks) > 0:
             message = mail.EmailMessage(sender="no-reply@flowdle.com",
-                #to=task.who.email(),
-                to="xebxeb@gmail.com",
+                to=task.who.email(),
+                #to="xebxeb@gmail.com",
                 subject="Flowdle Nudges (" + datetime.now().month.__str__() + "/" + datetime.now().day.__str__() + "/" + datetime.now().year.__str__() + ")",
                 body=bodytext + "\n\n http://www.flowdle.com/")        
             message.send()
+            
+            if len(mobilebody) > 0:
+                message = mail.EmailMessage(sender="no-reply@flowdle.com",
+                    to=sub.mobile,
+                    subject="Flowdle Nudges (" + datetime.now().month.__str__() + "/" + datetime.now().day.__str__() + "/" + datetime.now().year.__str__() + ")",
+                    body=mobilebody + "\n\n http://www.flowdle.com/")        
+                message.send()
+            
             return True
         else:
             return False

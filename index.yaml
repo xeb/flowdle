@@ -116,7 +116,7 @@ indexes:
   - name: who
   - name: when
 
-# Unused in query history -- copied from input.
+# Used 16 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -169,7 +169,7 @@ indexes:
   - name: who
   - name: when
 
-# Used 4 times in query history.
+# Used 62 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -229,6 +229,6 @@ indexes:
   - name: when
     direction: desc
 
-# Unused in query history -- copied from input.
+# Used 12 times in query history.
 - kind: Task
   ancestor: yes

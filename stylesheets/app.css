@@ -80,6 +80,13 @@
 
 #biglist .left {
 	width: 60%;
+	position: relative;
+}
+
+#biglist .left label {
+    font-weight: bold;
+    color: #333;
+    line-height: 18px;
 }
 
 #biglist .left label.complete {

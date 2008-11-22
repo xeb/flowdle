@@ -29,11 +29,11 @@
     <form id="taskForm" name="taskForm" action="{{formaction}}" method="post">
     <input type="hidden" name="taskkey" id="taskkey" />
     <div id="newtask" class="hiding">
-        <input type="text" class="taskname" id="taskname" name="taskname" maxlength="200" tabindex="1" value="{{edittask.name}}" />
+        <input type="text" class="taskname" id="taskname" name="taskname" maxlength="200" tabindex="1" autocomplete="off" value="{{edittask.name}}" />
         <div class="items">
             <table cellpadding="3" cellspacing="3">
             <tr><th>Tags:</th>
-            <td><input type="text" class="text" id="taglist" name="taglist" tabindex="2" value="{{tagdefault}}" />
+            <td><input type="text" class="text" id="taglist" name="taglist" tabindex="2" value="{{tagdefault}}" autocomplete="off" />
              <div class="commontags">
              </div>
             </td>

@@ -72,7 +72,7 @@
                         <tr>
                             <th><label for="nudge">Default Nudge:</label></th>
                             <td>
-                                <select name="nudge" id="nudge" tabindex="3">
+                                <select name="nudge" id="nudge">
                                     <option value="never" {% ifequal subscriber.nudge 'never' %}selected{% endifequal %}>Never</option>
                                     <option value="daily" {% ifequal subscriber.nudge 'daily' %}selected{% endifequal %}>Every Day</option>
                                     <option value="weekly" {% ifequal subscriber.nudge 'weekly' %}selected{% endifequal %}>Every Week</option>

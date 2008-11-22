@@ -22,6 +22,10 @@ handlers:
 - url: /logout
   script: python/logout.py
 
+- url: /favicon.ico
+  static_files: images/favicon.ico
+  upload: images/favicon.ico
+
 - url: /index.html
   script: python/main.py
 
