@@ -54,8 +54,7 @@ class Common:
             values['tagbaseurl'] = '/app/tagged/'
             values['tagtitle'] = 'All'
             values['taglinks'] = cmn.getTagLinks(values['alltags'], None)
-            values['alltasksview'] = 1
-        
+            
         # Show Tagged Tasks
         elif urlparam[:7] == "/tagged":
             tagstr = urlparam[8:]

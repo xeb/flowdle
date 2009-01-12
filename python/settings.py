@@ -58,7 +58,7 @@ class SettingsHandler(webapp.RequestHandler):
 
 def main():
     app = webapp.WSGIApplication([
-        ('/settings', SettingsHandler)], debug=True)
+        ('/settings', SettingsHandler)], debug=False)
     wsgiref.handlers.CGIHandler().run(app)
 
     

@@ -108,7 +108,7 @@ indexes:
   - name: nudge
     direction: desc
 
-# Unused in query history -- copied from input.
+# Used 2 times in query history.
 - kind: Task
   properties:
   - name: complete
@@ -116,7 +116,7 @@ indexes:
   - name: who
   - name: when
 
-# Used 16 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
@@ -162,14 +162,14 @@ indexes:
   - name: nudge
     direction: desc
 
-# Used 52 times in query history.
+# Used 16 times in query history.
 - kind: Task
   properties:
   - name: complete
   - name: who
   - name: when
 
-# Used 62 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   properties:
   - name: complete
@@ -229,6 +229,6 @@ indexes:
   - name: when
     direction: desc
 
-# Used 12 times in query history.
+# Unused in query history -- copied from input.
 - kind: Task
   ancestor: yes
