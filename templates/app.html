@@ -46,6 +46,7 @@
                         <option value="daily" {% ifequal subscriber.nudge 'daily' %}selected{% endifequal %}>Every Day</option>
                         <option value="weekly" {% ifequal subscriber.nudge 'weekly' %}selected{% endifequal %}>Every Week</option>
                         <option value="monthly" {% ifequal subscriber.nudge 'monthly' %}selected{% endifequal %}>Every Month</option>
+                        <option value="yearly" {% ifequal subscriber.nudge 'yearly' %}selected{% endifequal %}>Every Year</option>
                     </select>
                     <label style="display:none;" id="nudge_label">until complete</label>
                     <fieldset id="nudge_week" class="nudge_week hiding"> 
@@ -58,10 +59,13 @@
                         <input type="radio" id="nudge_7" name="nudge_day" value="7" tabindex="10" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '7' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_7">Sunday</label>
                     </fieldset>
                     <fieldset id="nudge_month" class="nudge_month hiding">
-                        <label for="nudge_month_val">Day of the Month:</label>
+                        <label for="nudge_month_value">Day of the Month:</label>
                         <input type="text" class="text" id="nudge_month_value" name="nudge_month_value" tabindex="11" value="{% ifequal subscriber.nudge 'monthly' %}{% ifnotequal subscriber.nudge_value 'None' %}{{subscriber.nudge_value}}{% else %}15{% endifnotequal %}{% endifequal %}">
                     </fieldset>
-                    <input type="text" class="nudge_day hiding" id="nudge_day" name="nudge_day" maxlength="10" value="07/31">
+                    <fieldset id="nudge_year" class="nudge_year hiding">
+                        <label for="nudge_year_value">Specific Date:</label>
+                        <input type="text" class="text" id="nudge_year_value" name="nudge_year_value" tabindex="12" maxlength="10" value="{% ifequal subscriber.nudge 'yearly' %}{{subscriber.nudge_value}}{% else %}01/31{% endifequal %}" />
+                    </fieldset>
                 </td>
             </tr>
             <tr>

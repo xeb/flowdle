@@ -136,6 +136,29 @@ class Sender(webapp.RequestHandler):
                         else:
                             if cmn.sendSingleTask(task, sub, self):
                                 self.response.out.write('Sent...' + task.key().id().__str__() + '  <br />')
+
+            # Yearly Tasks
+            tasks = db.GqlQuery(query, 'yearly', user)
+            if tasks:
+                for task in tasks:
+                    nudgeDay = task.nudge_value.__str__()[3:5]
+                    nudgeMonth = task.nudge_value.__str__()[:2]
+
+                    # strip leading 0s
+                    if nudgeDay[:1] == '0':
+                        nudgeDay = nudgeDay[1:2]
+                    if nudgeMonth[:1] == '0':
+                        nudgeMonth = nudgeMonth[1:2]
+                    
+                    if datetime.now().day.__str__() == nudgeDay.__str__() and datetime.now().month.__str__() == nudgeMonth.__str__():
+                        self.response.out.write('(' + task.key().id().__str__() + ', monthly) Last_Nudge was ' + task.last_nudge.__str__() + '<br />')
+                        if sub.group_nudges:
+                            tasks_to_nudge.add(task)
+                        else:
+                            if cmn.sendSingleTask(task, sub, self):
+                                self.response.out.write('Sent...' + task.key().id().__str__() + '  <br />')
+            
+            
             
             if sub.group_nudges and cmn.sendGroupTasks(tasks_to_nudge, sub, self):
                 self.response.out.write('Sent a group Nudge...with ' + len(tasks_to_nudge).__str__() + ' tasks. <br />')

@@ -21,7 +21,8 @@
 	padding: 3px;
 }
 #newtask #nudge_month_value, 
-#newtask #repeat_month_value {
+#newtask #repeat_month_value, 
+#newtask #nudge_year_value {
     width: 50px;
 }
 #newtask .items td,

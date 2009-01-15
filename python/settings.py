@@ -42,6 +42,9 @@ class SettingsHandler(webapp.RequestHandler):
                 sub.nudge_value = self.request.get('nudge_month_value')[:3]
             elif sub.nudge == 'weekly':
                 sub.nudge_value = self.request.get('nudge_day')[:3]
+            elif sub.nudge == 'yearly':
+                sub.nudge_value = self.request.get('nudge_year_value')[:6]
+                
             #sub.nudge_time = self.request.get('nudge_time')
             sub.sort = self.request.get('sort')
             sub.sort_asc = self.request.get('sort_asc') != "no"

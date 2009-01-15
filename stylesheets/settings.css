@@ -34,7 +34,8 @@ input.small {
 }
 
 fieldset.nudge_week,
-fieldset.nudge_month {
+fieldset.nudge_month,
+fieldset.nudge_year {
     margin-top: 13px;
 }
 

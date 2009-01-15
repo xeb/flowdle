@@ -187,7 +187,9 @@ class MainHandler(webapp.RequestHandler):
             task.nudge_value = self.request.get('nudge_month_value')[:3]
         elif task.nudge == 'weekly':
             task.nudge_value = self.request.get('nudge_day')[:3]
-        
+        elif task.nudge == 'yearly':
+            task.nudge_value = self.request.get('nudge_year_value')[:6]
+            
         if self.request.get('repeat') == 'True':
             task.repeat = True
         else:
