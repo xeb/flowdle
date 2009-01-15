@@ -1,5 +1,5 @@
 application: flowdle
-version: 2
+version: 3
 runtime: python
 api_version: 1
 
@@ -34,15 +34,15 @@ handlers:
 
 - url: /settings
   script: python/settings.py
-  login: admin
+  login: required
 
 - url: /app(.*)
   script: python/app.py
-  login: admin
+  login: required
 
 - url: /rpc(.*)
   script: python/rpc.py
-  login: admin
+  login: required
 
 - url: /nudger(.*)
   script: python/nudger.py

@@ -151,7 +151,7 @@ class Sender(webapp.RequestHandler):
                         nudgeMonth = nudgeMonth[1:2]
                     
                     if datetime.now().day.__str__() == nudgeDay.__str__() and datetime.now().month.__str__() == nudgeMonth.__str__():
-                        self.response.out.write('(' + task.key().id().__str__() + ', monthly) Last_Nudge was ' + task.last_nudge.__str__() + '<br />')
+                        self.response.out.write('(' + task.key().id().__str__() + ', yearly) Last_Nudge was ' + task.last_nudge.__str__() + '<br />')
                         if sub.group_nudges:
                             tasks_to_nudge.add(task)
                         else:
