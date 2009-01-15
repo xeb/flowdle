@@ -41,6 +41,17 @@ class Common:
         
         alltasks = db.GqlQuery( "SELECT * FROM Task WHERE who = :1 AND complete = False" 
                                 " ORDER BY "+orderBy+" "+orderDir, user)
+        
+        if alltasks.count() == 0:
+            tasks = []
+            task = Task(
+                name="Welcome!  Click this task to Complete it.  Add a new task above.",
+                who=user,
+                nudge="never")
+            task.put()
+            tasks.append(task)
+            alltasks = tasks
+            
         values = {
             'user': user,
             'alltasks' : alltasks,
@@ -206,7 +217,7 @@ class MainHandler(webapp.RequestHandler):
 def main():
     app = webapp.WSGIApplication(
                 [('/app(.*)', MainHandler)], 
-                debug=False)
+                debug=True)
     wsgiref.handlers.CGIHandler().run(app)
 
     
