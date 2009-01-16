@@ -6,18 +6,42 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <title>Flowdle</title>
     <link href="/stylesheets/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/index.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/facebox.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        h4 {
+            margin: 30px 0 0 0 !important;
+            font-size: 1.4em; }
+        p, label {
+            color: black; }
+        #feedback {
+            width: 300px;
+            margin: 50px 0 0 50px;}
+    </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            with(parent) {
+                $(document).trigger('close.facebox');
+            }
+        });
+    </script>
   </head>
   <body>
-	<div id="frame">
-	    <div id="inner">
-            <a href="/app/all"><img src="/images/logo.gif" alt="Flowdle" /></a> 
-            <span class="is">is...</span>
-            <span class="hint">(<a class="light" href="http://en.wikipedia.org/wiki/Flow_(psychology)">flow</a> + <a class="light" href="http://en.wikipedia.org/wiki/Doodling">doodle</a>)</span>
-            <div class="line"></div>
-            <h5>Thank You!</h5>
-            <p>We will notify you as soon as your request has been approved</p>
-        </div>
-	</div>
+  
+   <div id="feedback">
+          <h4>Thank You!</h4>
+   </div>
+  
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-4440510-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
   </body>
 </html>

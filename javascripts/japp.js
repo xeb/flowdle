@@ -7,9 +7,12 @@ InstallFunction(server, 'isRepeat')
 
 $(document).ready(function() {
     
-    $('body').keypress(function(){
-        
+    $.facebox.settings.opacity = 0.7;
+    $('a[rel*=facebox]').click(function() {
+          $.facebox('<iframe src="' + this.href + '" width="750" height="530"></iframe>');
+          return false;
     });
+
     
 	$('#taskname').val('');
 	$('#taskname').focus();

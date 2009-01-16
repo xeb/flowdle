@@ -117,6 +117,7 @@
     padding: 4px;
 }
 
-#biglist a:hover {
+#biglist a:hover,
+a.close:hover {
 	color: #FFFFFF;
 }

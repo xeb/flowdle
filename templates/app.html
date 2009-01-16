@@ -8,18 +8,17 @@
     <link href="/stylesheets/reset.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/app.css" rel="stylesheet" type="text/css" />
-    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
-    <script type="text/javascript">
-     google.load("jquery", "1.2.6");
-     </script>
+    <link href="/stylesheets/facebox.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
     <script src="/javascripts/json2.js" type="text/javascript"></script>
     <script src="/javascripts/rpc.js" type="text/javascript"></script>
+    <script src="/javascripts/facebox.js" type="text/javascript"></script>
     <script src="/javascripts/common.js" type="text/javascript"></script>
     <script src="/javascripts/japp.js" type="text/javascript"></script>
   </head>
   <body>
     <div id="topmenu">
-      <p>{{user.email}} | <a href="/settings">Settings</a> | <a href="http://flowdle.blogspot.com">Blog</a> | <a href="/logout">Logout</a></p>
+      <p>{{user.email}} | <a href="/feedback" rel="facebox" id="feedback">Feedback</a> | <a href="/settings">Settings</a> | <a href="http://flowdle.blogspot.com">Blog</a> | <a href="/logout">Logout</a></p>
            <div class="logo">
              <img src="/images/logo.gif" alt="Flowdle" id="logo" />
     <!--#config timefmt="%A" --> <!--#echo var="DATE_LOCAL" -->

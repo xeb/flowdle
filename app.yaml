@@ -35,6 +35,10 @@ handlers:
 - url: /settings
   script: python/settings.py
   login: required
+  
+- url: /feedback
+  script: python/feedback.py
+  login: required
 
 - url: /app(.*)
   script: python/app.py
