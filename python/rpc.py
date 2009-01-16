@@ -132,7 +132,8 @@ class RPCMethods:
                             nudge=task.nudge,
                             nudge_value=task.nudge_value,
                             repeat=task.repeat,
-                            last_nudge=task.last_nudge)
+                            last_nudge=task.last_nudge,
+			    last_complete=datetime.datetime.today())
                 repeatTask.put()
         return True
     else:
@@ -142,7 +143,7 @@ class RPCMethods:
 def main():
   app = webapp.WSGIApplication([
     ('/rpc(.*)', RPCHandler),
-    ], debug=False)
+    ], debug=True)
   util.run_wsgi_app(app)
 
 if __name__ == '__main__':

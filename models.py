@@ -15,7 +15,7 @@ class Task(db.Expando):
     nudge_value = db.StringProperty()
     last_nudge = db.DateTimeProperty()
     repeat = db.BooleanProperty(default=False)
-    
+    last_completed = db.DateTimeProperty()    
     
 class Subscriber(db.Model):
     who = db.UserProperty(required=True)

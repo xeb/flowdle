@@ -127,7 +127,9 @@
                                         <br />(repeat created)
                                     {% endifequal %}
                                 {% else %}
-                                Nudge me {{task.nudge}}{% ifequal task.repeat 1 %} (repeats){% endifequal %}
+                                Nudge me {{task.nudge}}{% ifequal task.repeat 1 %} (repeats)
+					{% ifnotequal task.last_complete None %}
+					<br />(last completed {{task.last_complete.month}}/{{task.last_complete.day}}/{{task.last_complete.year}}){% endifnotequal %}{% endifequal %}
                                 {% endifequal %}
                             </span>
                         </td>
