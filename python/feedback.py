@@ -20,7 +20,7 @@ class FeedbackHandler(webapp.RequestHandler):
         message = mail.EmailMessage(sender="no-reply@flowdle.com",
                   to="mark@kockerbeck.com",
                   subject="Flowdle Feedback: " + self.request.get('subject')[:50],
-                  body= self.request.get('message') + "\n\n http://www.flowdle.com/")        
+                  body= self.request.get('message') + "\n\nFrom: " + user.email() + "\n\n http://www.flowdle.com/")        
         message.send()
         self.response.out.write(template.render('../templates/thankyou.html', None))
         
