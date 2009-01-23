@@ -77,7 +77,7 @@
                                     <option value="daily" {% ifequal subscriber.nudge 'daily' %}selected{% endifequal %}>Every Day</option>
                                     <option value="weekly" {% ifequal subscriber.nudge 'weekly' %}selected{% endifequal %}>Every Week</option>
                                     <option value="monthly" {% ifequal subscriber.nudge 'monthly' %}selected{% endifequal %}>Every Month</option>
-                                    <option value="yearly" {% ifequal subscriber.nudge 'yearly' %}selected{% endifequal %}>Every Year</option>
+                                    <option value="yearly" {% ifequal subscriber.nudge 'yearly' %}selected{% endifequal %}>On Date</option>
                                 </select>
                                 <label style="display:none;" id="nudge_label">until complete</label>
                                 <fieldset id="nudge_week" class="nudge_week hiding"> 
