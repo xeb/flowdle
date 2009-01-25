@@ -21,7 +21,7 @@ class Common():
         tasks_to_remove = Set([])
         
         for task in tasks:
-            if task.last_nudge != None and task.last_nudge.day.__str__() == datetime.now().day.__str__() and task.last_nudge.month.__str__() == datetime.now().month.__str__() and task.last_nudge.year.__str__() == datetime.now().year.__str__():
+            if task.nudge != "frequently" and task.last_nudge != None and task.last_nudge.day.__str__() == datetime.now().day.__str__() and task.last_nudge.month.__str__() == datetime.now().month.__str__() and task.last_nudge.year.__str__() == datetime.now().year.__str__():
                 tasks_to_remove.add(task)
             else:
                 bodytext = bodytext + task.name + "\n\n"
@@ -80,6 +80,22 @@ class Common():
             return True
         else:
             return False
+       
+            
+class ListUsers(webapp.RequestHandler):
+    
+    def get(self):
+        query = "SELECT * FROM Subscriber"
+        people = db.GqlQuery(query)
+        if people:
+            count = 0
+            self.response.out.write('<html><head><style type="text/css">body { font-family: Helvetica Neue, Verdana; font-size: 20px; font-weight: bold; color: #010101; }</style></head><body><h1>Flowdle Users:</h1><br />')
+            for person in people:
+                count = count + 1
+                taskCount = db.GqlQuery("SELECT * FROM Task WHERE who = :1", person.who).count(1000)
+                self.response.out.write(count.__str__() + '.) ' + person.who.email() + ' has ' + taskCount.__str__() + '<br/>') 
+            self.response.out.write('</body></html>')
+              
               
 class MasterBlaster(webapp.RequestHandler):
     
@@ -89,6 +105,7 @@ class MasterBlaster(webapp.RequestHandler):
         if people:
             for person in people:
                 self.response.out.write(person.who.email() + '<br/>')       
+
 
 class Sender(webapp.RequestHandler):
     
@@ -102,6 +119,17 @@ class Sender(webapp.RequestHandler):
             cmn = Common()
             query =  "SELECT * FROM Task WHERE nudge = :1 AND who = :2 AND complete = False "
             
+            # Frequent Tasks
+            tasks = db.GqlQuery(query, 'frequently', user)
+            if tasks:
+                for task in tasks:
+                    self.response.out.write('(' + task.key().id().__str__() + ', daily) Last_Nudge was ' + task.last_nudge.__str__() + '<br />')
+                    if sub.group_nudges:
+                        tasks_to_nudge.add(task)
+                    else:
+                        if cmn.sendSingleTask(task, sub, self):  
+                            self.response.out.write('Sent...' + task.key().id().__str__() + ' <br />')
+
             # Daily Tasks
             tasks = db.GqlQuery(query, 'daily', user)
             if tasks:
@@ -168,9 +196,10 @@ def main():
     app = webapp.WSGIApplication(
                 [
                     ('/nudger', MasterBlaster),
+                    ('/nudger/list', ListUsers),
                     ('/nudger/send', Sender)
                 ], 
-                debug=False)
+                debug=True)
     wsgiref.handlers.CGIHandler().run(app)
 
     

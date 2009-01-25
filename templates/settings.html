@@ -74,6 +74,7 @@
                             <td>
                                 <select name="nudge" id="nudge">
                                     <option value="never" {% ifequal subscriber.nudge 'never' %}selected{% endifequal %}>Never</option>
+                                    <option value="frequently" {% ifequal subscriber.nudge 'frequently' %}selected{% endifequal %}>Frequently*</option>
                                     <option value="daily" {% ifequal subscriber.nudge 'daily' %}selected{% endifequal %}>Every Day</option>
                                     <option value="weekly" {% ifequal subscriber.nudge 'weekly' %}selected{% endifequal %}>Every Week</option>
                                     <option value="monthly" {% ifequal subscriber.nudge 'monthly' %}selected{% endifequal %}>Every Month</option>
@@ -96,6 +97,9 @@
                                 <fieldset id="nudge_year" class="nudge_year hiding">
                                     <label for="nudge_year_value">Specific Date:</label>
                                     <input type="text" class="small" id="nudge_year_value" name="nudge_year_value" tabindex="12" maxlength="10" value="{{subscriber.nudge_value}}" />
+                                </fieldset>
+                                <fieldset id="nudge_frequently" class="nudge_frequently hiding">
+                                    <label>* nudges will be sent every time our service runs (currently every 2 hours)</label>
                                 </fieldset>
                                 <p>The default Nudge that is selected when creating a new task</p>
                             </td>

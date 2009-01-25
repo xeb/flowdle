@@ -11,7 +11,7 @@ class Task(db.Expando):
     tags = db.StringListProperty()
     complete = db.BooleanProperty(default=False)
     complete_date = db.DateTimeProperty()
-    nudge = db.StringProperty(required=True, choices=set(["never", "daily", "weekly", "monthly","yearly"]))
+    nudge = db.StringProperty(required=True, choices=set(["never", "frequently", "daily", "weekly", "monthly","yearly"]))
     nudge_value = db.StringProperty()
     last_nudge = db.DateTimeProperty()
     repeat = db.BooleanProperty(default=False)
