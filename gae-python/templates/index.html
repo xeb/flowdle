@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Flowdle</title>
+    <link href="/stylesheets/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/index.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript">google.load("jquery", "1.2.6");</script>
+	<script type="text/javascript">
+	    $(document).ready(function(){
+	       $('input.check').click(function(){
+	          window.location = '/app' 
+	       }); 
+	    });
+	</script>
+  </head>
+  <body>
+	<div id="frame">
+        <div id="inner">
+            <a href="/app/all"><img src="/images/logo.gif" alt="Flowdle" /></a> 
+            <span class="is">is...</span>
+            <span class="hint">(<a class="light" href="http://en.wikipedia.org/wiki/Flow_(psychology)">flow</a> + <a class="light" href="http://en.wikipedia.org/wiki/Doodling">doodle</a>)</span>
+            <div class="line"></div>
+            
+            <img class="right" src="/images/screenshot_smaller.jpg" alt="Flowdle" border="0" />
+            <ul>
+                <li>tasks with tags
+                    <p>organize your lists for personal or professional tasks however you see fit with familiarity, ease and simplicity</p>
+                    </li>
+                    
+                <li>reminder "nudges"
+                    <p>get us to automatically nudge you to complete that important task either every day, once a week, once a month, once a year or never</p>
+                    </li>
+                
+                <li>on-going events
+                    <p>setup nudges for those tasks that are never truly complete and recur on a daily, weekly, monthly or annual basis</p> 
+                    </li>
+            </ul>
+            <div class="line"></div>
+            <div class="bottom">
+                <p>Use your existing <a class="bottom" href="https://www.google.com/accounts/">Google Account</a> and</p>
+                <input type="button" value="Check It Out!" class="check button">
+            </div>
+        </div>
+        <a href="http://flowdle.blogspot.com/" class="blog">Blog</a>
+	</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-4440510-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+  </body>
+</html>

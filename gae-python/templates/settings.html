@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Flowdle</title>
+    <link href="/stylesheets/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/settings.css" rel="stylesheet" type="text/css" />
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript">
+     google.load("jquery", "1.2.6");
+     </script>
+    <script type="text/javascript" src="/javascripts/common.js"></script>
+    <script type="text/javascript" src="/javascripts/settings.js"></script>
+  </head>
+  <body>
+    <div id="topmenu">
+      <p>{{user.email}} | <a href="/app">Back to App</a> | <a href="/logout">Logout</a></p>
+           <div class="logo">
+             <img src="/images/logo.gif" alt="Flowdle" id="logo" />
+    <!--#config timefmt="%A" --> <!--#echo var="DATE_LOCAL" -->
+           </div>
+    </div>
+    {{path}}
+    <h5>Settings</h5>
+    <table id="mainTable">
+        <tr>
+            <td class="left"><div id="tags">
+                    <ul></ul>
+                </div> <!-- #tag -->
+            </td>
+            <td id="right">
+                <img src="/images/spacer.gif" width="500" height="1" alt="" />
+                
+                <h6 class="{{message_class}}">{{message}}</h6>
+                
+                <form action="/settings" method="post">
+                    
+                    <table class="settings">
+                        <tr>
+                            <th><label for="default_tag">Mobile Email:</label>
+                            </th>
+                            <td><input type="text" class="text" name="mobile" id="mobile" maxlength="50" value="{% ifnotequal subscriber.mobile None %}{{subscriber.mobile}}{% endifnotequal %}" />
+                                    <p>Enter your mobile's email address to receive Nudges on your phone.  Example: 4805551212@vtext.com.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label for="default_tag">Mobile Tag Filter:</label>
+                            </th>
+                            <td><input type="text" class="text" name="mobile_tag" id="mobile_tag" maxlength="50" value="{% ifnotequal subscriber.mobile_tag None %}{{subscriber.mobile_tag}}{% endifnotequal %}" />
+                                    <p>Only tasks with this Tag will be sent to your mobile.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <td><input type="checkbox" name="group_nudges" id="group_nudges" value="yes" {% ifequal subscriber.group_nudges 1 %}checked="checked"{% endifequal %} />
+                                    <label for="group_nudges">Group my Nudges into 1 email</label>
+                                    <p>If selected all of your nudges will be grouped into 1 email / SMS message every day.</p>
+                                    <p>If not selected, they will each be sent individually.</p>
+                            </td>
+                        </tr>
+                        <tr><td colspan="2">&nbsp;</td></tr>
+                        <tr>
+                            <th><label for="default_tag">Default Tag:</label>
+                            </th>
+                            <td><input type="text" class="text" name="default_tag" id="default_tag" maxlength="50" value="{% ifnotequal subscriber.default_tag None %}{{subscriber.default_tag}}{% endifnotequal %}" />
+                                <p>This is the tag that first appears when you login.  Leave this blank to default to All.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label for="nudge">Default Nudge:</label></th>
+                            <td>
+                                <select name="nudge" id="nudge">
+                                    <option value="never" {% ifequal subscriber.nudge 'never' %}selected{% endifequal %}>Never</option>
+                                    <option value="frequently" {% ifequal subscriber.nudge 'frequently' %}selected{% endifequal %}>Frequently*</option>
+                                    <option value="daily" {% ifequal subscriber.nudge 'daily' %}selected{% endifequal %}>Every Day</option>
+                                    <option value="weekly" {% ifequal subscriber.nudge 'weekly' %}selected{% endifequal %}>Every Week</option>
+                                    <option value="monthly" {% ifequal subscriber.nudge 'monthly' %}selected{% endifequal %}>Every Month</option>
+                                    <option value="yearly" {% ifequal subscriber.nudge 'yearly' %}selected{% endifequal %}>On Date</option>
+                                </select>
+                                <label style="display:none;" id="nudge_label">until complete</label>
+                                <fieldset id="nudge_week" class="nudge_week hiding"> 
+                                    <input type="radio" id="nudge_1" name="nudge_day" value="1" tabindex="4" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '1' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_1">Monday</label>
+                                    <input type="radio" id="nudge_2" name="nudge_day" value="2" tabindex="5" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '2' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_2">Tuesday</label>
+                                    <input type="radio" id="nudge_3" name="nudge_day" value="3" tabindex="6" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '3' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_3">Wednesday</label>
+                                    <input type="radio" id="nudge_4" name="nudge_day" value="4" tabindex="7" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '4' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_4">Thursday</label>
+                                    <input type="radio" id="nudge_5" name="nudge_day" value="5" tabindex="8" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '5' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_5">Friday</label>
+                                    <input type="radio" id="nudge_6" name="nudge_day" value="6" tabindex="9" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '6' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_6">Saturday</label>
+                                    <input type="radio" id="nudge_7" name="nudge_day" value="7" tabindex="10" {% ifequal subscriber.nudge 'weekly' %}{% ifequal subscriber.nudge_value '7' %}checked="checked"{% endifequal %}{% endifequal %} /><label for="nudge_7">Sunday</label>
+                                </fieldset>
+                                <fieldset id="nudge_month" class="nudge_month hiding">
+                                    <label for="nudge_month_val">Day of the Month:</label>
+                                    <input type="text" class="text small" id="nudge_month_value" name="nudge_month_value" tabindex="11" value="{% ifequal subscriber.nudge 'monthly' %}{% ifnotequal subscriber.nudge_value 'None' %}{{subscriber.nudge_value}}{% else %}15{% endifnotequal %}{% endifequal %}">
+                                </fieldset>
+                                <fieldset id="nudge_year" class="nudge_year hiding">
+                                    <label for="nudge_year_value">Specific Date:</label>
+                                    <input type="text" class="small" id="nudge_year_value" name="nudge_year_value" tabindex="12" maxlength="10" value="{{subscriber.nudge_value}}" />
+                                </fieldset>
+                                <fieldset id="nudge_frequently" class="nudge_frequently hiding">
+                                    <label>* nudges will be sent every time our service runs (currently every 2 hours)</label>
+                                </fieldset>
+                                <p>The default Nudge that is selected when creating a new task</p>
+                            </td>
+                        </tr>    
+                        <tr>
+                            <th><label for="sort">Default Sort:</label>
+                            </th>
+                            <td><fieldset class="sort">
+                                    <select name="sort" id="sort">
+                                        <option value="when" {% ifequal subscriber.sort 'time' %}selected="selected"{% endifequal %}>time</option>
+                                        <option value="name" {% ifequal subscriber.sort 'name' %}selected="selected"{% endifequal %}>name</option>
+                                        <option value="nudge" {% ifequal subscriber.sort 'nudge' %}selected="selected"{% endifequal %}>nudge</option>
+                                    </select>
+                                    <input type="radio" id="sort_asc_1" name="sort_asc" value="yes" {% ifequal subscriber.sort_asc 1 %}checked="checked"{% endifequal %} /><label for="sort_asc_1">Ascending</label>
+                                    <input type="radio" id="sort_asc_0" name="sort_asc" value="no" {% ifequal subscriber.sort_asc 0 %}checked="checked"{% endifequal %} /><label for="sort_asc_0">Descending</label>
+                                    <p>The default sort field &amp; sort order (for lists with more than one task).</p>
+                                </fieldset>
+                            </td>
+                        </tr>       
+                        <tr>
+                            <th>&nbsp;</th>
+                            <td class="button">
+                                <input type="submit" class="bigbutton" name="submit" value="Save" id="submit" />
+                            </td>
+                        </tr>
+                    </table>
+                        
+
+                    
+                </form>
+            </td> <!-- #right -->
+        </tr>       
+    </table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-4440510-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+  </body>
+</html>

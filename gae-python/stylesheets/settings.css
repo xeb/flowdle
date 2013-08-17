@@ -1,0 +1,75 @@
+h5 {
+    font-size: 22px;
+    margin: 20px 0 30px 70px;
+    color: #555;
+}
+
+h6 {
+   font-size: 18px;
+   margin: 2px 0 10px 7px;
+   font-weight: bold; 
+}
+
+h6.success {
+    color: #00AA00;
+}
+
+h6.error {
+    color: #FF0000;
+}
+
+.hiding { display: none;}
+
+input.text {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 4px;
+    width: 300px;
+}
+
+input.small {
+    width: 50px !important;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+fieldset.nudge_week,
+fieldset.nudge_month,
+fieldset.nudge_year {
+    margin-top: 13px;
+}
+
+fieldset.nudge_week label,
+fieldset.nudge_month label,
+fieldset.sort label {
+    font-size: 13px;
+}
+
+div.form-input-submit input {
+    margin: 30px 30px 0 0px;
+    width: 100px;
+}
+
+table.settings td {
+    padding: 7px;
+}
+
+table.settings td.button {
+    padding-top: 20px;
+}
+
+table.settings td.button input.bigbutton {
+    width: 100px;
+}
+
+table.settings th {
+    text-align: right;
+    padding-left: 20px;
+}
+
+table.settings td p, #nudge_label {
+    font-size: 13px;
+    color: #999;
+    margin: 5px 0 0 0;
+    width: 100%;
+}
