@@ -2,10 +2,10 @@ package controllers
 
 import "github.com/robfig/revel"
 
-type App struct {
+type Tasks struct {
 	*revel.Controller
 }
 
-func (c App) Index() revel.Result {
+func (c Tasks) Index() revel.Result {
 	return c.Render()
 }

@@ -1,0 +1,25 @@
+body {
+    padding-top: 80px;
+	background: url(../img/oldgradient.gif) repeat-x;
+}
+
+.navbar-inner, .navbar, .navbar-innverse, .navbar-fixed-top {
+	background: #444 !important;
+}
+
+input {
+	border: 1px solid #CCC !important;
+}
+
+.newTask {
+	font-size: 18px !important;
+	padding: 10px !important;
+	width: 600px;
+	height: 21px !important;
+	background-color: #FFFFFF;
+	font-family: Helvetica,Arial,Sans-Serif !important;
+}
+
+.newTask.hiding {
+	background: url(../img/haveto.gif) #FFFFFF no-repeat 8px 8px;
+}

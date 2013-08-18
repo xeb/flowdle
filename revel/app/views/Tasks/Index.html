@@ -1,0 +1,16 @@
+{{set . "title" "Home"}}
+{{append . "moreStyles" "css/flowdle.css"}}
+{{append . "moreScripts" "js/flowdle.js"}}
+{{template "header.html" .}}
+
+{{template "nav.html" .}}
+
+    <div class="container">
+      <form action="/tasks/create" method="POST">
+      	<input type="text" name="taskText" class="newTask hiding" maxlength="200" autocomplete="off" tabindex="1" />
+      </form>
+      <p>More content will go here.  Left Tag-based Navigation &amp; then the final Task listing</p>
+    </div> <!-- /container -->
+
+
+{{template "footer.html" .}}
