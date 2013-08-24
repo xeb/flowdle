@@ -1,6 +1,7 @@
 body {
     padding-top: 80px;
 	background: url(../img/oldgradient.gif) repeat-x;
+	margin: 0 auto;
 }
 
 .navbar-inner, .navbar, .navbar-innverse, .navbar-fixed-top {
@@ -14,12 +15,36 @@ input {
 .newTask {
 	font-size: 18px !important;
 	padding: 10px !important;
-	width: 600px;
+	width: 590px;
 	height: 21px !important;
 	background-color: #FFFFFF;
 	font-family: Helvetica,Arial,Sans-Serif !important;
 }
 
-.newTask.hiding {
+.hiding .newTask {
 	background: url(../img/haveto.gif) #FFFFFF no-repeat 8px 8px;
+}
+
+.hiding .task-details {
+	display: none;
+}
+
+.hero-unit {
+	padding: 0px;
+	background-color: transparent;
+}
+
+.well {
+	background-color: #fff;
+}
+
+.tags-title{
+	line-height: 40px;
+}
+
+#tagentry { 
+	width: 75px;
+}
+#tagentry {
+	margin-top: 5px;
 }

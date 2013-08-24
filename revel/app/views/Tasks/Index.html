@@ -1,15 +1,55 @@
 {{set . "title" "Home"}}
+{{set . "tasksActive" "active"}}
+
 {{append . "moreStyles" "css/flowdle.css"}}
+{{append . "moreStyles" "css/tagmanager.css"}}
 {{append . "moreScripts" "js/flowdle.js"}}
+{{append . "moreScripts" "js/tagmanager.js"}}
 {{template "header.html" .}}
 
 {{template "nav.html" .}}
 
-    <div class="container">
-      <form action="/tasks/create" method="POST">
-      	<input type="text" name="taskText" class="newTask hiding" maxlength="200" autocomplete="off" tabindex="1" />
-      </form>
-      <p>More content will go here.  Left Tag-based Navigation &amp; then the final Task listing</p>
+    <div class="container-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Home</li>
+              <li><a href="#">All</a></li>
+              <li><a href="#">Completed</a></li>
+              <li><a href="#">No Tag</a></li>
+              <li class="nav-header">Your Tags</li>
+              <li class="active"><a href="#">Finish Tonight</a></li>
+              <li><a href="#">This Week</a></li>
+              <li><a href="#">House</a></li>
+              <li><a href="#">Ideas</a></li>
+              <li class=""><a href="#">A Crazy Long List of Things That I need to do</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span10">
+          <div class="hero-unit tasklist hiding">
+  	  		 <form action="/tasks/create" method="POST">
+  	  			<input type="text" name="taskText" class="newTask" maxlength="200" autocomplete="off" tabindex="1" />
+  	  			<div class="task-details">
+  	  				<div class="row">
+  	  					<div class="span7">
+                  <input type="hidden" id="tags" value="Urgent,Work" >
+  	  						<input type="text" id="tagentry" maxlength="1000" 
+                      autocomplete="off" tabindex="2" placeholder="Tags" class="tm-input" />
+                </div>
+                <div class="span1">
+                  <input type="submit" value="Add" class="btn btn-primary btn-medium" />
+                </div>
+  	  				</div>
+  	  			</div>
+  	  		 </form>
+          </div>
+        
+             <h3>You have no tasks</h3>
+              <p>Flowdle is a simple to-do list.  Your tasks are organized by tag.  When you enter a task, you can select which tags you'd like to add to it.  Your tasks are accessible via the left navigation.</p>
+            <!-- <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p> -->
+        </div>
+
     </div> <!-- /container -->
 
 
