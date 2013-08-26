@@ -1,7 +1,13 @@
-
+body {
+	background: url(../img/oldgradient.gif) repeat-x 0 200px;
+}
 .hero-unit {
 	background: #444 !important;
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;
+}
+
+.row.center {
+	text-align: center;
 }

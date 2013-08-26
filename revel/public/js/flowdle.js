@@ -3,7 +3,7 @@ $(function(){
 		.keydown(function(){$(this).parent().parent().removeClass('hiding');})
 		.blur(function(){ 
 			if($(this).val().length == 0) {
-				$(this).addClass('hiding');
+				$(this).parent().parent().addClass('hiding');
 			}
 		})
 		.focus()
