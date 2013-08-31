@@ -32,8 +32,13 @@ input {
 }
 
 .hero-unit {
-	padding: 0px;
+	padding: 0;
+	margin: 0;
 	background-color: transparent;
+}
+.hero-unit form {
+	padding: 0;
+	margin: 0;
 }
 
 .well {
@@ -67,12 +72,21 @@ input {
 	font-weight: bold;
 	font-size: 16px;
 }
+.tasks .task .date-completed {
+	display: none;
+}
 .tasks .task {
 	padding: 15px 0;
+}
+.tasks .task-0 {
+	padding-top: 0px;
 }
 .tasks .task.complete label {
 	text-decoration: line-through;
 	color: #AAA;
+}
+.tasks .task.complete .date-completed {
+	display: inline;
 }
 .tasks .task .btn {
 	padding: 2px 5px;

@@ -46,9 +46,9 @@
           </div>
               {{if .tasks}}
               <div class="container tasks well">
-                {{range .tasks}}
-                <div class="task">
-                    <input type="checkbox" id="chk{{.Id}}" />
+                {{range $index, $element := .tasks}}
+                <div class="task task-{{$index}} {{if .RelCompleted}}complete{{end}}">
+                    <input type="checkbox" id="chk{{.Id}}" {{if .RelCompleted}}checked="checked"{{end}} />
                     <label for="chk{{.Id}}">{{.Name}}</label>
                     <div class="btn-group"> 
                       <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -60,7 +60,12 @@
 
                       </ul>
                     </div>
-                    <div class="relative-time">{{.RelativeTime}}</div>
+                    <div class="relative-time">
+                      {{.RelCreated}} 
+                      {{if .RelCompleted}}
+                      <span class="date-completed">&nbsp;&nbsp;|&nbsp;&nbsp; <em>Completed: {{.RelCompleted}}</em></span>
+                      {{end}}
+                    </div>
                 </div>
                 {{end}}
               </div>
