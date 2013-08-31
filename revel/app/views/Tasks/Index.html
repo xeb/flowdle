@@ -1,4 +1,4 @@
-{{set . "title" "Home"}}
+{{set . "title" "Flowdle"}}
 {{set . "tasksActive" "active"}}
 
 {{append . "moreStyles" "css/flowdle.css"}}
@@ -44,12 +44,31 @@
   	  			</div>
   	  		 </form>
           </div>
-          
-             <h3>You have no tasks</h3>
-              <p>Enter some tasks to get going!  Your tasks are organized by tag.  When you enter a task, you can select which tags you'd like to add to it.  Your tasks are accessible via the left navigation.</p>
-            <!-- <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p> -->
-            <div class="container">
-            </div>
+              {{if .tasks}}
+              <div class="container tasks well">
+                {{range .tasks}}
+                <div class="task">
+                    <input type="checkbox" id="chk{{.Id}}" />
+                    <label for="chk{{.Id}}">{{.Name}}</label>
+                    <div class="btn-group"> 
+                      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a href="/task/{{.Id}}/edit">Edit</a></li>
+                        <li><a href="/task/{{.Id}}/delete">Purge</a></li>
+
+                      </ul>
+                    </div>
+                    <div class="relative-time">{{.RelativeTime}}</div>
+                </div>
+                {{end}}
+              </div>
+              {{else}}
+                 <h3>You have no tasks</h3>
+                  <p>Enter some tasks to get going!  Your tasks are organized by tag.  When you enter a task, you can select which tags you'd like to add to it.  Your tasks are accessible via the left navigation.</p>
+                <!-- <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p> -->
+              {{end}}
         </div>
 
     </div> <!-- /container -->
