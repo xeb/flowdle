@@ -28,9 +28,9 @@ type OAuthResult struct {
 }
 
 type Account struct {
-	Id      string
-	Name    string
-	Picture string
+	Id      string `json:"id"`
+	Name    string `json:"name"`
+	Picture string `json:"picture"`
 }
 
 func parseAccount(data string) (acc *Account, err error) {

@@ -6,13 +6,14 @@ import (
 	"github.com/robfig/revel"
 )
 
+var (
+	bucket  = services.GetBucket()
+	rootUrl = "http://localhost:9000" // todo: auto identify?
+)
+
 type Auth struct {
 	*revel.Controller
 }
-
-var (
-	bucket = services.GetBucket()
-)
 
 func (c Auth) Index() revel.Result {
 	tokenCache := services.NewOAuthCache(c.Session, bucket)
@@ -51,5 +52,7 @@ func (c Auth) Logout() revel.Result {
 	delete(c.Session, "userid")
 	delete(c.Session, "userimg")
 	delete(c.Session, "username")
-	return c.Redirect("/")
+
+	url := fmt.Sprintf("https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=%s", rootUrl)
+	return c.Redirect(url)
 }
