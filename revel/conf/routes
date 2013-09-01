@@ -5,6 +5,7 @@
 module:testrunner
 
 GET     /                                       Home.Index
+GET		/auth									Auth.Index
 GET 	/tasks									Tasks.Index
 
 
