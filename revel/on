@@ -186,3 +186,126 @@ TRACE 2013/09/01 01:02:25 i18n.go:150: Found Accept-Language header value: en-US
 TRACE 2013/09/01 01:02:25 invoker.go:26: Binding: prefix as string
 TRACE 2013/09/01 01:02:25 invoker.go:26: Binding: filepath as string
 TRACE 2013/09/01 01:02:45 app.go:86: Killing revel server pid 11486
+TRACE 2013/09/01 09:34:52 run.go:58: Base path: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle
+TRACE 2013/09/01 09:34:52 template.go:170: Refreshing templates from [/Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/templates]
+TRACE 2013/09/01 09:34:52 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app
+TRACE 2013/09/01 09:34:52 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/controllers
+TRACE 2013/09/01 09:34:52 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/models
+TRACE 2013/09/01 09:34:52 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/services
+TRACE 2013/09/01 09:34:52 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/testrunner/app
+TRACE 2013/09/01 09:34:52 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/testrunner/app/controllers
+TRACE 2013/09/01 09:34:52 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/tests
+TRACE 2013/09/01 09:34:52 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/static/app
+TRACE 2013/09/01 09:34:52 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/static/app/controllers
+TRACE 2013/09/01 09:35:47 run.go:58: Base path: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle
+TRACE 2013/09/01 09:35:47 template.go:170: Refreshing templates from [/Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/templates]
+TRACE 2013/09/01 09:35:47 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app
+TRACE 2013/09/01 09:35:47 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/controllers
+TRACE 2013/09/01 09:35:47 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/models
+TRACE 2013/09/01 09:35:47 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/services
+TRACE 2013/09/01 09:35:47 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/static/app
+TRACE 2013/09/01 09:35:47 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/static/app/controllers
+TRACE 2013/09/01 09:35:47 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/testrunner/app
+TRACE 2013/09/01 09:35:47 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/testrunner/app/controllers
+TRACE 2013/09/01 09:35:47 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/tests
+TRACE 2013/09/01 09:35:52 harness.go:113: Rebuild
+TRACE 2013/09/01 09:35:53 build.go:72: Exec: [/usr/local/bin/go build -tags  -o /Users/xeb/Dropbox/Projects/GoCode/bin/flowdle flowdle/app/tmp]
+TRACE 2013/09/01 09:35:57 app.go:56: Exec app: /Users/xeb/Dropbox/Projects/GoCode/bin/flowdle [/Users/xeb/Dropbox/Projects/GoCode/bin/flowdle -port=51319 -importPath=flowdle -runMode=dev]
+TRACE 2013/09/01 09:35:57 controller.go:348: Registered controller: Auth
+TRACE 2013/09/01 09:35:57 controller.go:348: Registered controller: Home
+TRACE 2013/09/01 09:35:57 controller.go:348: Registered controller: Tasks
+TRACE 2013/09/01 09:35:57 controller.go:348: Registered controller: Static
+TRACE 2013/09/01 09:35:57 controller.go:348: Registered controller: TestRunner
+TRACE 2013/09/01 09:35:57 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/views
+TRACE 2013/09/01 09:35:57 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/views/Home
+TRACE 2013/09/01 09:35:57 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/views/Tasks
+TRACE 2013/09/01 09:35:57 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/views/errors
+TRACE 2013/09/01 09:35:57 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/templates
+TRACE 2013/09/01 09:35:57 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/templates/errors
+TRACE 2013/09/01 09:35:57 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/testrunner/app/views
+TRACE 2013/09/01 09:35:57 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/testrunner/app/views/TestRunner
+TRACE 2013/09/01 09:35:57 i18n.go:120: Successfully loaded messages from file sample.en
+TRACE 2013/09/01 09:35:57 watcher.go:72: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/conf/routes
+TRACE 2013/09/01 09:35:57 template.go:170: Refreshing templates from [/Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/views /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/templates /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/testrunner/app/views]
+TRACE 2013/09/01 09:35:57 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:35:57 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:35:57 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:35:57 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:36:00 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:36:00 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:36:01 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:36:01 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:36:01 invoker.go:26: Binding: prefix as string
+TRACE 2013/09/01 09:36:01 invoker.go:26: Binding: filepath as string
+TRACE 2013/09/01 09:36:01 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:36:01 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:36:01 invoker.go:26: Binding: prefix as string
+TRACE 2013/09/01 09:36:01 invoker.go:26: Binding: filepath as string
+TRACE 2013/09/01 09:36:03 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:36:03 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:36:04 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:36:04 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:36:10 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:36:10 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:41:02 app.go:86: Killing revel server pid 11650
+TRACE 2013/09/01 09:41:56 run.go:58: Base path: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle
+TRACE 2013/09/01 09:41:56 template.go:170: Refreshing templates from [/Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/templates]
+TRACE 2013/09/01 09:41:56 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app
+TRACE 2013/09/01 09:41:56 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/controllers
+TRACE 2013/09/01 09:41:56 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/models
+TRACE 2013/09/01 09:41:56 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/services
+TRACE 2013/09/01 09:41:56 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/static/app
+TRACE 2013/09/01 09:41:56 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/static/app/controllers
+TRACE 2013/09/01 09:41:56 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/testrunner/app
+TRACE 2013/09/01 09:41:56 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/testrunner/app/controllers
+TRACE 2013/09/01 09:41:56 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/tests
+TRACE 2013/09/01 09:42:01 harness.go:113: Rebuild
+TRACE 2013/09/01 09:42:02 build.go:72: Exec: [/usr/local/bin/go build -tags  -o /Users/xeb/Dropbox/Projects/GoCode/bin/flowdle flowdle/app/tmp]
+TRACE 2013/09/01 09:42:06 app.go:56: Exec app: /Users/xeb/Dropbox/Projects/GoCode/bin/flowdle [/Users/xeb/Dropbox/Projects/GoCode/bin/flowdle -port=51376 -importPath=flowdle -runMode=dev]
+TRACE 2013/09/01 09:42:06 controller.go:348: Registered controller: Auth
+TRACE 2013/09/01 09:42:06 controller.go:348: Registered controller: Home
+TRACE 2013/09/01 09:42:06 controller.go:348: Registered controller: Tasks
+TRACE 2013/09/01 09:42:06 controller.go:348: Registered controller: Static
+TRACE 2013/09/01 09:42:06 controller.go:348: Registered controller: TestRunner
+TRACE 2013/09/01 09:42:06 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/views
+TRACE 2013/09/01 09:42:06 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/views/Home
+TRACE 2013/09/01 09:42:06 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/views/Tasks
+TRACE 2013/09/01 09:42:06 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/views/errors
+TRACE 2013/09/01 09:42:06 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/templates
+TRACE 2013/09/01 09:42:06 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/templates/errors
+TRACE 2013/09/01 09:42:06 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/testrunner/app/views
+TRACE 2013/09/01 09:42:06 watcher.go:94: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/testrunner/app/views/TestRunner
+TRACE 2013/09/01 09:42:06 i18n.go:120: Successfully loaded messages from file sample.en
+TRACE 2013/09/01 09:42:06 watcher.go:72: Watching: /Users/xeb/Dropbox/Projects/GoCode/src/flowdle/conf/routes
+TRACE 2013/09/01 09:42:06 template.go:170: Refreshing templates from [/Users/xeb/Dropbox/Projects/GoCode/src/flowdle/app/views /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/templates /Users/xeb/Dropbox/Projects/GoCode/src/github.com/robfig/revel/modules/testrunner/app/views]
+TRACE 2013/09/01 09:42:06 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:42:06 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:42:06 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:42:06 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:42:06 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:42:06 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:42:06 invoker.go:26: Binding: prefix as string
+TRACE 2013/09/01 09:42:06 invoker.go:26: Binding: filepath as string
+TRACE 2013/09/01 09:42:06 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:42:06 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:42:06 invoker.go:26: Binding: prefix as string
+TRACE 2013/09/01 09:42:06 invoker.go:26: Binding: filepath as string
+TRACE 2013/09/01 09:42:06 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:42:06 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:42:06 invoker.go:26: Binding: prefix as string
+TRACE 2013/09/01 09:42:06 invoker.go:26: Binding: filepath as string
+TRACE 2013/09/01 09:42:06 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:42:06 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:42:06 invoker.go:26: Binding: prefix as string
+TRACE 2013/09/01 09:42:06 invoker.go:26: Binding: filepath as string
+TRACE 2013/09/01 09:42:06 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:42:06 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:42:06 invoker.go:26: Binding: prefix as string
+TRACE 2013/09/01 09:42:06 invoker.go:26: Binding: filepath as string
+TRACE 2013/09/01 09:42:10 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:42:10 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:42:10 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:42:10 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:42:13 i18n.go:184: Unable to read locale cookie with name 'FLOWDLE_LANG': http: named cookie not present
+TRACE 2013/09/01 09:42:13 i18n.go:150: Found Accept-Language header value: en-US
+TRACE 2013/09/01 09:42:20 app.go:86: Killing revel server pid 11680

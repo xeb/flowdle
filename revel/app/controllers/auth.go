@@ -12,7 +12,7 @@ type Auth struct {
 
 func (c Auth) Index() revel.Result {
 
-	r, _ := services.TryOAuth()
+	r, _ := services.TryOAuth("")
 
 	if r.Success == false {
 		return c.Redirect(r.AuthURL)
@@ -22,8 +22,8 @@ func (c Auth) Index() revel.Result {
 }
 
 func (c Auth) Callback() revel.Result {
-
-	r, _ := services.TryOAuth()
+	code := c.Params.Get("code")
+	r, _ := services.TryOAuth(code)
 
 	if r.Success {
 		return c.RenderText(fmt.Sprintf("It worked! %s", r))

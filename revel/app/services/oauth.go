@@ -14,10 +14,9 @@ var (
 	authURL     = "https://accounts.google.com/o/oauth2/auth"
 	tokenURL    = "https://accounts.google.com/o/oauth2/token"
 	requestURL  = "https://www.googleapis.com/oauth2/v1/userinfo"
-	code        = ""
 	cachefile   = "cache.json"
-	clientId    string
-	secret      string
+	clientId, _ = readLine("/etc/flowdle/clientid")
+	secret, _   = readLine("/etc/flowdle/secrete")
 )
 
 type OAuthResult struct {
@@ -38,14 +37,9 @@ func readLine(path string) (string, error) {
 	return scanner.Text(), scanner.Err()
 }
 
-func TryOAuth() (result *OAuthResult, e error) {
-
-	clientId, _ = readLine("/etc/flowdle/clientid")
-	secret, _ = readLine("/etc/flowdle/secret")
-
+func TryOAuth(code string) (result *OAuthResult, e error) {
 	result = &OAuthResult{}
 
-	// Set up a configuration.
 	config := &oauth.Config{
 		ClientId:     clientId,
 		ClientSecret: secret,
@@ -56,7 +50,6 @@ func TryOAuth() (result *OAuthResult, e error) {
 		TokenCache:   oauth.CacheFile(cachefile),
 	}
 
-	// Set up a Transport using the config.
 	transport := &oauth.Transport{Config: config}
 
 	// Try to pull the token from the cache; if this fails, we need to get one.
@@ -89,14 +82,13 @@ func TryOAuth() (result *OAuthResult, e error) {
 	}
 	defer r.Body.Close()
 
-	// Send final carriage return, just to be neat.
 	buf := new(bytes.Buffer)
 	buf.ReadFrom(r.Body)
 	s := buf.String()
 	result.Debug = s
 	result.Success = true
 
-	log.Printf("Result success %s", result)
+	// log.Printf("Result success %s", result)
 
 	return
 }
