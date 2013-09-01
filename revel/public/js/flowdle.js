@@ -6,7 +6,7 @@ $(function(){
 			}
 		})
 		.blur(function(){ 
-			if($(this).val() != '') {
+			if($(this).val() == '') {
 				$(this).parent().parent().addClass('hiding');
 			}
 		})
