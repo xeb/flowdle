@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"flowdle/app/models"
-	// "fmt"
 	"github.com/robfig/revel"
 	"time"
 )

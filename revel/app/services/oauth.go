@@ -1,26 +1,23 @@
-package oauth
+package services
 
 import (
 	"bufio"
 	"bytes"
 	"code.google.com/p/goauth2/oauth"
-	"errors"
-	"fmt"
 	"log"
 	"os"
 )
 
 var (
 	scope       = "https://www.googleapis.com/auth/userinfo.profile"
-	redirectURL = "oob"
+	redirectURL = "http://localhost:9000/oauth2callback"
 	authURL     = "https://accounts.google.com/o/oauth2/auth"
 	tokenURL    = "https://accounts.google.com/o/oauth2/token"
 	requestURL  = "https://www.googleapis.com/oauth2/v1/userinfo"
 	code        = ""
 	cachefile   = "cache.json"
-
-	clientId, _ = readLine("/etc/flowdle/clientid")
-	secret, _   = readLine("/etc/flowdle/secret")
+	clientId    string
+	secret      string
 )
 
 type OAuthResult struct {
@@ -43,6 +40,9 @@ func readLine(path string) (string, error) {
 
 func TryOAuth() (result *OAuthResult, e error) {
 
+	clientId, _ = readLine("/etc/flowdle/clientid")
+	secret, _ = readLine("/etc/flowdle/secret")
+
 	result = &OAuthResult{}
 
 	// Set up a configuration.
@@ -63,9 +63,7 @@ func TryOAuth() (result *OAuthResult, e error) {
 	token, err := config.TokenCache.Token()
 	if err != nil {
 		if clientId == "" || secret == "" {
-			// TODO: error
-			result.Success = false
-			e = errors.New("Cannot find clientId and/or secret.  Check /etc/flowdle")
+			panic("Cannot find clientId and/or secret.  Check /etc/flowdle")
 			return
 		}
 		if code == "" {
@@ -97,5 +95,8 @@ func TryOAuth() (result *OAuthResult, e error) {
 	s := buf.String()
 	result.Debug = s
 	result.Success = true
+
+	log.Printf("Result success %s", result)
+
 	return
 }

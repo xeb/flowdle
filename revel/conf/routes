@@ -6,6 +6,7 @@ module:testrunner
 
 GET     /                                       Home.Index
 GET		/auth									Auth.Index
+GET		/oauth2callback							Auth.Callback
 GET 	/tasks									Tasks.Index
 
 
