@@ -25,5 +25,9 @@ func (c Tasks) Index() revel.Result {
 	username := c.Session["username"]
 	userimg := c.Session["userimg"]
 
+	if username == "" {
+		return c.Redirect("/")
+	}
+
 	return c.Render(tasks, username, userimg)
 }
