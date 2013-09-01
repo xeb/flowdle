@@ -22,5 +22,8 @@ func (c Tasks) Index() revel.Result {
 	task5 := models.NewTask(5, "Learn to be better at frontend development", time.Now().Add(-5*24*time.Hour))
 	tasks := []*models.Task{task1, task2, task3, task4, task5}
 
-	return c.Render(tasks)
+	username := c.Session["username"]
+	userimg := c.Session["userimg"]
+
+	return c.Render(tasks, username, userimg)
 }

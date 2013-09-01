@@ -22,17 +22,34 @@ func (c Auth) Index() revel.Result {
 		return c.Redirect(r.AuthURL)
 	}
 
-	return c.RenderText(fmt.Sprintf("Already logged in! %s", r))
+	c.Session["username"] = r.Account.Name
+	return c.Redirect("/tasks")
 }
 
 func (c Auth) Callback() revel.Result {
 	tokenCache := services.NewOAuthCache(c.Session, bucket)
 	code := c.Params.Get("code")
-	r, _ := services.TryOAuth(tokenCache, code)
-
-	if r.Success {
-		return c.RenderText(fmt.Sprintf("It worked! %s", r))
+	r, err := services.TryOAuth(tokenCache, code)
+	if err != nil {
+		return c.RenderText(fmt.Sprintf("%s", err))
 	}
 
-	return c.RenderText("Not quite")
+	c.Session["username"] = r.Account.Name
+	c.Session["userimg"] = r.Account.Picture
+
+	if r.Success {
+		return c.Redirect("/tasks")
+	}
+
+	c.Response.Status = 401
+	return c.RenderText("Unauthorized")
+}
+
+func (c Auth) Logout() revel.Result {
+	bucket = services.GetBucket()
+	_ = bucket.Delete(fmt.Sprintf("authtoken-%s", c.Session["userid"]))
+	delete(c.Session, "userid")
+	delete(c.Session, "userimg")
+	delete(c.Session, "username")
+	return c.Redirect("/")
 }

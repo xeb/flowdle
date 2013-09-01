@@ -9,11 +9,24 @@ body {
 .navbar-inner, .navbar, .navbar-innverse, .navbar-fixed-top {
 	background: #444 !important;
 }
-
+.navbar .pull-right {
+	margin-top: 7px;
+	color: #ddd;
+}
+.navbar .pull-right a {
+	padding: 5px;
+}
+.navbar .pull-right a:hover {
+	background: #ddd;
+	color: #333;
+	text-decoration: none;
+}
+.navbar .avatar {
+	height: 35px;
+}
 input {
 	border: 1px solid #CCC !important;
 }
-
 .newTask {
 	font-size: 18px !important;
 	padding: 10px !important;

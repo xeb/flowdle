@@ -9,10 +9,21 @@
           </button>
           <a class="brand" href="/"><img src="public/img/logo.png" alt="Flowdle" /></a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
+            <!--
+             <ul class="nav">
               <li class="{{.homeActive}}"><a href="#">Home</a></li>
               <li class="{{.tasksActive}}"><a href="#about">Tasks</a></li>
-            </ul>
+            </ul> 
+            -->
+            <div class="pull-right">
+              {{if .userimg}}
+                <img src="{{.userimg}}" class="avatar" />
+              {{end}}
+              {{if .username}}
+                {{.username}}&nbsp;&nbsp;|
+                <a href="/auth/logout">Logout</a>
+              {{end}}
+            </div>
           </div><!--/.nav-collapse -->
         </div>
       </div>

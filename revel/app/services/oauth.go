@@ -4,8 +4,10 @@ import (
 	"bufio"
 	"bytes"
 	"code.google.com/p/goauth2/oauth"
+	"encoding/json"
 	"log"
 	"os"
+	"strings"
 )
 
 var (
@@ -21,8 +23,23 @@ var (
 type OAuthResult struct {
 	Success bool
 	AuthURL string
-	Debug   string
+	Account *Account
 	Token   *oauth.Token
+}
+
+type Account struct {
+	Id      string
+	Name    string
+	Picture string
+}
+
+func parseAccount(data string) (acc *Account, err error) {
+	acc = &Account{}
+	dec := json.NewDecoder(strings.NewReader(data))
+	if err = dec.Decode(acc); err != nil {
+		return nil, err
+	}
+	return acc, nil
 }
 
 func readLine(path string) (string, error) {
@@ -89,11 +106,13 @@ func TryOAuth(cache oauth.Cache, code string) (result *OAuthResult, e error) {
 	buf := new(bytes.Buffer)
 	buf.ReadFrom(r.Body)
 	s := buf.String()
-	result.Debug = s
 	result.Success = true
 	result.Token = token
-
-	// log.Printf("Result success %s", result)
+	result.Account, err = parseAccount(s)
+	if err != nil {
+		log.Fatal("parseAccount:", err)
+		e = err
+	}
 
 	return
 }
