@@ -10,22 +10,28 @@ type Auth struct {
 	*revel.Controller
 }
 
-func (c Auth) Index() revel.Result {
+var (
+	bucket = services.GetBucket()
+)
 
-	r, _ := services.TryOAuth("")
+func (c Auth) Index() revel.Result {
+	tokenCache := services.NewOAuthCache(c.Session["id"], bucket)
+	r, _ := services.TryOAuth(*tokenCache, "")
 
 	if r.Success == false {
 		return c.Redirect(r.AuthURL)
 	}
 
-	return c.Render()
+	return c.RenderText(fmt.Sprintf("Already logged in! %s", r))
 }
 
 func (c Auth) Callback() revel.Result {
+	tokenCache := services.NewOAuthCache("", bucket)
 	code := c.Params.Get("code")
-	r, _ := services.TryOAuth(code)
+	r, _ := services.TryOAuth(tokenCache, code)
 
 	if r.Success {
+		c.Session["id"] = r.Token.AccessToken
 		return c.RenderText(fmt.Sprintf("It worked! %s", r))
 	}
 

@@ -14,15 +14,15 @@ var (
 	authURL     = "https://accounts.google.com/o/oauth2/auth"
 	tokenURL    = "https://accounts.google.com/o/oauth2/token"
 	requestURL  = "https://www.googleapis.com/oauth2/v1/userinfo"
-	cachefile   = "cache.json"
 	clientId, _ = readLine("/etc/flowdle/clientid")
-	secret, _   = readLine("/etc/flowdle/secrete")
+	secret, _   = readLine("/etc/flowdle/secret")
 )
 
 type OAuthResult struct {
 	Success bool
 	AuthURL string
 	Debug   string
+	Token   *oauth.Token
 }
 
 func readLine(path string) (string, error) {
@@ -37,7 +37,7 @@ func readLine(path string) (string, error) {
 	return scanner.Text(), scanner.Err()
 }
 
-func TryOAuth(code string) (result *OAuthResult, e error) {
+func TryOAuth(cache oauth.Cache, code string) (result *OAuthResult, e error) {
 	result = &OAuthResult{}
 
 	config := &oauth.Config{
@@ -47,7 +47,7 @@ func TryOAuth(code string) (result *OAuthResult, e error) {
 		Scope:        scope,
 		AuthURL:      authURL,
 		TokenURL:     tokenURL,
-		TokenCache:   oauth.CacheFile(cachefile),
+		TokenCache:   cache,
 	}
 
 	transport := &oauth.Transport{Config: config}
@@ -55,8 +55,12 @@ func TryOAuth(code string) (result *OAuthResult, e error) {
 	// Try to pull the token from the cache; if this fails, we need to get one.
 	token, err := config.TokenCache.Token()
 	if err != nil {
-		if clientId == "" || secret == "" {
-			panic("Cannot find clientId and/or secret.  Check /etc/flowdle")
+		if clientId == "" {
+			panic("Cannot find clientId.  Check /etc/flowdle")
+			return
+		}
+		if secret == "" {
+			panic("Cannot find secret.  Check /etc/flowdle")
 			return
 		}
 		if code == "" {
@@ -87,6 +91,7 @@ func TryOAuth(code string) (result *OAuthResult, e error) {
 	s := buf.String()
 	result.Debug = s
 	result.Success = true
+	result.Token = token
 
 	// log.Printf("Result success %s", result)
 
