@@ -1,9 +1,9 @@
-Flowdle Revel TODO
+# Flowdle Revel TODO
 
-# TODO
+## TODO
 * Success Messages
 * Edit
 * Purge
 * Completed List
+* Archive Completed Tasks
 * URL Escaping url.QueryEscape of Tags
-* Tag-auto-entry on Add click

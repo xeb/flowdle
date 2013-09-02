@@ -33,3 +33,13 @@ func (c Tasks) New(task models.Task) revel.Result {
 
 	return c.Redirect("/tasks")
 }
+
+func (c Tasks) Complete(id int, complete bool) revel.Result {
+
+	err := services.CompleteTask(id, complete, c.Session["userid"])
+	if err != nil {
+		return c.RenderText(fmt.Sprintf("%s", err))
+	}
+
+	return c.Redirect("/tasks")
+}

@@ -22,11 +22,15 @@ $(function(){
 	});
 
 	var selectedTag = $('#selected-tag').val();
-	$('.nav-list li a').each(function(i,e){
-		if($(e).text() == selectedTag) {
-			$(e).parent().addClass('active')
-		}
-	});
+	if(selectedTag == '') {
+		$('.all-tasks').addClass('active');
+	} else {
+		$('.nav-list li a').each(function(i,e){
+			if($(e).text() == selectedTag) {
+				$(e).parent().addClass('active')
+			}
+		});
+	}
 
 	$('.tasks input:checkbox').bind('click', function(){
 		var chkd = $(this).is(':checked');
@@ -34,12 +38,10 @@ $(function(){
 		var menu = parent.find('.btn-group .btn.dropdown-toggle');
 		if(chkd) {
 			parent.addClass('complete');
-			// menu.removeData('toggle');
-			// $(this).prop('disabled', true);
 		} else {
 			parent.removeClass('complete');
-			// menu.data('toggle', 'dropdown');
-			// $(this).prop('disabled', false);
 		}
+		var url = '/tasks/' + $(this).data('id') + '/complete/' + chkd;
+		$.post(url); // todo error handling
 	})
 });

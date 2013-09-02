@@ -13,7 +13,7 @@ type AccountTasks struct {
 type Tasks []*Task
 
 type Task struct {
-	Id        int64
+	Id        int
 	Name      string
 	Created   time.Time
 	Completed time.Time

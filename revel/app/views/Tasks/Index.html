@@ -14,7 +14,7 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Tasks</li>
-              <li><a href="/tasks">All</a></li>
+              <li class="all-tasks"><a href="/tasks">All</a></li>
               <li><a href="#">Completed</a></li>
               <li><a href="#">No Tag</a></li>
               <li class="nav-header">Your Tags</li>
@@ -48,7 +48,7 @@
               <div class="container tasks well">
                 {{range $index, $element := .tasks}}
                 <div class="task task-{{$index}} {{if .RelCompleted}}complete{{end}}">
-                    <input type="checkbox" id="chk{{$index}}" {{if .RelCompleted}}checked="checked"{{end}} />
+                    <input type="checkbox" id="chk{{$index}}" data-id="{{.Id}}" {{if .RelCompleted}}checked="checked"{{end}} />
                     <label for="chk{{$index}}">{{.Name}}</label>
                     <div class="btn-group"> 
                       <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -61,7 +61,9 @@
                       </ul>
                     </div>
                     <div class="tagstring relative-time">
-                      {{.Tags}}&nbsp;&nbsp;|&nbsp;&nbsp;
+                      {{if .Tags}}
+                      <span class="tags">{{.Tags}}</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                      {{end}}
                       {{.RelCreated}} 
                       {{if .RelCompleted}}
                       <span class="date-completed">&nbsp;&nbsp;|&nbsp;&nbsp; <em>Completed: {{.RelCompleted}}</em></span>

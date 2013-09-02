@@ -1,6 +1,7 @@
 package services
 
 import (
+	"errors"
 	"flowdle/app/models"
 	"fmt"
 	"math/rand"
@@ -9,7 +10,7 @@ import (
 	"time"
 )
 
-func GetTasks(userid, tag string) (tasks []*models.Task, tags []string, err error) {
+func GetTasks(userid, tag string) (tasks models.Tasks, tags []string, err error) {
 	accountKey := getAccountKey(userid)
 	bucket := GetBucket()
 
@@ -33,7 +34,7 @@ func GetTasks(userid, tag string) (tasks []*models.Task, tags []string, err erro
 				}
 			}
 
-			if inlist == false {
+			if inlist == false && tag != "" {
 				tags = append(tags, tag)
 			}
 		}
@@ -48,19 +49,42 @@ func GetTasks(userid, tag string) (tasks []*models.Task, tags []string, err erro
 		}
 	}
 
-	sort.Sort(accountTasks.Tasks)
+	sort.Sort(tasks)
 	sort.Strings(tags)
 
 	return
 }
 
-func AddTask(task models.Task, userid string) (err error) {
+func CompleteTask(id int, complete bool, userid string) (err error) {
 	accountKey := getAccountKey(userid)
 	bucket := GetBucket()
 
+	var accountTasks models.AccountTasks
+	err = bucket.Get(accountKey, &accountTasks)
+	if err != nil {
+		return err
+	}
+
+	for _, task := range accountTasks.Tasks {
+		if task.Id == id {
+			if complete == false {
+				task.Completed = time.Unix(0, 0)
+			} else {
+				task.Completed = time.Now()
+			}
+			return bucket.Set(accountKey, -1, accountTasks)
+		}
+	}
+	return errors.New("No key found")
+}
+
+func AddTask(task models.Task, userid string) (err error) {
+	accountKey := getAccountKey(userid)
+	bucket := GetBucket()
+	rand.Seed(time.Now().Unix())
 	task.Created = time.Now()
 	task.TagString = task.TagString + "," // helpful for searching
-	task.Id = rand.Int63()
+	task.Id = rand.Int()
 
 	var accountTasks models.AccountTasks
 	_ = bucket.Get(accountKey, &accountTasks)

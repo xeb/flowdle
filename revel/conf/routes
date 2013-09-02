@@ -11,6 +11,7 @@ GET		/oauth2callback							Auth.Callback
 GET 	/tasks									Tasks.Index
 POST	/tasks									Tasks.New
 GET		/tasks/:tag								Tasks.Index
+POST	/tasks/:id/complete/:complete			Tasks.Complete
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/*filepath                       Static.Serve("public")
