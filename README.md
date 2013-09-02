@@ -10,7 +10,13 @@ Check back later to see my progress!
 
 
 ### Outstanding Concerns / Notes
-* I'd like to continue using GAE, but Revel doesn't quite run on it yet.  See [Revel Issue #239](https://github.com/robfig/revel/issues/239)
 * Rebuilding Flowdle is more about experiencing Revel and not about GAE
-* I'm not going to worry about Authentication just yet
 * Given recent experience, I'm going to use [Couchbase](http://couchbase.com) and [go-couchbase](https://github.com/couchbaselabs/go-couchbase), see some [benchmarks](http://github.com/xeb/couchbase-tests)
+
+## Implementation TODO
+* Success Messages
+* Edit
+* Purge
+* Completed List
+* Archive Completed Tasks
+* URL Escaping url.QueryEscape of Tags
