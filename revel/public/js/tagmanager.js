@@ -99,22 +99,6 @@
 
     if ($.isFunction(tagManagerOptions.validator)) obj.data('validator', tagManagerOptions.validator);
 
-
-    //var ajaxPolling = function (query, process) {
-    //  if (typeof (tagManagerOptions.typeaheadAjaxSource) == "string") {
-    //    $.ajax({
-    //      cache: false,
-    //      type: "POST",
-    //      contentType: "application/json",
-    //      dataType: "json",
-    //      url: tagManagerOptions.typeaheadAjaxSource,
-    //      data: JSON.stringify({ typeahead: query }),
-    //      success: function (data) { onTypeaheadAjaxSuccess(data, false, process); }
-    //    });
-    //  }
-    //};
-
-
     var tagClasses = function () {
       // 1) default class (tm-tag)
       var cl = tagBaseClass;

@@ -17,6 +17,10 @@ $(function(){
 		prefilled: $('#tags').val().split(',')
 	});
 
+	$('.submit').bind('click', function(){
+		$.fn.popTag();
+	});
+
 	$('.tasks input:checkbox').bind('click', function(){
 		var chkd = $(this).is(':checked');
 		var parent = $(this).parent();

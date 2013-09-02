@@ -1,6 +1,7 @@
 package models
 
 import (
+	"strings"
 	"time"
 )
 
@@ -12,6 +13,7 @@ type AccountTasks struct {
 type Tasks []*Task
 
 type Task struct {
+	Id        int64
 	Name      string
 	Created   time.Time
 	Completed time.Time
@@ -26,6 +28,10 @@ func (task Task) RelCompleted() (r string) {
 	return relative(task.Completed)
 }
 
+func (task Task) Tags() string {
+	return strings.Replace(task.TagString[:len(task.TagString)-1], ",", ", ", -1)
+}
+
 func (tasks Tasks) Len() int {
 	return len(tasks)
 }
@@ -38,12 +44,6 @@ func (tasks Tasks) Swap(i, j int) {
 	task := tasks[i]
 	tasks[i] = tasks[j]
 	tasks[j] = task
-}
-
-// TODO: remove this
-func NewTask(id int, name string, created time.Time) (task *Task) {
-	task = &Task{Name: name, Created: created}
-	return
 }
 
 func relative(dt time.Time) (r string) {

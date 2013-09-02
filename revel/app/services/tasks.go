@@ -3,12 +3,13 @@ package services
 import (
 	"flowdle/app/models"
 	"fmt"
+	"math/rand"
 	"sort"
 	"strings"
 	"time"
 )
 
-func GetTasks(userid string) (tasks []*models.Task, tags []string, err error) {
+func GetTasks(userid, tag string) (tasks []*models.Task, tags []string, err error) {
 	accountKey := getAccountKey(userid)
 	bucket := GetBucket()
 
@@ -17,6 +18,8 @@ func GetTasks(userid string) (tasks []*models.Task, tags []string, err error) {
 	if err != nil {
 		return nil, nil, err
 	}
+
+	tasks = accountTasks.Tasks
 
 	tags = make([]string, 0)
 	for _, task := range accountTasks.Tasks {
@@ -36,10 +39,19 @@ func GetTasks(userid string) (tasks []*models.Task, tags []string, err error) {
 		}
 	}
 
+	if tag != "" {
+		tasks = make([]*models.Task, 0)
+		for _, task := range accountTasks.Tasks {
+			if strings.Contains(task.TagString, tag+",") {
+				tasks = append(tasks, task)
+			}
+		}
+	}
+
 	sort.Sort(accountTasks.Tasks)
 	sort.Strings(tags)
 
-	return accountTasks.Tasks, tags, nil
+	return
 }
 
 func AddTask(task models.Task, userid string) (err error) {
@@ -48,13 +60,10 @@ func AddTask(task models.Task, userid string) (err error) {
 
 	task.Created = time.Now()
 	task.TagString = task.TagString + "," // helpful for searching
+	task.Id = rand.Int63()
 
 	var accountTasks models.AccountTasks
-	err = bucket.Get(accountKey, &accountTasks)
-	if err != nil {
-		return err
-	}
-
+	_ = bucket.Get(accountKey, &accountTasks)
 	if accountTasks.Tasks != nil {
 		accountTasks.Tasks = append(accountTasks.Tasks, &task)
 	} else {

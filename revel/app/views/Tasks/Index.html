@@ -14,13 +14,13 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Tasks</li>
-              <li><a href="#">All</a></li>
+              <li><a href="/tasks">All</a></li>
               <li><a href="#">Completed</a></li>
               <li><a href="#">No Tag</a></li>
               <li class="nav-header">Your Tags</li>
               {{if .tags}}
                 {{range $index, $element := .tags}}
-                  <li><a href="#">{{$element}}</a></li>
+                  <li><a href="/tasks/{{$element}}">{{$element}}</a></li>
                 {{end}}
               {{end}}
             </ul>
@@ -38,7 +38,7 @@
                       autocomplete="off" tabindex="2" placeholder="Tags" class="tm-input" />
                 </div>
                 <div class="span1">
-                  <input type="submit" value="Add" class="btn btn-primary btn-medium" />
+                  <input type="submit" value="Add" class="btn btn-primary btn-medium submit" />
                 </div>
   	  				</div>
   	  			</div>
@@ -60,7 +60,8 @@
 
                       </ul>
                     </div>
-                    <div class="relative-time">
+                    <div class="tagstring relative-time">
+                      {{.Tags}}&nbsp;&nbsp;|&nbsp;&nbsp;
                       {{.RelCreated}} 
                       {{if .RelCompleted}}
                       <span class="date-completed">&nbsp;&nbsp;|&nbsp;&nbsp; <em>Completed: {{.RelCompleted}}</em></span>
