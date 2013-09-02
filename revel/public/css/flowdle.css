@@ -9,14 +9,18 @@ body {
 .navbar-inner, .navbar, .navbar-innverse, .navbar-fixed-top {
 	background: #444 !important;
 }
-.navbar .pull-right {
-	margin-top: 7px;
+.navbar .logo {
+	margin-left: 20px;
+}
+.navbar .login {
+	margin: 12px 20px 0 0;
+	float: right;
 	color: #ddd;
 }
-.navbar .pull-right a {
+.navbar .login a {
 	padding: 5px;
 }
-.navbar .pull-right a:hover {
+.navbar .login a:hover {
 	background: #ddd;
 	color: #333;
 	text-decoration: none;
@@ -72,7 +76,6 @@ input {
 .tasks {
 	background: #fff;
 	padding: 10px;
-	width: 90%;
 	margin: auto 0;
 }
 

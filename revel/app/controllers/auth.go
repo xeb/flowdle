@@ -35,6 +35,7 @@ func (c Auth) Callback() revel.Result {
 		return c.RenderText(fmt.Sprintf("%s", err))
 	}
 
+	c.Session["userid"] = r.Account.Id
 	c.Session["username"] = r.Account.Name
 	c.Session["userimg"] = r.Account.Picture
 
@@ -48,7 +49,8 @@ func (c Auth) Callback() revel.Result {
 
 func (c Auth) Logout() revel.Result {
 	bucket = services.GetBucket()
-	_ = bucket.Delete(fmt.Sprintf("authtoken-%s", c.Session["userid"]))
+	_ = bucket.Delete(fmt.Sprintf("authtoken-%s", c.Session["authtoken"]))
+	delete(c.Session, "authtoken")
 	delete(c.Session, "userid")
 	delete(c.Session, "userimg")
 	delete(c.Session, "username")

@@ -9,6 +9,7 @@ GET		/auth									Auth.Index
 GET		/auth/logout							Auth.Logout
 GET		/oauth2callback							Auth.Callback
 GET 	/tasks									Tasks.Index
+POST	/tasks									Tasks.New
 
 
 # Map static resources from the /app/public folder to the /public path

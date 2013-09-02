@@ -4,17 +4,16 @@ import (
 	"time"
 )
 
+type AccountTasks struct {
+	Id    string
+	Tasks []*Task
+}
+
 type Task struct {
-	Id        int
 	Name      string
 	Created   time.Time
 	Completed time.Time
-	Tags      []*Tag
-}
-
-type Tag struct {
-	Id   int
-	Name string
+	TagString string
 }
 
 func (task Task) RelCreated() (r string) {
@@ -25,8 +24,9 @@ func (task Task) RelCompleted() (r string) {
 	return relative(task.Completed)
 }
 
+// TODO: remove this
 func NewTask(id int, name string, created time.Time) (task *Task) {
-	task = &Task{Id: id, Name: name, Created: created}
+	task = &Task{Name: name, Created: created}
 	return
 }
 

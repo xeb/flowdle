@@ -28,13 +28,13 @@
         </div><!--/span-->
         <div class="span10">
           <div class="hero-unit tasklist hiding">
-  	  		 <form action="/tasks/create" method="POST">
-  	  			<input type="text" name="taskText" class="newTask" maxlength="200" autocomplete="off" tabindex="1" />
+  	  		 <form action="/tasks" method="POST">
+  	  			<input type="text" name="task.Name" class="newTask" maxlength="200" autocomplete="off" tabindex="1" />
   	  			<div class="task-details">
   	  				<div class="row">
   	  					<div class="span7">
-                  <input type="hidden" id="tags" value="Urgent,Work" >
-  	  						<input type="text" id="tagentry" maxlength="1000" 
+                  <input type="hidden" id="tags" value="Urgent" >
+  	  						<input type="text" id="tagentry" maxlength="1000" name="task.TagString"
                       autocomplete="off" tabindex="2" placeholder="Tags" class="tm-input" />
                 </div>
                 <div class="span1">
@@ -48,15 +48,15 @@
               <div class="container tasks well">
                 {{range $index, $element := .tasks}}
                 <div class="task task-{{$index}} {{if .RelCompleted}}complete{{end}}">
-                    <input type="checkbox" id="chk{{.Id}}" {{if .RelCompleted}}checked="checked"{{end}} />
-                    <label for="chk{{.Id}}">{{.Name}}</label>
+                    <input type="checkbox" id="chk{{$index}}" {{if .RelCompleted}}checked="checked"{{end}} />
+                    <label for="chk{{$index}}">{{.Name}}</label>
                     <div class="btn-group"> 
                       <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                         <span class="caret"></span>
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a href="/task/{{.Id}}/edit">Edit</a></li>
-                        <li><a href="/task/{{.Id}}/delete">Purge</a></li>
+                        <li><a href="/task/{{$index}}/edit">Edit</a></li>
+                        <li><a href="/task/{{$index}}/delete">Purge</a></li>
 
                       </ul>
                     </div>
