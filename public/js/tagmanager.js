@@ -31,6 +31,7 @@
     var tagManagerOptions = {
       prefilled: null,
       CapitalizeFirstLetter: false,
+      submitFormOnEnter: true,
       preventSubmitOnEnter: true, // deprecated
       isClearInputOnEsc: true, // deprecated
       AjaxPush: null,
@@ -426,6 +427,9 @@
       obj.on('keydown', function (e) {
         // disable ENTER
         if (e.which == 13) {
+          if(tagManagerOptions.submitFormOnEnter) {
+            obj.parents('form').submit();
+          }
           if (tagManagerOptions.preventSubmitOnEnter) {
             killEvent(e);
           }

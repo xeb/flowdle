@@ -16,6 +16,11 @@ Check back later to see my progress!
 ## Implementation TODO
 * Success Messages
 * Edit
+* Remember Last Tag
+* Sharing
+* Re-ordering Issue
+* Sorting <> Created, Completed, Name
+* Tag Type Ahead
 * Purge
 * Completed List
 * Archive Completed Tasks

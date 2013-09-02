@@ -14,7 +14,8 @@ $(function(){
 		;
 
 	$("#tagentry").tagsManager({
-		prefilled: $('#tags').val().split(',')
+		prefilled: $('#tags').val().split(','),
+		preventSubmitOnEnter: false
 	});
 
 	$('.submit').bind('click', function(){
