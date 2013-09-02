@@ -8,7 +8,7 @@
 {{template "header.html" .}}
 
 {{template "nav.html" .}}
-
+    <input type="hidden" id="selected-tag" value="{{.tag}}" /> {{/*I hate this*/}}
     <div class="container-fluid">
         <div class="span3">
           <div class="well sidebar-nav">

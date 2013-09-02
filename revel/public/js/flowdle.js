@@ -21,6 +21,13 @@ $(function(){
 		$.fn.popTag();
 	});
 
+	var selectedTag = $('#selected-tag').val();
+	$('.nav-list li a').each(function(i,e){
+		if($(e).text() == selectedTag) {
+			$(e).parent().addClass('active')
+		}
+	});
+
 	$('.tasks input:checkbox').bind('click', function(){
 		var chkd = $(this).is(':checked');
 		var parent = $(this).parent();
