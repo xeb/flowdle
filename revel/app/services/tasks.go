@@ -3,20 +3,43 @@ package services
 import (
 	"flowdle/app/models"
 	"fmt"
+	"sort"
+	"strings"
 	"time"
 )
 
-func GetTasks(userid string) (tasks []*models.Task, err error) {
+func GetTasks(userid string) (tasks []*models.Task, tags []string, err error) {
 	accountKey := getAccountKey(userid)
 	bucket := GetBucket()
 
 	var accountTasks models.AccountTasks
 	err = bucket.Get(accountKey, &accountTasks)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	return accountTasks.Tasks, nil
+	tags = make([]string, 0)
+	for _, task := range accountTasks.Tasks {
+		etags := strings.Split(task.TagString, ",")
+		for _, tag := range etags {
+			inlist := false
+			for _, et := range tags {
+				if tag == et {
+					inlist = true
+					continue
+				}
+			}
+
+			if inlist == false {
+				tags = append(tags, tag)
+			}
+		}
+	}
+
+	sort.Sort(accountTasks.Tasks)
+	sort.Strings(tags)
+
+	return accountTasks.Tasks, tags, nil
 }
 
 func AddTask(task models.Task, userid string) (err error) {

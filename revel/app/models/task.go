@@ -6,8 +6,10 @@ import (
 
 type AccountTasks struct {
 	Id    string
-	Tasks []*Task
+	Tasks Tasks
 }
+
+type Tasks []*Task
 
 type Task struct {
 	Name      string
@@ -22,6 +24,20 @@ func (task Task) RelCreated() (r string) {
 
 func (task Task) RelCompleted() (r string) {
 	return relative(task.Completed)
+}
+
+func (tasks Tasks) Len() int {
+	return len(tasks)
+}
+
+func (tasks Tasks) Less(i, j int) bool {
+	return tasks[i].Completed.Unix() <= tasks[j].Completed.Unix()
+}
+
+func (tasks Tasks) Swap(i, j int) {
+	task := tasks[i]
+	tasks[i] = tasks[j]
+	tasks[j] = task
 }
 
 // TODO: remove this

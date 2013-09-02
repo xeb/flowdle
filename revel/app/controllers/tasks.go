@@ -11,7 +11,7 @@ type Tasks struct {
 }
 
 func (c Tasks) Index() revel.Result {
-	tasks, err := services.GetTasks(c.Session["userid"])
+	tasks, tags, err := services.GetTasks(c.Session["userid"])
 	if err != nil {
 		return c.RenderError(err)
 	}
@@ -22,7 +22,7 @@ func (c Tasks) Index() revel.Result {
 		return c.Redirect("/")
 	}
 
-	return c.Render(tasks, username, userimg)
+	return c.Render(tasks, username, userimg, tags)
 }
 
 func (c Tasks) New(task models.Task) revel.Result {

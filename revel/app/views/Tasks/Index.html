@@ -18,11 +18,11 @@
               <li><a href="#">Completed</a></li>
               <li><a href="#">No Tag</a></li>
               <li class="nav-header">Your Tags</li>
-              <li class="active"><a href="#">Finish Tonight</a></li>
-              <li><a href="#">This Week</a></li>
-              <li><a href="#">House</a></li>
-              <li><a href="#">Ideas</a></li>
-              <li class=""><a href="#">A Crazy Long List of Things That I need to do</a></li>
+              {{if .tags}}
+                {{range $index, $element := .tags}}
+                  <li><a href="#">{{$element}}</a></li>
+                {{end}}
+              {{end}}
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
