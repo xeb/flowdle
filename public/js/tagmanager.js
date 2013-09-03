@@ -31,7 +31,7 @@
     var tagManagerOptions = {
       prefilled: null,
       CapitalizeFirstLetter: false,
-      submitFormOnEnter: true,
+      submitFormOnEnter: false,
       preventSubmitOnEnter: true, // deprecated
       isClearInputOnEsc: true, // deprecated
       AjaxPush: null,
@@ -426,19 +426,19 @@
 
       obj.on('keydown', function (e) {
         // disable ENTER
-        if (e.which == 13) {
-          if(tagManagerOptions.submitFormOnEnter) {
-            obj.parents('form').submit();
-          }
-          if (tagManagerOptions.preventSubmitOnEnter) {
-            killEvent(e);
-          }
+        if (e.which == 13 && tagManagerOptions.preventSubmitOnEnter) {
+          killEvent(e);
         }
 
         // push key-based delimiters (includes <enter> by default)
         if (keyInArray(e, delimiterKeys)) {
           applyDelimiter(e);
         }
+
+        if(e.which == 13 && tagManagerOptions.submitFormOnEnter) {
+          obj.parents('form').submit();
+        }
+
       });
 
       // BACKSPACE (keydown used for browser compatibility)

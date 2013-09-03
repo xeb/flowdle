@@ -37,7 +37,7 @@ func (tasks Tasks) Len() int {
 }
 
 func (tasks Tasks) Less(i, j int) bool {
-	return tasks[i].Completed.Unix() <= tasks[j].Completed.Unix()
+	return tasks[i].Created.Unix() < tasks[j].Created.Unix()
 }
 
 func (tasks Tasks) Swap(i, j int) {

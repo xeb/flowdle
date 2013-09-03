@@ -15,7 +15,8 @@ $(function(){
 
 	$("#tagentry").tagsManager({
 		prefilled: $('#tags').val().split(','),
-		preventSubmitOnEnter: false
+		preventSubmitOnEnter: false,
+		submitFormOnEnter: true,
 	});
 
 	$('.submit').bind('click', function(){
