@@ -50,6 +50,7 @@ func GetTasks(userid, tag string) (tasks models.Tasks, tags []string, err error)
 	}
 
 	sort.Sort(tasks)
+	sort.Sort(tasks)
 	sort.Strings(tags)
 
 	return

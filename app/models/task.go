@@ -37,7 +37,23 @@ func (tasks Tasks) Len() int {
 }
 
 func (tasks Tasks) Less(i, j int) bool {
-	return tasks[i].Created.Unix() < tasks[j].Created.Unix()
+	inix := tasks[i].Completed.Unix()
+	jnix := tasks[j].Completed.Unix()
+	icr := tasks[i].Created.Unix()
+	jcr := tasks[j].Created.Unix()
+	switch {
+	case inix == 0 && jnix > 0:
+		return true
+	case inix > 0 && jnix == 0:
+		return false
+	case inix < jnix:
+		return true
+	case icr < jcr:
+		return true
+	default:
+		return false
+	}
+
 }
 
 func (tasks Tasks) Swap(i, j int) {
