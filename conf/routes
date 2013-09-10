@@ -10,6 +10,7 @@ GET		/auth/logout							Auth.Logout
 GET		/oauth2callback							Auth.Callback
 GET 	/tasks									Tasks.Index
 POST	/tasks									Tasks.New
+POST	/tasks/completed						Tasks.Completed
 GET		/tasks/:tag								Tasks.Index
 POST	/tasks/:id/complete/:complete			Tasks.Complete
 

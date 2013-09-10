@@ -12,7 +12,7 @@ type Tasks struct {
 }
 
 func (c Tasks) Index(tag string) revel.Result {
-	tasks, tags, _ := services.GetTasks(c.Session["userid"], tag)
+	tasks, tags, _ := services.GetTasks(c.Session["userid"], tag, false)
 
 	username := c.Session["username"]
 	userimg := c.Session["userimg"]
@@ -42,4 +42,19 @@ func (c Tasks) Complete(id int, complete bool) revel.Result {
 	}
 
 	return c.Redirect("/tasks")
+}
+
+func (c Tasks) Completed() revel.Result {
+	tasks, tags, e := services.GetTasks(c.Session["userid"], "", true)
+	if e != nil {
+		return c.RenderText(fmt.Sprintf("%s", e))
+	}
+	username := c.Session["username"]
+	userimg := c.Session["userimg"]
+
+	if username == "" {
+		return c.Redirect("/")
+	}
+
+	return c.Render(tasks, username, userimg, tags)
 }

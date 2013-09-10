@@ -15,8 +15,8 @@
             <ul class="nav nav-list">
               <li class="nav-header">Tasks</li>
               <li class="all-tasks"><a href="/tasks">All</a></li>
-              <li><a href="#">Completed</a></li>
-              <li><a href="#">No Tag</a></li>
+              <li class="completed-tasks"><a href="/tasks/completed">Completed</a></li>
+              <li class="notag-tasks"><a href="#">No Tag</a></li>
               <li class="nav-header">Your Tags</li>
               {{if .tags}}
                 {{range $index, $element := .tags}}

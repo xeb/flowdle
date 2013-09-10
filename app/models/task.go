@@ -37,18 +37,18 @@ func (tasks Tasks) Len() int {
 }
 
 func (tasks Tasks) Less(i, j int) bool {
-	inix := tasks[i].Completed.Unix()
-	jnix := tasks[j].Completed.Unix()
+	icom := tasks[i].Completed.Unix()
+	jcom := tasks[j].Completed.Unix()
 	icr := tasks[i].Created.Unix()
 	jcr := tasks[j].Created.Unix()
 	switch {
-	case inix == 0 && jnix > 0:
+	case icom <= 0 && jcom > 0:
 		return true
-	case inix > 0 && jnix == 0:
+	case icom > 0 && jcom <= 0:
 		return false
-	case inix < jnix:
+	case icom > jcom && icom > 0 && jcom > 0:
 		return true
-	case icr < jcr:
+	case icr > jcr:
 		return true
 	default:
 		return false

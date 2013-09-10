@@ -103,6 +103,19 @@ func main() {
 				RenderArgNames: map[int][]string{ 
 				},
 			},
+			&revel.MethodType{
+				Name: "Completed",
+				Args: []*revel.MethodArg{ 
+				},
+				RenderArgNames: map[int][]string{ 
+					59: []string{ 
+						"tasks",
+						"username",
+						"userimg",
+						"tags",
+					},
+				},
+			},
 			
 		})
 	
@@ -168,6 +181,7 @@ func main() {
 	}
 	revel.TestSuites = []interface{}{ 
 		(*tests.AppTest)(nil),
+		(*tests.TasksTest)(nil),
 	}
 
 	revel.Run(*port)

@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func GetTasks(userid, tag string) (tasks models.Tasks, tags []string, err error) {
+func GetTasks(userid, tag string, onlyCompleted bool) (tasks models.Tasks, tags []string, err error) {
 	accountKey := getAccountKey(userid)
 	bucket := GetBucket()
 
@@ -24,6 +24,11 @@ func GetTasks(userid, tag string) (tasks models.Tasks, tags []string, err error)
 
 	tags = make([]string, 0)
 	for _, task := range accountTasks.Tasks {
+
+		if task.Completed.Unix() < 0 {
+			task.Completed = time.Unix(0, 0)
+		}
+
 		etags := strings.Split(task.TagString, ",")
 		for _, tag := range etags {
 			inlist := false
@@ -49,11 +54,29 @@ func GetTasks(userid, tag string) (tasks models.Tasks, tags []string, err error)
 		}
 	}
 
-	sort.Sort(tasks)
-	sort.Sort(tasks)
+	if onlyCompleted {
+		tasks2 := make([]*models.Task, 0)
+		for _, task := range accountTasks.Tasks {
+			if task.Completed.Unix() > 0 {
+				tasks2 = append(tasks2, task)
+			}
+		}
+		tasks = tasks2
+	}
+
+	tasks = sortTasks(tasks)
 	sort.Strings(tags)
 
 	return
+}
+
+func sortTasks(tasks models.Tasks) models.Tasks {
+	// this is absolutely terrible, but I get it.  This is a basic swap-based sort.
+	// I'm leaving this so I can eventually write my own
+	for i := 0; i < len(tasks); i++ {
+		sort.Sort(tasks)
+	}
+	return tasks
 }
 
 func CompleteTask(id int, complete bool, userid string) (err error) {

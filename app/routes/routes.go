@@ -75,6 +75,13 @@ func (_ tTasks) Complete(
 	return revel.MainRouter.Reverse("Tasks.Complete", args).Url
 }
 
+func (_ tTasks) Completed(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("Tasks.Completed", args).Url
+}
+
 
 type tTestRunner struct {}
 var TestRunner tTestRunner
