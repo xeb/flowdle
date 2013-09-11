@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"log"
 	"os"
+	"fmt"
 	"strings"
 )
 
@@ -16,8 +17,10 @@ var (
 	authURL     = "https://accounts.google.com/o/oauth2/auth"
 	tokenURL    = "https://accounts.google.com/o/oauth2/token"
 	requestURL  = "https://www.googleapis.com/oauth2/v1/userinfo"
-	clientId, _ = readLine("/etc/flowdle/clientid")
-	secret, _   = readLine("/etc/flowdle/secret")
+	nixRoot 	= "/etc/flowdle/"
+	winRoot		= "c:\\cygwin64\\etc\\flowdle\\"
+	clientId, _ = readFlowdleConfig("clientid")
+	secret, _   = readFlowdleConfig("secret")
 )
 
 type OAuthResult struct {
@@ -42,8 +45,16 @@ func parseAccount(data string) (acc *Account, err error) {
 	return acc, nil
 }
 
-func readLine(path string) (string, error) {
-	file, err := os.Open(path)
+func readFlowdleConfig(fileName string) (string, error) {
+	path := nixRoot
+	exists, _ := exists(path)
+	if exists == false {
+		path = winRoot
+	}
+	
+	fullPath := fmt.Sprintf("%s%s", path, fileName)
+
+	file, err := os.Open(fullPath)
 	if err != nil {
 		return "", err
 	}
@@ -53,6 +64,14 @@ func readLine(path string) (string, error) {
 	scanner.Scan()
 	return scanner.Text(), scanner.Err()
 }
+
+func exists(path string) (bool, error) {
+    _, err := os.Stat(path)
+    if err == nil { return true, nil }
+    if os.IsNotExist(err) { return false, nil }
+    return false, err
+}
+
 
 func TryOAuth(cache oauth.Cache, code string) (result *OAuthResult, e error) {
 	result = &OAuthResult{}

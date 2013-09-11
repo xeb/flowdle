@@ -2,7 +2,7 @@ package services
 
 import (
 	"errors"
-	"flowdle/app/models"
+	"github.com/xeb/flowdle/app/models"
 	"fmt"
 	"math/rand"
 	"sort"

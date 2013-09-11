@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"flowdle/app/models"
-	"flowdle/app/services"
+	"github.com/xeb/flowdle/app/models"
+	"github.com/xeb/flowdle/app/services"
 	"fmt"
 	"github.com/robfig/revel"
 )
