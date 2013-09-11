@@ -5,13 +5,13 @@ import (
 	"flag"
 	"reflect"
 	"github.com/robfig/revel"
+	_ "flowdle/app"
+	controllers "flowdle/app/controllers"
+	tests "flowdle/tests"
 	controllers0 "github.com/robfig/revel/modules/static/app/controllers"
 	_ "github.com/robfig/revel/modules/testrunner/app"
 	controllers1 "github.com/robfig/revel/modules/testrunner/app/controllers"
-	_ "github.com/xeb/flowdle/app"
-	controllers "github.com/xeb/flowdle/app/controllers"
 	models "github.com/xeb/flowdle/app/models"
-	tests "github.com/xeb/flowdle/tests"
 )
 
 var (
