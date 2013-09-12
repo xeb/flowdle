@@ -1,26 +1,23 @@
 package services
 
 import (
-	"bufio"
 	"bytes"
 	"code.google.com/p/goauth2/oauth"
 	"encoding/json"
 	"log"
-	"os"
-	"fmt"
 	"strings"
 )
 
 var (
 	scope       = "https://www.googleapis.com/auth/userinfo.profile"
-	redirectURL = "http://localhost:9000/oauth2callback"
+	redirectURL = "http://mkockerbeck-w7.corp.blizzard.net:9000/oauth2callback"
 	authURL     = "https://accounts.google.com/o/oauth2/auth"
 	tokenURL    = "https://accounts.google.com/o/oauth2/token"
 	requestURL  = "https://www.googleapis.com/oauth2/v1/userinfo"
-	nixRoot 	= "/etc/flowdle/"
-	winRoot		= "c:\\cygwin64\\etc\\flowdle\\"
-	clientId, _ = readFlowdleConfig("clientid")
-	secret, _   = readFlowdleConfig("secret")
+	nixRoot     = "/etc/flowdle/"
+	winRoot     = "c:\\cygwin64\\etc\\flowdle\\"
+	clientId, _ = ReadConfig("clientid")
+	secret, _   = ReadConfig("secret")
 )
 
 type OAuthResult struct {
@@ -44,34 +41,6 @@ func parseAccount(data string) (acc *Account, err error) {
 	}
 	return acc, nil
 }
-
-func readFlowdleConfig(fileName string) (string, error) {
-	path := nixRoot
-	exists, _ := exists(path)
-	if exists == false {
-		path = winRoot
-	}
-	
-	fullPath := fmt.Sprintf("%s%s", path, fileName)
-
-	file, err := os.Open(fullPath)
-	if err != nil {
-		return "", err
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	scanner.Scan()
-	return scanner.Text(), scanner.Err()
-}
-
-func exists(path string) (bool, error) {
-    _, err := os.Stat(path)
-    if err == nil { return true, nil }
-    if os.IsNotExist(err) { return false, nil }
-    return false, err
-}
-
 
 func TryOAuth(cache oauth.Cache, code string) (result *OAuthResult, e error) {
 	result = &OAuthResult{}

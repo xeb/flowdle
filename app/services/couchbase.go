@@ -1,11 +1,15 @@
 package services
 
 import (
+	"fmt"
 	"github.com/couchbaselabs/go-couchbase"
 	"log"
 )
 
-var bucket *couchbase.Bucket
+var (
+	bucket *couchbase.Bucket
+	server = ReadConfigOrDefault("server", "http://localhost:8091/")
+)
 
 func GetBucket() (b *couchbase.Bucket) {
 
@@ -13,7 +17,9 @@ func GetBucket() (b *couchbase.Bucket) {
 		return bucket
 	}
 
-	b, err := couchbase.GetBucket("http://localhost:8091/", "default", "flowdle")
+	fmt.Printf("COUCHBASE Connecting to %s\n", server)
+
+	b, err := couchbase.GetBucket(server, "default", "flowdle")
 	if err != nil {
 		log.Fatal("Cannot connect %s", err)
 	}
