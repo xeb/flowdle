@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"github.com/xeb/flowdle/app/services"
 	"fmt"
-	"github.com/robfig/revel"
+	"github.com/revel/revel"
+	"github.com/xeb/flowdle/app/services"
 )
 
 type Home struct {

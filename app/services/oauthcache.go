@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/couchbaselabs/go-couchbase"
-	"github.com/robfig/revel"
+	"github.com/revel/revel"
 )
 
 type OAuthCache struct {

@@ -1,10 +1,10 @@
 package controllers
 
 import (
+	"fmt"
+	"github.com/revel/revel"
 	"github.com/xeb/flowdle/app/models"
 	"github.com/xeb/flowdle/app/services"
-	"fmt"
-	"github.com/robfig/revel"
 )
 
 type Tasks struct {

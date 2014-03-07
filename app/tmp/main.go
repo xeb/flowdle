@@ -4,13 +4,12 @@ package main
 import (
 	"flag"
 	"reflect"
-	"github.com/robfig/revel"
+	"github.com/revel/revel"
 	_ "flowdle/app"
 	controllers "flowdle/app/controllers"
-	tests "flowdle/tests"
-	controllers1 "github.com/robfig/revel/modules/static/app/controllers"
-	_ "github.com/robfig/revel/modules/testrunner/app"
-	controllers0 "github.com/robfig/revel/modules/testrunner/app/controllers"
+	controllers1 "github.com/revel/revel/modules/static/app/controllers"
+	_ "github.com/revel/revel/modules/testrunner/app"
+	controllers0 "github.com/revel/revel/modules/testrunner/app/controllers"
 	models "github.com/xeb/flowdle/app/models"
 )
 
@@ -28,6 +27,20 @@ func main() {
 	flag.Parse()
 	revel.Init(*runMode, *importPath, *srcPath)
 	revel.INFO.Println("Running revel server")
+	
+	revel.RegisterController((*controllers.App)(nil),
+		[]*revel.MethodType{
+			&revel.MethodType{
+				Name: "Index",
+				Args: []*revel.MethodArg{ 
+				},
+				RenderArgNames: map[int][]string{ 
+					10: []string{ 
+					},
+				},
+			},
+			
+		})
 	
 	revel.RegisterController((*controllers.Auth)(nil),
 		[]*revel.MethodType{
@@ -180,8 +193,6 @@ func main() {
 	revel.DefaultValidationKeys = map[string]map[int]string{ 
 	}
 	revel.TestSuites = []interface{}{ 
-		(*tests.AppTest)(nil),
-		(*tests.TasksTest)(nil),
 	}
 
 	revel.Run(*port)

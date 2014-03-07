@@ -18,4 +18,4 @@ POST	/tasks/:id/complete/:complete			Tasks.Complete
 GET     /public/*filepath                       Static.Serve("public")
 
 # Catch all
-# *       /:controller/:action                    :controller.:action
+*       /:controller/:action                    :controller.:action
