@@ -1,0 +1,161 @@
+body {
+	background: url(/images/oldgradient.gif) repeat-x;
+	width: 100%;
+	text-align: center;
+}
+
+a.light {
+    color: #575757;
+}
+
+a.bottom {
+    color: #ccc;
+}
+
+a.blog {
+	color: #009BF4;
+	text-decoration: none;
+	padding: 4px;
+	float: right;
+	margin: 7px 0 0 0;
+	font-family: Helvetica, Verdana, Arial;
+}
+a.blog:hover {
+	color: #FFFFFF;
+	background-color: #009BF4;
+}
+
+div.line {
+    height: 3px;
+    width: 100%;
+    margin: 10px 0 10px 0;
+    text-align: center;
+    background-color: #404040;
+}
+
+#frame {
+    margin:0 auto;
+    text-align:left;
+    width: 800px;
+    padding: 100px 0 0 0;
+}
+
+#inner {
+    background: #444444;
+    position: relative;
+    padding: 10px;
+}
+
+#inner span, #inner li, #inner p {
+    -x-system-font:none;
+    color:#aaaaaa;
+    font-family:helvetica,arial,sans-serif;
+    font-size:18px;
+    font-size-adjust:none;
+    font-stretch:normal;
+    font-style:normal;
+    font-variant:normal;
+    font-weight:bold;
+    line-height:20px;
+}
+
+#inner span.is {
+    position: absolute;
+    top: 43px;
+    left: 187px;
+}
+
+#inner span.hint {
+    position: absolute;
+    top: 39px;
+    left: 240px;
+    font-size: 22px;
+    color: #494949;
+    font-family: Georgia;
+    font-style:italic;
+}
+
+#inner ul {
+    margin: 20px 0 20px 20px;
+    height: 250px;
+}
+
+#inner ul li {
+    font-size: 18px;
+    margin: 11px 0 20px 0;
+    list-style-type: none;
+    color: #CCCCCC;
+}
+
+#inner ul li p {
+    font-size: 12px;
+    font-weight: none;
+    color: #777;
+    font-family: arial, sans-serif;
+}
+
+#inner img.right {
+    float: right;
+    margin: 0 10px 0 25px;
+}
+
+#inner div.bottom {
+    text-align: center;
+    margin: 30px 0 30px 0;
+}
+
+#inner p {
+    font-size: 16px;
+    margin: 0 0 20px 0;
+}
+
+#inner input.button {
+    background: #009BF4;
+    color: #FFFFFF;
+    border: 0px;    
+}
+
+#inner input.check {
+    width: 200px;
+    height: 40px;
+    font-size:18px;
+}
+
+#inner input.request {
+    width: 120px;
+    height: 28px;
+    font-size: 14px;
+}
+
+#inner input.button:hover {
+    background: #FFFFFF;
+    color: #444444;
+    cursor: pointer;
+}
+
+h5, p.center {
+    text-align: center;
+    font-family: arial, sans-serif;
+}
+
+h5 {
+    color: #fff;
+    font-size: 26px;
+}
+
+p, p a {
+    font-size: 14px;
+    color: #ddd;
+    padding-top: 10px;
+}
+
+input.who {
+    border: 1px solid #999;
+    font-size: 19px;
+    margin: 4px;
+    font-family: arial, sans-serif;
+}
+
+input.request {
+    
+}

@@ -9,7 +9,10 @@ I've tried Wunderlist and other means to track basic "TODO" style tasks; however
 ### Update ###
 I've decied to stop working Flowdle as [http://todoist.com](http://todoist.com) has become my de facto task tracking app.  I love it.  It's wonderful & everything I wanted Flowdle to be.  I'll keep the repository around but this project is archived for all intents and purposes.
 
+### Python version
+Currently on http://www.flowdle.com the Python version is live
 
-### Outstanding Concerns / Notes
-* Rebuilding Flowdle is more about experiencing Revel and not about GAE
-* Given recent experience, I'm going to use [Couchbase](http://couchbase.com) and [go-couchbase](https://github.com/couchbaselabs/go-couchbase), see some [benchmarks](http://github.com/xeb/couchbase-tests)
+
+### Go version?
+In March 2014, I started re-writing Flowdle in Go.  I got busy & stopped but will be keeping the repo here.
+

@@ -1,0 +1,125 @@
+body {
+	background: url(/images/newgradient.gif) repeat-x;
+	width: 100%;
+	font-family: Helvetica,Arial,Sans-Serif;
+	font-size: 16px;
+}
+
+h4 {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+h5 {
+    font-size:14px;
+    font-weight: bold;
+    color: #777;
+    margin: 3px 0 0 120px;
+}
+
+input {
+    border: 1px solid #CCC;
+}
+
+.clear {
+  clear:both;
+  height:1px;
+  overflow:hidden;
+}
+
+a:active, a:visited, a:link {
+	color: #009BF4;
+	text-decoration: none;
+	padding: 4px;
+}
+a:hover {
+	color: #FFFFFF;
+	background-color: #009BF4;
+}
+
+#topmenu {
+	width: 100%;
+	position: relative;
+	text-align: right;
+	height: 70px;
+}
+
+#topmenu p {
+	margin: 5px 30px 0 0;
+	font-weight: bold;
+	font-size: 12px;
+	color: #CCC;
+}
+
+#topmenu .logo {
+	position: absolute;
+	top: 0px;
+	left: 10px;
+}
+
+#topmenu #logo {
+    cursor: pointer;
+}
+
+#mainTable {
+	margin: 10px 200px 10px 30px;
+}
+
+#mainTable #tags {
+	min-width: 20px;
+	text-align: right;
+	margin: 0 10px 0 0;
+}
+
+#mainTable #tags ul {
+	padding: 5px 0 5px 0;
+}
+
+#mainTable #tags li {
+	padding: 3px 0 3px 0;
+}
+
+#mainTable #tags li strong {
+    font-weight: bold;
+}
+
+#mainTable #right {
+	background-color: #FEFEFE;
+	vertical-align: top;
+	padding: 10px;
+	width: 100%;
+	margin: 0 200px 0 0;
+}
+
+#mainTable #right .head {
+	position: relative;
+}
+
+#mainTable #right #tablemenu {
+    text-align: left;
+    font-size: 12px;
+    margin: 30px 30px 0 0;
+}
+
+
+#mainTable #ads {
+	padding: 200px 0 0 0;
+}
+
+p.copyright {
+	text-align: center;
+	font-size: 10px;
+	margin: 10px 0 0 0;
+}
+
+
+input.bigbutton {
+    font-size: 18px;
+    margin: 5px;
+}
+
+input.bigbutton:hover {
+    background: #009BF4;
+    color: #FFFFFF;
+    cursor: pointer;
+}

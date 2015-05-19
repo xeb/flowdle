@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Flowdle</title>
+    <link href="/stylesheets/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/index.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/facebox.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        h4 {
+            margin: 30px 0 0 0 !important; }
+        p, label {
+            color: black; }
+        #feedback {
+            width: 300px;
+            margin: 50px 0 0 50px;}
+         #feedback table td {
+             vertical-align: top;
+             padding: 10px 10px 5px 10px;}
+         #feedback p {
+             padding: 10px 0 15px 0; }
+         #feedback input, 
+         #feedback textarea {
+             border: 1px solid black;
+             font-family: Helvetica, Verdana, Arial;
+             font-size: 1.0em;
+             padding: 7px; }
+          #feedback label {
+              padding: 13px 0 0 0 !important; } 
+         #feedback input.button {
+              background: #009BF4;
+              color: #FFFFFF;
+              border: 0px;    
+              width: 120px;
+              height: 28px;
+              font-size: 14px;
+              margin: 10px 0 0 18px; }
+         #feedback input.button:hover {
+              background: #999;
+              color: #222;
+              cursor: pointer; }
+
+    </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+    <script src="/javascripts/json2.js" type="text/javascript"></script>
+    <script src="/javascripts/rpc.js" type="text/javascript"></script>
+    <script src="/javascripts/facebox.js" type="text/javascript"></script>
+    <script src="/javascripts/common.js" type="text/javascript"></script>
+    <script src="/javascripts/japp.js" type="text/javascript"></script>
+  </head>
+  <body>
+  
+   <div id="feedback">
+      <form id="feedback" name="feedback" action="/feedback" method="post">
+          <h4>Feedback</h4>
+          <p>We're happy to hear from you!  Please fill out the form below to send us your feedback.</p>
+          
+          <table>
+              <tr>
+               <td><label for="subject">Subject:</label></td>
+               <td><input type="text" name="subject" id="subject" class="textbox" maxlength="50" /></td>
+              </tr>
+              <tr>
+               <td><label for="msg">Message:</label></td>
+               <td><textarea id="message" name="message" rows="13" cols="50"></textarea></td>
+              </tr>
+          </table>
+          <input type="submit" name="submit" value="Send" class="button" />
+      </form>
+   </div>
+  
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-4440510-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+  </body>
+</html>
